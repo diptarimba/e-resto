@@ -1,11 +1,28 @@
 import { createApp, h } from 'vue'
-import { createInertiaApp } from '@inertiajs/inertia-vue3'
+import { createInertiaApp, Link, Head } from '@inertiajs/inertia-vue3'
+import { InertiaProgress } from '@inertiajs/progress'
 
 createInertiaApp({
   resolve: name => import(`./Pages/${name}.vue`),
   setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
+    const app = createApp({ render: () => h(App, props) })
       .use(plugin)
-      .mount(el)
+      .component("Link", Link)
+      .component("Head", Head);
+
+    app.config.globalProperties.$filters = {
+        toIDR(value) {
+            return 'Rp. ' + new Intl.NumberFormat('en-US').format(value)
+        },
+    }
+
+    app.mount(el);
   },
+
+  title: title => `E-Resto: ${title}`
 })
+
+InertiaProgress.init({
+    // The color of the progress bar.
+  color: '#29d',
+});
