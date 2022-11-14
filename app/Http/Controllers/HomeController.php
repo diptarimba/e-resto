@@ -31,8 +31,13 @@ class HomeController extends Controller
         ]);
     }
 
-    public function detail(Category $category)
+    public function categoryExpand(Category $category)
     {
+        dd('hoha');
+    }
 
+    public function productDetail()
+    {
+        dd('heha');
     }
 }

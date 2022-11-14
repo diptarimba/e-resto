@@ -1,9 +1,9 @@
 <template>
     <!-- Start Product Single Item -->
         <div class="single-product-item product-item--style-1" :class="'product-item--bg-' + bgColour">
-            <a href="single-product.html" class="image">
+            <Link :href="route('product.detail', product.id, false)" class="image">
                 <img width="127" height="98" class="img-fluid" :src="product.image" alt="image">
-            </a>
+            </Link>
             <div class="content">
                 <div class="content--left">
                     <ul class="review-star">
@@ -13,7 +13,7 @@
                         <li class="items fill"><i class="icon icon-carce-star-full"></i></li>
                         <li class="items fill"><i class="icon icon-carce-star-full"></i></li>
                     </ul>
-                    <a href="single-product.html" class="title">{{product.name}}</a>
+                    <Link :href="route('product.detail', product.id, false)" class="title">{{product.name}}</Link>
                     <span class="price">{{ $filters.toIDR(product.price) }}</span>
                 </div>
                 <div class="content--right">

@@ -1,7 +1,7 @@
 <template>
 <div class="title-content">
     <h2 class="title">{{category.name}}</h2>
-    <a href="shop.html" class="view-all">View All</a>
+    <Link :href="route('category.expand', category.id, false)" class="view-all">View All</Link>
 </div>
 <div class="catagories-wrapper">
     <div class="catagories-wrapper-content">

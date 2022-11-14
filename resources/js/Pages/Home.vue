@@ -8,11 +8,9 @@
         <category v-for="category in categoryWithProduct" :key="category.id" :category="category"/>
     </template>
     <template #product v-else>
-        <div class="catagories-wrapper">
-            <div class="catagories-wrapper-content">
-                <p class="mx-auto">Produk tidak tersedia</p>
+            <div class="container">
+                <p class="text-center">Produk tidak tersedia</p>
             </div>
-        </div>
     </template>
 </layout-home>
 </template>

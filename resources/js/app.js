@@ -1,5 +1,7 @@
 import { createApp, h } from 'vue'
 import { createInertiaApp, Link, Head } from '@inertiajs/inertia-vue3'
+import { ZiggyVue } from '/vendor/tightenco/ziggy/dist/vue.es.js';
+import { Ziggy } from './ziggy.js';
 import { InertiaProgress } from '@inertiajs/progress'
 
 createInertiaApp({
@@ -7,6 +9,7 @@ createInertiaApp({
   setup({ el, App, props, plugin }) {
     const app = createApp({ render: () => h(App, props) })
       .use(plugin)
+      .use(ZiggyVue, Ziggy)
       .component("Link", Link)
       .component("Head", Head);
 
