@@ -3,6 +3,10 @@ import { createInertiaApp, Link, Head } from '@inertiajs/inertia-vue3'
 import { ZiggyVue } from '/vendor/tightenco/ziggy/dist/vue.es.js';
 import { Ziggy } from './ziggy.js';
 import { InertiaProgress } from '@inertiajs/progress'
+import {
+    Swiper,
+    SwiperSlide
+} from 'swiper/vue';
 
 createInertiaApp({
   resolve: name => import(`./Pages/${name}.vue`),
@@ -10,6 +14,8 @@ createInertiaApp({
     const app = createApp({ render: () => h(App, props) })
       .use(plugin)
       .use(ZiggyVue, Ziggy)
+      .component("Swiper", Swiper)
+      .component("SwiperSlide", SwiperSlide)
       .component("Link", Link)
       .component("Head", Head);
 

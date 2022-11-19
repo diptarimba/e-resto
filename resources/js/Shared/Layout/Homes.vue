@@ -8,7 +8,8 @@
             <div class="header-area">
                 <div class="header-top-area header-top-area--style-1">
                     <ul class="event-list">
-                        <li class="list-item"><a href="#mobile-menu-offcanvas" area-label="mobile menu offcanvas svg icon" class="btn btn--size-33-33 btn--center btn--round btn--color-radical-red btn--bg-white btn--box-shadow main-menu offcanvas-toggle offside-menu">
+                        <li class="list-item">
+                            <button @click="clickSideBar" area-label="mobile menu offcanvas svg icon" class="btn btn--size-33-33 btn--center btn--round btn--color-radical-red btn--bg-white btn--box-shadow main-menu offcanvas-toggle offside-menu">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                                     <g id="Group_1" data-name="Group 1" transform="translate(-28 -63)">
                                         <path id="Rectangle_3" data-name="Rectangle 3" d="M0,0H5A2,2,0,0,1,7,2V5A2,2,0,0,1,5,7H2A2,2,0,0,1,0,5V0A0,0,0,0,1,0,0Z" transform="translate(28 63)" fill="#ff375f" />
@@ -17,7 +18,7 @@
                                         <path id="Rectangle_5" data-name="Rectangle 5" d="M2,0H5A2,2,0,0,1,7,2V7A0,0,0,0,1,7,7H2A2,2,0,0,1,0,5V2A2,2,0,0,1,2,0Z" transform="translate(37 72)" fill="#ff375f" />
                                     </g>
                                 </svg>
-                            </a></li>
+                            </button></li>
                         <li class="list-item">
                             <h2 class="title text-center">Home</h2>
                         </li>
@@ -29,8 +30,9 @@
                                 </li>
                                 <li class="list-item">
                                     <span class="notch-bg notch-bg--emerald"></span>
-                                    <a href="#profile-menu-offcanvas" area-label="User" class="btn btn--size-33-33 btn--center btn--round offcanvas-toggle offside-menu">
-                                        <img class="img-fluid" height="33" width="33" src="assets/images/header-top-user-img.jpg" alt="user image"></a>
+                                    <button @click="clickProfile" area-label="User" class="btn btn--size-33-33 btn--center btn--round offcanvas-toggle offside-menu">
+                                        <img class="img-fluid" height="33" width="33" src="assets/images/header-top-user-img.jpg" alt="user image">
+                                    </button>
                                 </li>
                             </ul>
                         </li>
@@ -43,7 +45,7 @@
     <!-- ...:::End User Event Section:::... -->
 
     <!--  Start Offcanvas Mobile Menu Section -->
-    <div id="mobile-menu-offcanvas" class="offcanvas offcanvas-leftside offcanvas-mobile-menu-section">
+    <div id="mobile-menu-offcanvas" class="offcanvas offcanvas-leftside offcanvas-mobile-menu-section" :class="{ 'offcanvas-open' : sidebarOpen }">
         <!-- Start Offcanvas Header -->
         <div class="offcanvas-header flex-end">
 
@@ -51,7 +53,7 @@
                 <a href="index.html"><img class="img-fluid" width="147" height="26" src="assets/images/logo.png" alt="image"></a>
             </div>
 
-            <button class="offcanvas-close" aria-label="offcanvas svg icon">
+            <button class="offcanvas-close" aria-label="offcanvas svg icon" @click="clickSideBar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="5.973" height="10.449" viewBox="0 0 5.973 10.449">
                     <path id="Icon_ionic-ios-arrow-back" data-name="Icon ionic-ios-arrow-back" d="M13.051,11.417,17,7.466a.747.747,0,0,0-1.058-1.054l-4.479,4.476a.745.745,0,0,0-.022,1.03l4.5,4.507A.747.747,0,1,0,17,15.37Z" transform="translate(-11.251 -6.194)" />
                 </svg>
@@ -70,6 +72,7 @@
                             <a href="index.html"><span>Home</span></a>
                         </li>
                         <li>
+                            <div class="offcanvas-menu-expand"></div>
                             <a href="#"><span>Shop</span></a>
                             <ul class="mobile-sub-menu">
                                 <li><a href="shop.html">Shop</a></li>
@@ -79,6 +82,7 @@
 
                         </li>
                         <li>
+                            <div class="offcanvas-menu-expand"></div>
                             <a href="#"><span>Pages</span></a>
                             <ul class="mobile-sub-menu">
                                 <li><a href="chat.html">Chat</a></li>
@@ -108,10 +112,10 @@
     </div> <!-- ...:::: End Offcanvas Mobile Menu Section:::... -->
 
     <!--  Start Offcanvas Profile Menu Section -->
-    <div id="profile-menu-offcanvas" class="offcanvas offcanvas-rightside">
+    <div id="profile-menu-offcanvas" class="offcanvas offcanvas-rightside" :class="{ 'offcanvas-open' : profileOpen }">
         <!-- Start Offcanvas Header -->
         <div class="offcanvas-header flex-start offcanvas-modify">
-            <button class="offcanvas-close" aria-label="offcanvas svg icon">
+            <button class="offcanvas-close" @click="clickProfile" aria-label="offcanvas svg icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="5.973" height="10.449" viewBox="0 0 5.973 10.449">
                     <path id="Icon_ionic-ios-arrow-back" data-name="Icon ionic-ios-arrow-back" d="M13.051,11.417,17,7.466a.747.747,0,0,0-1.058-1.054l-4.479,4.476a.745.745,0,0,0-.022,1.03l4.5,4.507A.747.747,0,1,0,17,15.37Z" transform="translate(-11.251 -6.194)" />
                 </svg>
@@ -187,108 +191,7 @@
 
     <div class="offcanvas-overlay"></div>
 
-    <!-- ...:::Start Search & Filter Section:::... -->
-    <slot name="search"></slot>
-    <!-- ...:::End Search & Filter Section:::... -->
-
-    <!-- ...:::Start Hero Slider Section:::... -->
-    <div class="hero-section section-gap-top-25">
-        <div class="container">
-            <!-- Start Hero Area -->
-            <div class="hero-area hero-area--style-1 hero-slider-active">
-                <swiper :modules="[Pagination]" :pagination="{ clickable: true, hide: false }" :speed="1500" :slides-per-view="1" :observer="true" :observe-parents="true" :space-between="5" watch-slides-progress :loop="true">
-                    <swiper-slide>
-                        <div class="hero-singel-slide ">
-                            <div class="hero-bg">
-                                <img width="388" height="160" class="img-full" src="assets/images/hero/bg/hero-bg-1.jpg" alt="image">
-                            </div>
-                            <div class="inner-wrapper">
-                                <div class="content">
-                                    <p class="title-tag">Summer 1 Hehe</p>
-                                    <h1 class="title">Fashion</h1>
-                                    <h2 class="sub-title">SALE</h2>
-                                    <h3 class="sub-title">UP to <span>70% </span> off</h3>
-                                </div>
-                                <div class="product-img">
-                                    <img width="149" height="127" class="img-fluid" src="assets/images/hero/product/product-1.png" alt="image">
-                                    <div class="shape shape-1"><img width="83" height="83" class="img-fluid" src="assets/images/hero/shape/shape-dotted.png" alt="image"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </swiper-slide>
-                    <swiper-slide>
-                        <div class="hero-singel-slide">
-                            <div class="hero-bg">
-                                <img width="388" height="160" class="img-full" src="assets/images/hero/bg/hero-bg-1.jpg" alt="image">
-                            </div>
-                            <div class="inner-wrapper">
-                                <div class="content">
-                                    <p class="title-tag">Summer 2 Heha</p>
-                                    <h1 class="title">Fashion</h1>
-                                    <h2 class="sub-title">SALE</h2>
-                                    <h3 class="sub-title">UP to <span>70% </span> off</h3>
-                                </div>
-                                <div class="product-img">
-                                    <img width="127" height="98" class="img-fluid" src="assets/images/hero/product/product-2.png" alt="image">
-                                    <div class="shape shape-1"><img width="83" height="83" class="img-fluid" src="assets/images/hero/shape/shape-dotted.png" alt="image"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </swiper-slide>
-                    <swiper-slide>
-                        <div class="hero-singel-slide">
-                            <div class="hero-bg">
-                                <img width="388" height="160" class="img-full" src="assets/images/hero/bg/hero-bg-1.jpg" alt="image">
-                            </div>
-                            <div class="inner-wrapper">
-                                <div class="content">
-                                    <p class="title-tag">Summer 3 Huha</p>
-                                    <h1 class="title">Fashion</h1>
-                                    <h2 class="sub-title">SALE</h2>
-                                    <h3 class="sub-title">UP to <span>70% </span> off</h3>
-                                </div>
-                                <div class="product-img">
-                                    <img width="126" height="98" class="img-fluid" src="assets/images/hero/product/product-3.png" alt="image">
-                                    <div class="shape shape-1"><img width="83" height="83" class="img-fluid" src="assets/images/hero/shape/shape-dotted.png" alt="image"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </swiper-slide>
-                </swiper>
-            </div>
-            <!-- End Hero Area -->
-        </div>
-    </div>
-    <!-- ...:::End Hero Slider Section:::... -->
-
-    <!-- ...:::Start Catagories - 1 Section:::... -->
-    <div class="catagories-section section-gap-top-50">
-        <div class="container">
-            <div class="catagories-area">
-                <div class="catagories-nav-1">
-                    <swiper slides-per-view="auto" :space-between="12">
-                        <swiper-slide>
-                            <Link href="shop.html" class="btn"><span class="icon"><img width="33" height="33" src="assets/images/catagories/sneakers.png" alt="image"></span> Sneakers</Link>
-                        </swiper-slide>
-                        <swiper-slide>
-                            <Link href="shop.html" class="btn"><span class="icon"><img width="33" height="33" src="assets/images/catagories/watch.png" alt="image"></span>Watch</Link>
-                        </swiper-slide>
-                        <swiper-slide>
-                            <Link href="shop.html" class="btn"><span class="icon"><img width="33" height="33" src="assets/images/catagories/headphones.png" alt="image"></span>Gadget</Link>
-                        </swiper-slide>
-                        <swiper-slide>
-                            <Link href="shop.html" class="btn"><span class="icon"><img width="33" height="33" src="assets/images/catagories/bagpack.png" alt="image"></span>Bagpack</Link>
-                        </swiper-slide>
-                    </swiper>
-                    <!-- Slider main container -->
-                </div>
-            </div>
-
-            <slot name="product"></slot>
-
-        </div>
-    </div>
-    <!-- ...:::Start Catagories - 1 Section:::... -->
+    <slot></slot>
 
     <!-- ...:::Start User Event Section:::... -->
     <div class="user-event-section">
@@ -319,30 +222,38 @@
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-@import url('../../../public/assets/css/style.css');
-@import url('../../../public/assets/css/vendor/icomoon.css');
-.swiper-pagination {
-    position: sticky !important;
-}
+@import url('../../../../public/assets/css/style.css');
+@import url('../../../../public/assets/css/vendor/icomoon.css');
 </style>
+
 <script setup>
-import { Pagination } from 'swiper'
-import { ref, onMounted, onUnmounted } from 'vue'
+import {
+    ref,
+    onMounted,
+    onUnmounted
+} from 'vue'
 
-import 'swiper/css/pagination';
-import 'swiper/css';
-
-const scrolled = ref(false)
+const scrolled = ref(false);
+const profileOpen = ref(false);
+const sidebarOpen = ref(false);
 
 const handleScroll = (e) => {
     scrolled.value = window.top.scrollY > 0 ? true : false
 }
 
+const clickProfile = () => {
+    profileOpen.value = !profileOpen.value
+}
+
+const clickSideBar = () => {
+    sidebarOpen.value = !sidebarOpen.value
+}
+
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll)
 })
 
 onUnmounted(() => {
-  window.removeEventListener(handleScroll)
+    window.removeEventListener(handleScroll)
 })
 </script>

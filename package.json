@@ -17,6 +17,8 @@
         "@inertiajs/inertia-vue3": "^0.6.0",
         "@inertiajs/progress": "^0.2.7",
         "@vitejs/plugin-vue": "^3.1.2",
+        "@vueform/slider": "^2.1.5",
+        "swiper": "^8.4.4",
         "vue": "^3.2.36",
         "vue-loader": "^17.0.0",
         "ziggy-js": "^1.5.0"

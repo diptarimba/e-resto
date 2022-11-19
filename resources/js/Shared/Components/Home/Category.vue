@@ -9,14 +9,9 @@
     </div>
 </div>
 </template>
-<script>
-import Product from "./Product.vue"
-export default {
-    components: {
-        Product
-    },
-    props: {
-        category: Object
-    }
-}
+<script setup>
+import Product from "../Home/Product.vue"
+defineProps({
+    category: Object
+})
 </script>

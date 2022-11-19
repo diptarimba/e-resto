@@ -18,7 +18,7 @@ class ProductFactory extends Factory
     {
         return [
             'name' => fake()->words(2, true),
-            'image' => '/storage/placeholder/temp.png',
+            'image' => '/storage/placeholder/product/temp.png',
             'price' => fake()->numberBetween(2000,15000),
             'quantity' => fake()->numberBetween(1,200)
         ];
