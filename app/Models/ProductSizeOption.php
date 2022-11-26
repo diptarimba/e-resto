@@ -14,7 +14,13 @@ class ProductSizeOption extends Model
         'name'
     ];
 
-    public function product_size()
+    protected $hidden = [
+        'product_size_id',
+        'created_at',
+        'updated_at'
+    ];
+
+    public function size()
     {
         return $this->belongsTo(ProductSize::class, 'product_size_id');
     }

@@ -14,6 +14,7 @@ class Product extends Model
         'price',
         'image',
         'quantity',
+        'description',
         'category_id'
     ];
 
@@ -31,7 +32,7 @@ class Product extends Model
         return $this->hasMany(OrderDetail::class, 'product_id');
     }
 
-    public function product_size()
+    public function size()
     {
         return $this->hasMany(ProductSize::class, 'product_id');
     }

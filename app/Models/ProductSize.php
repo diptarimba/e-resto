@@ -15,12 +15,18 @@ class ProductSize extends Model
         'type'
     ];
 
+    protected $hidden = [
+        'product_id',
+        'created_at',
+        'updated_at'
+    ];
+
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
 
-    public function product_option()
+    public function size_option()
     {
         return $this->hasMany(ProductSizeOption::class, 'product_size_id');
     }
