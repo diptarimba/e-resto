@@ -13,4 +13,9 @@ class ProductSizeOption extends Model
         'product_size_id',
         'name'
     ];
+
+    public function product_size()
+    {
+        return $this->belongsTo(ProductSize::class, 'product_size_id');
+    }
 }

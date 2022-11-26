@@ -15,4 +15,14 @@ class ProductSize extends Model
         'type'
     ];
 
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function product_option()
+    {
+        return $this->hasMany(ProductSizeOption::class, 'product_size_id');
+    }
+
 }

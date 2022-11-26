@@ -17,6 +17,10 @@ class Product extends Model
         'category_id'
     ];
 
+    protected $appends = [
+        'category_name'
+    ];
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
@@ -25,5 +29,15 @@ class Product extends Model
     public function order_detail()
     {
         return $this->hasMany(OrderDetail::class, 'product_id');
+    }
+
+    public function product_size()
+    {
+        return $this->hasMany(ProductSize::class, 'product_id');
+    }
+
+    public function getCategoryNameAttribute()
+    {
+        return $this->category()->first()->name ?? null;
     }
 }
