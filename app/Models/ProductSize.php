@@ -11,8 +11,7 @@ class ProductSize extends Model
 
     protected $fillable = [
         'product_id',
-        'name',
-        'type'
+        'name'
     ];
 
     protected $hidden = [

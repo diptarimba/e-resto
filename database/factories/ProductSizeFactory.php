@@ -18,8 +18,7 @@ class ProductSizeFactory extends Factory
     {
         return [
             'product_id' => 1,
-            'name' => fake()->lexify('????'),
-            'type' => fake()->randomElement(['checkbox', 'radio'])
+            'name' => fake()->lexify('????')
         ];
     }
 }
