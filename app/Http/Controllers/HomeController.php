@@ -67,6 +67,16 @@ class HomeController extends Controller
 
     public function productDetail()
     {
-        dd('heha');
+        return Inertia::render('Product');
+    }
+
+    public function cart()
+    {
+        return Inertia::render('Cart');
+    }
+
+    public function wishlist()
+    {
+        return Inertia::render('Wishlist');
     }
 }

@@ -18,7 +18,7 @@
                                 </div>
                                 <div class="product-img">
                                     <img width="149" height="127" class="img-fluid" :src="slider.product_pict" alt="image">
-                                    <div class="shape shape-1"><img width="83" height="83" class="img-fluid" src="assets/images/hero/shape/shape-dotted.png" alt="image"></div>
+                                    <div class="shape shape-1"><img width="83" height="83" class="img-fluid" src="/assets/images/hero/shape/shape-dotted.png" alt="image"></div>
                                 </div>
                             </div>
                         </div>

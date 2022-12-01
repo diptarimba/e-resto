@@ -26,12 +26,12 @@
                             <ul class="list-child">
                                 <li class="list-item">
                                     <span class="notch-bg notch-bg--sunset-orange"></span>
-                                    <a href="cart.html" area-label="Cart" class="btn btn--size-33-33 btn--center btn--round btn--color-radical-red btn--bg-white btn--box-shadow"><i class="icon icon-carce-cart"></i></a>
+                                    <Link :href="route('home.cart',undefined, false)" area-label="Cart" class="btn btn--size-33-33 btn--center btn--round btn--color-radical-red btn--bg-white btn--box-shadow"><i class="icon icon-carce-cart"></i></Link>
                                 </li>
                                 <li class="list-item">
                                     <span class="notch-bg notch-bg--emerald"></span>
                                     <button @click="clickProfile" area-label="User" class="btn btn--size-33-33 btn--center btn--round offcanvas-toggle offside-menu">
-                                        <img class="img-fluid" height="33" width="33" src="assets/images/header-top-user-img.jpg" alt="user image">
+                                        <img class="img-fluid" height="33" width="33" src="/assets/images/header-top-user-img.jpg" alt="user image">
                                     </button>
                                 </li>
                             </ul>
@@ -50,7 +50,7 @@
         <div class="offcanvas-header flex-end">
 
             <div class="logo">
-                <a href="index.html"><img class="img-fluid" width="147" height="26" src="assets/images/logo.png" alt="image"></a>
+                <a href="index.html"><img class="img-fluid" width="147" height="26" src="/assets/images/logo.png" alt="image"></a>
             </div>
 
             <button class="offcanvas-close" aria-label="offcanvas svg icon" @click="clickSideBar">
@@ -129,15 +129,15 @@
             <div class="profile-card-section section-gap-top-25">
                 <div class="profile-card-wrapper">
                     <div class="image">
-                        <img class="img-fluid" width="96" height="96" src="assets/images/user/user-profile.png" alt="image">
+                        <img class="img-fluid" width="96" height="96" src="/assets/images/user/user-profile.png" alt="image">
                     </div>
                     <div class="content">
                         <h2 class="name">Kajavasta Moon</h2>
                         <span class="email">moon@example.com</span>
                         <span class="id-num">ID NO: EXMPL 4566</span>
                     </div>
-                    <div class="profile-shape profile-shape-1"><img class="img-fluid" width="61" height="50" src="assets/images/profile-shape-1.svg" alt="image"></div>
-                    <div class="profile-shape profile-shape-2"><img class="img-fluid" width="48" height="59" src="assets/images/profile-shape-2.svg" alt="image"></div>
+                    <div class="profile-shape profile-shape-1"><img class="img-fluid" width="61" height="50" src="/assets/images/profile-shape-1.svg" alt="image"></div>
+                    <div class="profile-shape profile-shape-2"><img class="img-fluid" width="48" height="59" src="/assets/images/profile-shape-2.svg" alt="image"></div>
                 </div>
             </div>
             <!-- ...:::End Profile Card Section:::... -->
@@ -200,11 +200,11 @@
 
             <div class="user-event-area" :class="{'sticky' : scrolled}">
                 <div class="user-event user-event--left">
-                    <a area-label="event link icon" href="index.html" class="event-btn-link"><i class="icon icon-carce-home"></i></a>
-                    <a area-label="wishlist icon" href="wishlist.html" class="event-btn-link"><i class="icon icon-carce-heart"></i></a>
+                    <Link area-label="event link icon" href="/" class="event-btn-link"><i class="icon icon-carce-home"></i></Link>
+                    <Link area-label="wishlist icon" :href="route('home.wishlist', undefined, false)" class="event-btn-link"><i class="icon icon-carce-heart"></i></Link>
                 </div>
                 <div class="user-event user-event--center">
-                    <a area-label="cart icon" href="cart.html" class="event-btn-link"><i class="icon icon-carce-cart"></i></a>
+                    <Link area-label="cart icon" :href="route('home.cart',undefined, false)" class="event-btn-link"><i class="icon icon-carce-cart"></i></Link>
                 </div>
                 <div class="user-event user-event--right">
                     <a area-label="order icon" href="order.html" class="event-btn-link"><i class="icon icon-carce-compare"></i></a>
@@ -224,6 +224,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('../../../../public/assets/css/style.css');
 @import url('../../../../public/assets/css/vendor/icomoon.css');
+@import url('sweetalert2/dist/sweetalert2.min.css');
 </style>
 
 <script setup>

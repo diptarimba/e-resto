@@ -1,4 +1,5 @@
 <template>
+<div>
     <Head title="Home" />
     <!-- ...:::Start Search & Filter Section:::... -->
     <Search v-model:search-text="searchText" v-model:slider-default="defaultValue" v-model:slider-max="maxValueSlider"/>
@@ -27,6 +28,7 @@
         </div>
     </div>
     <!-- ...:::END Catagories - 1 Section:::... -->
+    </div>
 
 </template>
 <style>
