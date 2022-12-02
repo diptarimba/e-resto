@@ -138,6 +138,7 @@ import {
 let countQuantity = ref(1);
 let option = [];
 
+// Menggunakan sweetalert dari fungsi global
 const swal = inject("$swal")
 
 // funcsi untuk memilih option dari product
@@ -262,7 +263,7 @@ const addToCart = () => {
 
 }
 
-// Mendefinisikan props
+// Menerima data dari controller
 let props = defineProps({
     product: Object
 })

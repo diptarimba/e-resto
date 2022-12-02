@@ -2,13 +2,13 @@
 <!-- Start Single Cart Item -->
 <li class="single-cart-item">
     <div class="image">
-        <img width="90" height="90" :src="product.picture" alt="">
+        <img class="img-wishlist" :src="product.image" alt="">
     </div>
     <div class="content">
         <a href="single-product.html" class="title">{{product.name}}</a>
         <div class="details">
             <div class="left">
-                <span class="brand">Rebook</span>
+                <span class="brand">{{product.category_name}}</span>
                 <span class="price">{{ $filters.toIDR(product.price) }}</span>
             </div>
             <div class="right">
@@ -19,10 +19,23 @@
 </li>
 <!-- End Single Cart Item -->
 </template>
+
+<style>
+.image {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.img-wishlist {
+    height: auto !important;
+    width: 100% !important;
+    position: absolute !important;
+}
+</style>
+
 <script setup>
 const props = defineProps({
     product: Object,
 })
 console.log(props.product)
-
 </script>

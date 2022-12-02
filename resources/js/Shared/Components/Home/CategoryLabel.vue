@@ -4,7 +4,6 @@
         <Link href="shop.html" class="btn"><span class="icon"><img width="33" height="33" src="/assets/images/catagories/sneakers.png" alt="image"></span> {{eachCateory.name}}</Link>
     </swiper-slide>
 </swiper>
-<!-- Slider main container -->
 </template>
 <script setup>
 import 'swiper/css';
