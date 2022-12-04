@@ -22,7 +22,8 @@ class CategoryController extends Controller
             $query->where('price', '<=', $max);
         })
         ->whereCategoryId($categoryId)
-        ->paginate(9);
+        ->paginate(9)
+        ->withQueryString();
 
         // Mendapatkan range slider tertinggi
         $categories = Category::get();
