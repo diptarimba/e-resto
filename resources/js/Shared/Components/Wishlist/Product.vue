@@ -12,8 +12,8 @@
                 <span class="price">{{ $filters.toIDR(product.price) }}</span>
             </div>
             <div class="right">
-                <button v-if="inCart" class="btn btn--default btn--radius btn--color-white btn--bg-pink-swan">Check Cart</button>
-                <button v-else class="btn btn--default btn--radius btn--color-white btn--radical-red">Add to cart</button>
+                <button v-if="inCart" @click="redirectCart" class="btn btn--default btn--radius btn--color-white btn--bg-pink-swan">Check Cart</button>
+                <button v-else @click="redirectProduct" class="btn btn--default btn--radius btn--color-white btn--radical-red">Add to cart</button>
             </div>
         </div>
     </div>
@@ -35,6 +35,7 @@
 </style>
 
 <script setup>
+import { Inertia } from "@inertiajs/inertia"
 import { ref } from "@vue/reactivity"
 import { onMounted, onUpdated } from "@vue/runtime-core"
 
@@ -45,7 +46,16 @@ const props = defineProps({
 
 const inCart = ref(false)
 
+const redirectProduct = () => {
+    Inertia.get('/product/' + props.product.id, {})
+}
+
+const redirectCart = () => {
+    Inertia.get('/cart', {})
+}
+
 onMounted(() => {
     inCart.value = props.currentCart.findIndex(({id}) => id === props.product.id) != -1
 })
+
 </script>
