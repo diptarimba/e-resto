@@ -7,7 +7,7 @@
         <div class="container">
             <div class="cart-items-wrapper">
                 <ul class="cart-item-list">
-                    <single-product v-for="(each, key) in currentCart" :key="key" :product="each" />
+                    <single-product v-for="(each, key) in currentCart" :key="key" :product="each" :current-cart="currentCart" @update-cart="getCartLocal"/>
                 </ul>
 
                 <ul class="cart-info-list">
@@ -66,5 +66,10 @@ const getCartLocal = () => {
     // mengambil data cart dari localstorage
     let cartLocal = localStorage.getItem('cart');
     currentCart.value = cartLocal != 'undefined' && cartLocal != null ? JSON.parse(cartLocal) : []
+
+    currenTotal.value = 0
+    currentCart.value.forEach(each => {
+        currenTotal.value += each.choosenQuantity * each.price
+    })
 }
 </script>

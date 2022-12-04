@@ -178,7 +178,7 @@ const addToCart = () => {
     // membuat variable baru dengan sedikit modifikasi untuk ditambahkan
     let productAdd = unProxy(props.product)
     productAdd.option = unProxy(option);
-    productAdd.quantity = unProxy(countQuantity.value)
+    productAdd.choosenQuantity = unProxy(countQuantity.value)
 
     // Filter cart berdasarkan product yang akan ditambahkan, dengan
     let indexProductInCart = currentCart.filter(({
@@ -188,7 +188,7 @@ const addToCart = () => {
     // Mengantisipasi jumlah order berlebihan dari stok yang tersedia
     let sumQtyInCart = 0;
     indexProductInCart.forEach(each => {
-        sumQtyInCart += each.quantity
+        sumQtyInCart += each.choosenQuantity
     })
 
     if (countQuantity.value > (props.product.quantity - sumQtyInCart)) {
@@ -243,6 +243,8 @@ const addToCart = () => {
 
     // mendefinisikan key untuk penambahan ke cart localstorage
     let key = undefined;
+
+    console.log(dataFind)
 
     // melakukan perulangan dari hasil pengecekan
     for (var x = 0; x < dataFind.length; x++) {
