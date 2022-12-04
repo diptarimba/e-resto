@@ -12,7 +12,8 @@
                 <span class="price">{{ $filters.toIDR(product.price) }}</span>
             </div>
             <div class="right">
-                <a href="cart.html" class="btn btn--default btn--radius btn--color-white btn--radical-red">Add to cart</a>
+                <button v-if="inCart" class="btn btn--default btn--radius btn--color-white btn--bg-pink-swan">Check Cart</button>
+                <button v-else class="btn btn--default btn--radius btn--color-white btn--radical-red">Add to cart</button>
             </div>
         </div>
     </div>
@@ -34,8 +35,17 @@
 </style>
 
 <script setup>
+import { ref } from "@vue/reactivity"
+import { onMounted, onUpdated } from "@vue/runtime-core"
+
 const props = defineProps({
     product: Object,
+    currentCart: Array
 })
-console.log(props.product)
+
+const inCart = ref(false)
+
+onMounted(() => {
+    inCart.value = props.currentCart.findIndex(({id}) => id === props.product.id) != -1
+})
 </script>

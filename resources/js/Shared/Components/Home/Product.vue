@@ -56,22 +56,39 @@ onUpdated(() => {
 })
 
 const modifyWishlist = () => {
+
+    // deklarasikan product yang akan ditambahkan ke wishlist
     let productAdd = unProxy(props.product)
+
+    // deklarasikan wishlist ke variable baru yang terdapat pada localstorage
     let currentWishlist = props.wishlistLocal;
-    console.log(currentWishlist)
-    if(currentWishlist.length > 10 ) {
+
+    // check apakah product yang akan di masukan terdapat pada wishlist di localstorage atau tidak
+    let checkLocal = currentWishlist.findIndex(({id}) => id === productAdd.id)
+
+    // membatasi penambahan product ke dalam wishlist apabila sudah terdapat 10 product
+    if(currentWishlist.length >= 10 && checkLocal === -1 ) {
         swal({
             title: 'Perhatian',
             icon: 'warning',
-            text: 'Stok tidak tersedia, Silahkan kurangi kuantitas order produk ini di cart terlebih dahulu',
+            text: 'Anda sudah melebihi batas wishlist maksimal, silahkan kurangi wishlist yang sudah ada terlebih dahulu.',
             confirmButtonColor: '#007AFF'
         });
         return
     }
-    let checkLocal = currentWishlist.findIndex(({id}) => id === productAdd.id)
+
+    // -1 bertanda product belum terdapat pada array of object wishlist di localstorage
+    // apabila belum ada, maka akan dilakukan push, yakni menambah
+    // apabila sudah ada, berarti menghapus dari wishlist
     checkLocal == -1 ? currentWishlist.push(productAdd) : currentWishlist.splice(checkLocal, 1);
+
+    // menyimpan data wishlist ke dalam local storage
     localStorage.setItem('wishlist', JSON.stringify(currentWishlist))
+
+    // melakukan update data dari localstorage dari parent
     emit('updateWishlistClick')
+
+    // mengecek data pada wishlist local apakah sudah tersedia apa belum, untuk menginterpretasikan logo love merah dan hitam
     checkLocal = currentWishlist.findIndex(({id}) => id === productAdd.id)
     inWishlist.value =  checkLocal != -1
 }

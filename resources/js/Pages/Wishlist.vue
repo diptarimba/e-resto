@@ -6,7 +6,7 @@
     <div class="container">
         <div class="cart-items-wrapper">
             <ul class="cart-item-list">
-                <single-product v-for="(value, key) in currentWishlist" :key="key" :product="value"/>
+                <single-product v-for="(value, key) in currentWishlist" :key="key" :product="value" :current-cart="currentCart"/>
             </ul>
         </div>
     </div>
@@ -30,9 +30,12 @@ import { onMounted, ref } from '@vue/runtime-core';
 // Memanggil fungsi saat mount
 onMounted(() => {
     getWishlistLocal()
+    getCartLocal()
 })
-// Deklarasikan variable penampungan
-let currentWishlist = ref([]);
+
+let currentWishlist = ref([]); // Deklarasikan variable penampungan wishlist
+let currentCart = ref([]); // Deklarasikan variable penampungan cart
+
 
 const getWishlistLocal = () => {
     // mengambil data wishlist dari localstorage
@@ -40,9 +43,9 @@ const getWishlistLocal = () => {
     currentWishlist.value = wishlistLocal != 'undefined' && wishlistLocal != null ? JSON.parse(wishlistLocal) : []
 }
 
-let products = [
-    {name: 'Halo 1', price: 20000, picture: 'https://via.placeholder.com/150/FF0000/FFFFFF?Text=Down.com'},
-    {name: 'Halo 2', price: 18000, picture: 'https://via.placeholder.com/150/FF0000/FFFFFF?Text=Down.com'},
-    {name: 'Halo 3', price: 20000, picture: 'https://via.placeholder.com/150/FF0000/FFFFFF?Text=Down.com'},
-];
+const getCartLocal = () => {
+    // mengambil data cart dari localstorage
+    let cartLocal = localStorage.getItem('cart');
+    currentCart.value = cartLocal != 'undefined' && cartLocal != null ? JSON.parse(cartLocal) : []
+}
 </script>

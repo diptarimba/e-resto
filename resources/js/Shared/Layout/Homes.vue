@@ -238,23 +238,23 @@ const scrolled = ref(false);
 const profileOpen = ref(false);
 const sidebarOpen = ref(false);
 
-const handleScroll = (e) => {
-    scrolled.value = window.top.scrollY > 0 ? true : false
-}
+// const handleScroll = (e) => {
+//     scrolled.value = window.top.scrollY > 0 ? true : false
+// }
 
-const clickProfile = () => {
-    profileOpen.value = !profileOpen.value
-}
+// const clickProfile = () => {
+//     profileOpen.value = !profileOpen.value
+// }
 
-const clickSideBar = () => {
-    sidebarOpen.value = !sidebarOpen.value
-}
+// const clickSideBar = () => {
+//     sidebarOpen.value = !sidebarOpen.value
+// }
 
-onMounted(() => {
-    window.addEventListener('scroll', handleScroll)
-})
+// onMounted(() => {
+//     window.addEventListener('scroll', handleScroll)
+// })
 
-onUnmounted(() => {
-    window.removeEventListener(handleScroll)
-})
+// onUnmounted(() => {
+//     window.removeEventListener(handleScroll, )
+// })
 </script>
