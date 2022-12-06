@@ -52,7 +52,8 @@
 
 <script setup>
 import { ref } from "@vue/reactivity";
-import { inject } from "@vue/runtime-core";
+import { inject, watch } from "@vue/runtime-core";
+import debounce from 'lodash/debounce'
 
 const props = defineProps({
     product: Object,
@@ -80,6 +81,14 @@ const removeFromCart = () => {
     emit('updateCart')
 }
 
+const modifyChoosenQuantity = () => {
+    let getIndex = props.currentCart.findIndex(({id}) => id === props.product.id);
+    let currentCart = unProxy(props.currentCart);
+    currentCart[getIndex].choosenQuantity = unProxy(countQuantity.value)
+    localStorage.setItem('cart', JSON.stringify(currentCart))
+    emit('updateCart')
+}
+
 const unlistProduct = () => {
     swal({
         title: 'Apakah kamu yakin?',
@@ -101,4 +110,8 @@ const unlistProduct = () => {
 
     })
 }
+
+watch(countQuantity, debounce((newQuantity, oldQuantity)=>{
+    modifyChoosenQuantity()
+}, 500))
 </script>
