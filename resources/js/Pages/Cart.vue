@@ -5,7 +5,7 @@
     <Head title="Cart" />
     <div class="cart-section section-gap-top-30">
         <div class="container">
-            <div class="cart-items-wrapper">
+            <div v-if="currentCart.length > 0" class="cart-items-wrapper">
                 <ul class="cart-item-list">
                     <single-product v-for="(each, key) in currentCart" :key="key" :product="each" :current-cart="currentCart" @update-cart="getCartLocal"/>
                 </ul>
@@ -32,6 +32,9 @@
                     </li>
                 </ul>
             </div>
+            <div v-else class="cart-items-wrapper">
+            <div class="card-empty">Anda belum menambahkan produk kedalam cart</div>
+        </div>
         </div>
     </div>
     <!-- ...:::End Cart Section:::... -->
