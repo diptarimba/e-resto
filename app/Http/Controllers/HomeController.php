@@ -112,4 +112,9 @@ class HomeController extends Controller
 
         return redirect()->route('home.cart')->with(["message" => "Success Create", "order_number" => $order->order_number]);
     }
+
+    public function order()
+    {
+        dd('nganu');
+    }
 }

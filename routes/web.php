@@ -17,10 +17,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
 Route::get('/category/{categoryId}', [CategoryController::class, 'index'])->name('category.expand');
 Route::get('/product/{productId}', [ProductController::class, 'show'])->name('product.detail');
 
 Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('home.wishlist');
 Route::get('/cart', [HomeController::class, 'cart'])->name('home.cart');
 
+Route::get('/order', [HomeController::class, 'order'])->name('home.order');
 Route::post('/order',[HomeController::class, 'place_order'])->name('post.order');

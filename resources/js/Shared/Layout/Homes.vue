@@ -207,7 +207,7 @@
                     <Link area-label="cart icon" :href="route('home.cart',undefined, false)" class="event-btn-link"><i class="icon icon-carce-cart"></i></Link>
                 </div>
                 <div class="user-event user-event--right">
-                    <a area-label="order icon" href="order.html" class="event-btn-link"><i class="icon icon-carce-compare"></i></a>
+                    <Link area-label="order icon" :href="route('home.order',undefined, false)" class="event-btn-link"><i class="icon icon-carce-compare"></i></Link>
                     <a area-label="chat icon" href="chat.html" class="event-btn-link"><i class="icon icon-carce-bubbles2"></i></a>
                 </div>
             </div>
