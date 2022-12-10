@@ -19,8 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('table_id')->nullable();
             $table->bigInteger('quantity');
             $table->bigInteger('pay_amount');
-            $table->boolean('is_paid')->default(0);
-            $table->boolean('is_leave')->default(0);
+            $table->string('status');
+            $table->string('order_number')->unique();
             $table->unsignedBigInteger('payment_id')->nullable();
             $table->timestamps();
         });

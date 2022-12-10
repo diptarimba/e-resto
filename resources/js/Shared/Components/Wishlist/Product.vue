@@ -5,7 +5,7 @@
         <img class="img-wishlist" :src="product.image" alt="">
     </div>
     <div class="content">
-        <a href="single-product.html" class="title">{{product.name}}</a>
+        <Link :href="route('product.detail', product.id, false)" class="title">{{product.name}}</Link>
         <div class="details">
             <div class="left">
                 <span class="brand">{{product.category_name}}</span>

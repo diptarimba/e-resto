@@ -25,7 +25,7 @@
                     <li class="cart-info-single-list">
                         <ul class="cart-info-child">
                             <li class="item"><span class="text-left">Total</span> <span class="total-price">{{ $filters.toIDR(currenTotal)}}</span>
-                                <a href="checkout.html" class="btn"><span class="icon"><i class="icon icon-carce-check-circle"></i></span>Check out</a>
+                                <button @click="actionOrder" :disabled="orderCart.items.length <= 0" class="btn"><span class="icon"><i class="icon icon-carce-check-circle"></i></span>Check out</button>
 
                             </li>
                         </ul>
@@ -33,8 +33,11 @@
                 </ul>
             </div>
             <div v-else class="cart-items-wrapper">
-            <div class="card-empty">Anda belum menambahkan produk kedalam cart</div>
-        </div>
+                <div class="card-empty">Anda belum menambahkan produk kedalam cart</div>
+            </div>
+            <!-- <div v-if="$page.props.flash.message" class="alert">
+                {{ $page.props.flash.message }}
+            </div> -->
         </div>
     </div>
     <!-- ...:::End Cart Section:::... -->
@@ -50,20 +53,30 @@ export default {
 
 <script setup>
 import SingleProduct from '../Shared/Components/Cart/Product.vue'
+import moment from 'moment';
 import {
+  reactive,
     ref
 } from '@vue/reactivity';
 import {
     onMounted
 } from '@vue/runtime-core';
+import { Inertia } from '@inertiajs/inertia';
+import { useForm } from '@inertiajs/inertia-vue3'
 
 onMounted(() => {
     getCartLocal()
+    moment.locale('de');
 })
 
 const currenTotal = ref(0)
 
 let currentCart = ref([]); // Deklarasikan variable penampungan cart
+const orderCart = useForm({
+    total: 0,
+    total_items: 0,
+    items: []
+});
 
 const getCartLocal = () => {
     // mengambil data cart dari localstorage
@@ -71,8 +84,29 @@ const getCartLocal = () => {
     currentCart.value = cartLocal != 'undefined' && cartLocal != null ? JSON.parse(cartLocal) : []
 
     currenTotal.value = 0
+    orderCart.total_items = 0
+    orderCart.items = []
     currentCart.value.forEach(each => {
         currenTotal.value += each.choosenQuantity * each.price
+        orderCart.total_items += each.choosenQuantity
+        orderCart.items.push({
+            product_id: each.id,
+            quantity: each.choosenQuantity,
+            option: each.option.map(x => x.key),
+            note: ''
+        })
+    })
+    orderCart.total = currenTotal.value
+}
+
+const actionOrder = () => {
+    orderCart.post('/order', {
+        preserveScroll: true,
+        onSuccess: () => {
+            orderCart.reset();
+            localStorage.setItem('cart', JSON.stringify([]));
+            getCartLocal();
+        },
     })
 }
 </script>

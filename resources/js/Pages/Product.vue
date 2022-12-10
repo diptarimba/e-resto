@@ -43,8 +43,8 @@
                     </swiper>
                 </div>
                 <div class="product-tag">
-                    <span class="tag-discountQuantity">40% OFF</span>
-                    <a href="wishlist.html" aria-label="Wishlist" class="btn btn--size-33-33 btn--center btn--round btn--color-radical-red btn--bg-white btn--box-shadow"><i class="icon icon-carce-heart"></i></a>
+                    <span class="tag-discountQuantity">Available</span>
+                    <button @click="modifyWishlist" aria-label="Wishlist" class="btn btn--size-33-33 btn--center btn--round btn--bg-white btn--box-shadow" :class="{ 'btn--color-pink-swan' : !inWishlist, ' btn--color-radical-red' : inWishlist }"><i class="icon icon-carce-heart"></i></button>
                 </div>
             </div>
 
@@ -137,6 +137,7 @@ import {
 
 let countQuantity = ref(1);
 let option = [];
+const inWishlist = ref(false)
 
 // Menggunakan sweetalert dari fungsi global
 const swal = inject("$swal")
@@ -160,17 +161,56 @@ const chooseOption = (size, options) => {
 
 // deklarasikan variable baru untuk penampungan cart dari localstorage
 let currentCart = [];
+let currentWishlist = [];
 
 onMounted(() => {
-
     // mengambil data cart dari localstorage
     let cartLocal = localStorage.getItem('cart');
     currentCart = cartLocal != 'undefined' && cartLocal != null ? JSON.parse(cartLocal) : []
+    getWishlistLocal();
+    inWishlist.value = currentWishlist.findIndex(({id}) => id === props.product.id) != -1
 })
+
+const getWishlistLocal = () => {
+    let localWishlist = localStorage.getItem('wishlist');
+    currentWishlist = localWishlist != 'undefined' && localWishlist != null ? JSON.parse(localWishlist) : []
+}
 
 // Menghapus fitur proxy dari ES6 javascript
 const unProxy = (value) => {
     return JSON.parse(JSON.stringify(value))
+}
+
+const modifyWishlist = () => {
+
+    // deklarasikan product yang akan ditambahkan ke wishlist
+    let productAdd = unProxy(props.product)
+
+    // check apakah product yang akan di masukan terdapat pada wishlist di localstorage atau tidak
+    let checkLocal = currentWishlist.findIndex(({id}) => id === productAdd.id)
+
+    // membatasi penambahan product ke dalam wishlist apabila sudah terdapat 10 product
+    if(currentWishlist.length >= 10 && checkLocal === -1 ) {
+        swal({
+            title: 'Perhatian',
+            icon: 'warning',
+            text: 'Anda sudah melebihi batas wishlist maksimal, silahkan kurangi wishlist yang sudah ada terlebih dahulu.',
+            confirmButtonColor: '#007AFF'
+        });
+        return
+    }
+
+    // -1 bertanda product belum terdapat pada array of object wishlist di localstorage
+    // apabila belum ada, maka akan dilakukan push, yakni menambah
+    // apabila sudah ada, berarti menghapus dari wishlist
+    checkLocal == -1 ? currentWishlist.push(productAdd) : currentWishlist.splice(checkLocal, 1);
+
+    // menyimpan data wishlist ke dalam local storage
+    localStorage.setItem('wishlist', JSON.stringify(currentWishlist))
+
+    // mengecek data pada wishlist local apakah sudah tersedia apa belum, untuk menginterpretasikan logo love merah dan hitam
+    checkLocal = currentWishlist.findIndex(({id}) => id === productAdd.id)
+    inWishlist.value =  checkLocal != -1
 }
 
 const addToCart = () => {

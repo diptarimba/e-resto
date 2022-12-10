@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
+use stdClass;
 
 use function Termwind\render;
 
@@ -74,5 +76,40 @@ class HomeController extends Controller
     public function wishlist()
     {
         return Inertia::render('Wishlist');
+    }
+
+    public function place_order(Request $request)
+    {
+        $this->validate($request, [
+            'total' => 'numeric',
+            'items' => 'array',
+            'total_items' => 'numeric',
+            'items.*.product_id' => 'exists:products,id',
+            'items.*.quantity' => 'required',
+            'items.*.option' => 'array',
+            'items.*.option.*' => 'exists:product_size_options,id'
+        ]);
+
+        $order = Order::create([
+            'name' => 'Pelanggan',
+            'table_id' => 1,
+            'quantity' => $request->total_items,
+            'pay_amount' => $request->total,
+            'status' => Order::$ORDER_STATUS_ACCEPT,
+        ]);
+
+        foreach($request->items as $each)
+        {
+            $each = (object) $each;
+            $order_detail = $order->order_detail()->create([
+                'product_id' => $each->product_id,
+                'quantity' => $each->quantity,
+                'note' => $each->note ?? ''
+            ]);
+
+            $order_detail->product_option()->attach($each->option);
+        }
+
+        return redirect()->route('home.cart')->with(["message" => "Success Create", "order_number" => $order->order_number]);
     }
 }

@@ -24,4 +24,9 @@ class ProductSizeOption extends Model
     {
         return $this->belongsTo(ProductSize::class, 'product_size_id');
     }
+
+    public function order_detail()
+    {
+        return $this->belongsToMany(OrderDetail::class, 'order_detail_options', 'product_size_option_id', 'order_detail_id');
+    }
 }

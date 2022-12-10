@@ -242,13 +242,13 @@ const sidebarOpen = ref(false);
 //     scrolled.value = window.top.scrollY > 0 ? true : false
 // }
 
-// const clickProfile = () => {
-//     profileOpen.value = !profileOpen.value
-// }
+const clickProfile = () => {
+    profileOpen.value = !profileOpen.value
+}
 
-// const clickSideBar = () => {
-//     sidebarOpen.value = !sidebarOpen.value
-// }
+const clickSideBar = () => {
+    sidebarOpen.value = !sidebarOpen.value
+}
 
 // onMounted(() => {
 //     window.addEventListener('scroll', handleScroll)

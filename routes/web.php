@@ -22,3 +22,5 @@ Route::get('/product/{productId}', [ProductController::class, 'show'])->name('pr
 
 Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('home.wishlist');
 Route::get('/cart', [HomeController::class, 'cart'])->name('home.cart');
+
+Route::post('/order',[HomeController::class, 'place_order'])->name('post.order');
