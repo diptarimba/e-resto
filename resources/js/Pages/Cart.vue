@@ -92,7 +92,7 @@ const getCartLocal = () => {
         orderCart.items.push({
             product_id: each.id,
             quantity: each.choosenQuantity,
-            option: each.option.map(x => x.key),
+            option: each.option.map(x => x.value),
             note: ''
         })
     })
