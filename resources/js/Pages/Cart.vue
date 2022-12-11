@@ -53,7 +53,6 @@ export default {
 
 <script setup>
 import SingleProduct from '../Shared/Components/Cart/Product.vue'
-import moment from 'moment';
 import {
   reactive,
     ref
@@ -66,7 +65,6 @@ import { useForm } from '@inertiajs/inertia-vue3'
 
 onMounted(() => {
     getCartLocal()
-    moment.locale('de');
 })
 
 const currenTotal = ref(0)
@@ -74,11 +72,15 @@ const currenTotal = ref(0)
 let currentCart = ref([]); // Deklarasikan variable penampungan cart
 const orderCart = useForm({
     total: 0,
+    token: '',
     total_items: 0,
     items: []
 });
 
 const getCartLocal = () => {
+
+    // mengambil data token masing masing user
+    let tokenLocal = localStorage.getItem('token');
     // mengambil data cart dari localstorage
     let cartLocal = localStorage.getItem('cart');
     currentCart.value = cartLocal != 'undefined' && cartLocal != null ? JSON.parse(cartLocal) : []
@@ -96,6 +98,7 @@ const getCartLocal = () => {
             note: ''
         })
     })
+    orderCart.token = tokenLocal
     orderCart.total = currenTotal.value
 }
 

@@ -20,6 +20,7 @@ class Order extends Model
         'table_id',
         'quantity',
         'pay_amount',
+        'customer_id',
         'order_number',
         'status',
         'payment_id'
@@ -46,5 +47,10 @@ class Order extends Model
     public function order_detail()
     {
         return $this->hasMany(OrderDetail::class, 'order_id');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
 }

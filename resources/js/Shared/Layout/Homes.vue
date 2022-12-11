@@ -231,8 +231,10 @@
 import {
     ref,
     onMounted,
-    onUnmounted
+    onUnmounted,
+    inject
 } from 'vue'
+import { v4 as uuidv4 } from 'uuid';
 
 const scrolled = ref(false);
 const profileOpen = ref(false);
@@ -250,9 +252,16 @@ const clickSideBar = () => {
     sidebarOpen.value = !sidebarOpen.value
 }
 
-// onMounted(() => {
-//     window.addEventListener('scroll', handleScroll)
-// })
+const checkToken = () => {
+    let tokenLocal = localStorage.getItem('token');
+    var currentToken = tokenLocal != 'undefined' && tokenLocal != null ? tokenLocal : uuidv4()
+    localStorage.setItem('token', currentToken);
+}
+
+onMounted(() => {
+    checkToken()
+    // window.addEventListener('scroll', handleScroll)
+})
 
 // onUnmounted(() => {
 //     window.removeEventListener(handleScroll, )

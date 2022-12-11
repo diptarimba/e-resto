@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Slider;
@@ -80,9 +81,11 @@ class HomeController extends Controller
 
     public function place_order(Request $request)
     {
+
         $this->validate($request, [
             'total' => 'numeric',
             'items' => 'array',
+            'token' => 'string',
             'total_items' => 'numeric',
             'items.*.product_id' => 'exists:products,id',
             'items.*.quantity' => 'required',
@@ -90,9 +93,14 @@ class HomeController extends Controller
             'items.*.option.*' => 'exists:product_size_options,id'
         ]);
 
+        $customerId = Customer::firstOrCreate(
+            ['token' => $request->token]
+        )->id;
+
         $order = Order::create([
             'name' => 'Pelanggan',
             'table_id' => 1,
+            'customer_id' => $customerId,
             'quantity' => $request->total_items,
             'pay_amount' => $request->total,
             'status' => Order::$ORDER_STATUS_ACCEPT,

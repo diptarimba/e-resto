@@ -22,7 +22,11 @@ return new class extends Migration
             $table->string('status');
             $table->string('order_number')->unique();
             $table->unsignedBigInteger('payment_id')->nullable();
+            $table->unsignedBigInteger('customer_id');
             $table->timestamps();
+
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
         });
     }
 
