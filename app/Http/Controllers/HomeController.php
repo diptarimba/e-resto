@@ -121,8 +121,22 @@ class HomeController extends Controller
         return redirect()->route('home.cart')->with(["message" => "Success Create", "order_number" => $order->order_number]);
     }
 
-    public function order()
+    public function order($token)
     {
-        dd('nganu');
+        $order = Order::with('customer')->whereHas('customer', function($query) use ($token){
+            $query->whereToken($token);
+        })->get();
+
+        return Inertia::render('Order', [
+            'order' => $order
+        ]);
+    }
+
+    public function order_detail($id)
+    {
+        $order = Order::with('order_detail.product', 'order_detail.product_option', 'customer')->whereId($id)->first();
+        return Inertia::render('OrderDetail', [
+            'order' => $order
+        ]);
     }
 }

@@ -207,7 +207,7 @@
                     <Link area-label="cart icon" :href="route('home.cart',undefined, false)" class="event-btn-link"><i class="icon icon-carce-cart"></i></Link>
                 </div>
                 <div class="user-event user-event--right">
-                    <Link area-label="order icon" :href="route('home.order',undefined, false)" class="event-btn-link"><i class="icon icon-carce-compare"></i></Link>
+                    <Link area-label="order icon" v-if="currentToken" :href="route('home.order',currentToken, false)" class="event-btn-link"><i class="icon icon-carce-compare"></i></Link>
                     <a area-label="chat icon" href="chat.html" class="event-btn-link"><i class="icon icon-carce-bubbles2"></i></a>
                 </div>
             </div>
@@ -252,10 +252,12 @@ const clickSideBar = () => {
     sidebarOpen.value = !sidebarOpen.value
 }
 
+const currentToken = ref(null);
+
 const checkToken = () => {
     let tokenLocal = localStorage.getItem('token');
-    var currentToken = tokenLocal != 'undefined' && tokenLocal != null ? tokenLocal : uuidv4()
-    localStorage.setItem('token', currentToken);
+    currentToken.value = tokenLocal != 'undefined' && tokenLocal != null ? tokenLocal : uuidv4()
+    localStorage.setItem('token', currentToken.value);
 }
 
 onMounted(() => {

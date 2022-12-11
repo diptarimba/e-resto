@@ -24,5 +24,6 @@ Route::get('/product/{productId}', [ProductController::class, 'show'])->name('pr
 Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('home.wishlist');
 Route::get('/cart', [HomeController::class, 'cart'])->name('home.cart');
 
-Route::get('/order', [HomeController::class, 'order'])->name('home.order');
+Route::get('/order/{id}/detail', [HomeController::class, 'order_detail'])->name('order.detail');
+Route::get('/order/{token}', [HomeController::class, 'order'])->name('home.order');
 Route::post('/order',[HomeController::class, 'place_order'])->name('post.order');
