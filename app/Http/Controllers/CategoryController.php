@@ -11,7 +11,8 @@ class CategoryController extends Controller
 {
     public function index(Request $request, $categoryId)
     {
-        $product = Product::
+        $product = Product::query()
+        ->
         when(request()->input('search'), function ($query, $search) {
             $query->where('name', 'LIKE', '%' . $search . '%');
         })
@@ -35,7 +36,6 @@ class CategoryController extends Controller
             'product' => $product,
             'filters' => Request()->hasAny(['min', 'max', 'search']) ? Request()->only(['min', 'max', 'search']) : ['search' => '', 'min' => 0, 'max' => $maxPrice],
             'maxPrice' => $maxPrice,
-
         ]);
     }
 }

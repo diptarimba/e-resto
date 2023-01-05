@@ -35,6 +35,7 @@ export default {
 import {
     onMounted,
     onUnmounted,
+    onUpdated,
     ref,
     watch
 } from '@vue/runtime-core'
@@ -76,7 +77,7 @@ let searchText = ref(props.filters.search)
 // Deklarasikan variable penampungan wishlist
 let currentWishlist = ref([]);
 
- const scrollComponent = ref(null)
+const scrollComponent = ref(null)
 
 const getWishlistLocal = () => {
     // mengambil data wishlist dari localstorage
@@ -86,36 +87,40 @@ const getWishlistLocal = () => {
 
 const handleScroll = (e) => {
     let element = scrollComponent.value
-  if (element.getBoundingClientRect().bottom < window.innerHeight) {
-    addProductOnScroll()
-  }
+    if (element.getBoundingClientRect().bottom < window.innerHeight) {
+        addProductOnScroll()
+    }
 }
 
 const addProductOnScroll = () => {
     if (props.product.next_page_url === null) {
         return;
     }
-
+    console.log('sini')
     Inertia.get(props.product.next_page_url, {}, {
         preserveScroll: true,
         preserveState: true,
         replace: true,
         only: ['product'],
-        onSuccess: () => {
-            productList.value = [...productList.value, ...props.product.data]
+        onSuccess: pages => {
+            productList.value = [...productList.value, ...pages.props.product.data]
         }
     })
 }
 
 // Melakukan query baru pencarian product ketika user menuliskan nama barang / memilih filter harga
 watch([searchText, defaultValue], debounce(function ([newSearch, newDefaultValue], [oldSearch, oldDefaultValue]) {
+    console.log('cek pencarian', newSearch)
     Inertia.get('/category/' + props.categoryId, {
         search: newSearch,
         min: newDefaultValue[0],
         max: newDefaultValue[1]
     }, {
         preserveState: true,
-        replace: true
+        replace: true,
+        onSuccess: pages => {
+            productList.value = pages.props.product.data
+        }
     })
 }, 300));
 </script>
