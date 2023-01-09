@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> @yield('title') | CMC Polines</title>
+    <title> @yield('title') | @env('APP_NAME')</title>
 
     <link rel="stylesheet" href="{{asset('assets/css/main/app.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/main/app-dark.css')}}">
@@ -29,7 +29,7 @@
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
-                        <p>2022 &copy; CMC Polines</p>
+                        <p>2022 &copy; @env('APP_NAME')</p>
                     </div>
                     <div class="float-end">
                         {{-- <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
@@ -41,6 +41,9 @@
     </div>
     <script src="{{asset('assets/js/app.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{{asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
+    <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
     @yield('footer')
     @stack('footer-add')
 </body>
