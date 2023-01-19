@@ -3,7 +3,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <a href="index.html"><img src="{{asset('assets/images/logo/logo.svg')}}" alt="Logo"
+                    <a href="index.html"><img src="{{asset('dashboard-assets/images/logo/logo.svg')}}" alt="Logo"
                             srcset=""></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
@@ -44,9 +44,9 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <x-sidebar.sidebar-single text="Dashboard" icon="bi bi-grid-fill" href="/"/>
-                <x-sidebar.sidebar-single text="Event" icon="bi bi-stack" href="{{route('event.index')}}"/>
+                {{-- <x-sidebar.sidebar-single text="Event" icon="bi bi-stack" href="{{route('event.index')}}"/>
                 <x-sidebar.sidebar-single text="Audience" icon="bi bi-stack" href="{{route('audience.index')}}"/>
-                <x-sidebar.sidebar-single text="Logout" icon="bi bi-arrow-bar-right" href="{{route('logout.index')}}"/>
+                <x-sidebar.sidebar-single text="Logout" icon="bi bi-arrow-bar-right" href="{{route('logout.index')}}"/> --}}
             </ul>
         </div>
     </div>

@@ -9,5 +9,5 @@
     </div>
 </div>
 @push('footer-add')
-<script src="{{asset('assets/js/imageReview.js')}}"></script>
+<script src="{{asset('dashboard-assets/js/imageReview.js')}}"></script>
 @endpush

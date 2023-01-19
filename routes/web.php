@@ -33,5 +33,5 @@ Route::get('/auth/login', [LoginController::class, 'index'])->name('auth.index')
 Route::post('/auth/login', [LoginController::class, 'authenticate'])->name('auth.post');
 
 Route::name('admin.')->prefix('a')->group(function(){
-
+    Route::get('/', [HomeController::class, 'index'])->name('home.index');
 });

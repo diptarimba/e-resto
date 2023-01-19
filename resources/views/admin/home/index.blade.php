@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    <x-card.card-statistic text="Total Penjualan" value="{{$audience}}"/>
+    <x-card.card-statistic text="Total Penjualan" value="{{$sales}}"/>
 </x-layoutDashboard>
 @endsection
 
