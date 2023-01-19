@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -33,5 +34,5 @@ Route::get('/auth/login', [LoginController::class, 'index'])->name('auth.index')
 Route::post('/auth/login', [LoginController::class, 'authenticate'])->name('auth.post');
 
 Route::name('admin.')->prefix('a')->group(function(){
-    Route::get('/', [HomeController::class, 'index'])->name('home.index');
+    Route::get('/', [AdminHomeController::class, 'index'])->name('home.index');
 });

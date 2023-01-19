@@ -4,7 +4,7 @@
             <span class="h4">{{$text}}</span>
         </div>
         <div class="card-body">
-            {{$value}} Peserta
+            {{$value}} {{$unit}}
         </div>
     </div>
 </div>
