@@ -28,7 +28,7 @@ class ProductController extends Controller
             ->make(true);
         }
 
-        return view('layouts.admin.product.index');
+        return view('admin.product.index');
     }
 
     /**
@@ -39,7 +39,7 @@ class ProductController extends Controller
     public function create()
     {
         $category = Category::get()->pluck('name', 'id');
-        return view('layouts.admin.product.create-edit', compact('category'));
+        return view('admin.product.create-edit', compact('category'));
     }
 
     /**
@@ -84,7 +84,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $category = Category::get()->pluck('name', 'id');
-        return view('layouts.admin.product.create-edit', compact('product', 'category'));
+        return view('admin.product.create-edit', compact('product', 'category'));
     }
 
     /**
