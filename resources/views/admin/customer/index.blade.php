@@ -8,8 +8,8 @@
 
 @section('body')
 <x-layoutContent
-    Heading="Product"
-    mainTitle="Product"
+    Heading="Customer"
+    mainTitle="Customer"
     subTitle="Home"
 >
     <x-card.card>
