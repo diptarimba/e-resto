@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\CategoryController;
@@ -38,7 +39,9 @@ Route::post('/auth/login', [LoginController::class, 'authenticate'])->name('auth
 
 Route::name('admin.')->prefix('a')->group(function(){
     Route::get('/', [AdminHomeController::class, 'index'])->name('home.index');
+    Route::post('/order/change_status/{order}', [OrderController::class, 'change_status'])->name('order.change');
     Route::resource('product', AdminProductController::class);
     Route::resource('customer', CustomerController::class);
     Route::resource('payment', PaymentController::class);
+    Route::resource('order', OrderController::class);
 });

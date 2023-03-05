@@ -14,6 +14,10 @@ class Order extends Model
     public static $ORDER_STATUS_PROCESS = 'PROCESS';
     public static $ORDER_STATUS_CANCEL = 'CANCEL';
     public static $ORDER_STATUS_COMPLETE = 'COMPLETE';
+    public static $ORDER_NEXT_ACCEPT = [['key' => 'CANCEL', 'val' => 'danger'], ['key' => 'PROCESS', 'val' => 'secondary']];
+    public static $ORDER_NEXT_PROCESS = [['key' => 'COMPLETE', 'val' => 'info']];
+    public static $ORDER_NEXT_CANCEL = [['key' => 'ACCEPT', 'val' => 'success']];
+    public static $ORDER_NEXT_COMPLETE = [];
 
     protected $fillable = [
         'name',
