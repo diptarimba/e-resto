@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\CategoryController;
@@ -37,4 +38,5 @@ Route::post('/auth/login', [LoginController::class, 'authenticate'])->name('auth
 Route::name('admin.')->prefix('a')->group(function(){
     Route::get('/', [AdminHomeController::class, 'index'])->name('home.index');
     Route::resource('product', AdminProductController::class);
+    Route::resource('customer', CustomerController::class);
 });

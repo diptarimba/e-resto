@@ -44,6 +44,7 @@
             <ul class="menu">
                 <x-sidebar.sidebar-single text="Dashboard" icon="bi bi-grid-fill" href="{{route('admin.home.index')}}" />
                 <x-sidebar.sidebar-single text="Product" icon="bi bi-file-diff-fill" href="{{route('admin.product.index')}}" />
+                <x-sidebar.sidebar-single text="Customer" icon="bi bi-person-fill" href="{{route('admin.customer.index')}}" />
                 {{-- <x-sidebar.sidebar-single text="Event" icon="bi bi-stack" href="{{route('event.index')}}"/>
                 <x-sidebar.sidebar-single text="Audience" icon="bi bi-stack" href="{{route('audience.index')}}"/>
                 <x-sidebar.sidebar-single text="Logout" icon="bi bi-arrow-bar-right" href="{{route('logout.index')}}"/> --}}

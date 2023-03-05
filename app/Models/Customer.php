@@ -13,8 +13,17 @@ class Customer extends Model
         'name', 'phone', 'token'
     ];
 
+    protected $append = [
+        'order_count'
+    ];
+
     public function order()
     {
-        $this->hasMany(Order::class, 'customer_id');
+        return $this->hasMany(Order::class, 'customer_id');
+    }
+
+    public function getOrderCountAttribute()
+    {
+        return $this->order()->count();
     }
 }
