@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> @yield('title') | {{env('APP_NAME')}}</title>
+    <title> @yield('title') | {{config('app.name')}}</title>
 
     <link rel="stylesheet" href="{{asset('dashboard-assets/css/main/app.css')}}">
     <link rel="stylesheet" href="{{asset('dashboard-assets/css/main/app-dark.css')}}">
+    <link rel="stylesheet" href="{{asset('dashboard-assets/extensions/sweetalert2/sweetalert2.min.css')}}">
     <link rel="shortcut icon" href="{{asset('dashboard-assets/images/logo/favicon.svg')}}" type="image/x-icon">
     <link rel="shortcut icon" href="{{asset('dashboard-assets/images/logo/favicon.png')}}" type="image/png">
     @yield('header')
@@ -43,9 +44,33 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{{asset('dashboard-assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('dashboard-assets/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
-    <script src="{{asset('dashboard-assets/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('dashboard-assets/extensions/sweetalert2/sweetalert2.min.js')}}"></script>
+    {{-- <script src="{{asset('dashboard-assets/js/bootstrap.bundle.min.js')}}"></script> --}}
+    <script>
+        function delete_data(identify){
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                        )
+                        $(`#${identify}`).submit();
+                    }
+                }
+            )
+        }
+    </script>
+    <script src="{{asset('imageReview.js')}}"></script>
     @yield('footer')
-    @stack('footer-add')
 </body>
 
 </html>

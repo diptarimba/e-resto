@@ -8,6 +8,3 @@
         {{-- <h5 class="card-title">{{ $label }}</h5> --}}
     </div>
 </div>
-@push('footer-add')
-<script src="{{asset('dashboard-assets/js/imageReview.js')}}"></script>
-@endpush

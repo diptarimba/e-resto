@@ -123,6 +123,7 @@ class HomeController extends Controller
 
     public function order($token)
     {
+        
         $order = Order::with('customer')->whereHas('customer', function($query) use ($token){
             $query->whereToken($token);
         })->get();
