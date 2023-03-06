@@ -40,5 +40,31 @@
 @endsection
 
 @section('footer')
+    <script>
+        $('select').on('change', function() {
+            var dataToSend = {
+                payment_id: $(this).val()
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('admin.order.payment', $order->id) }}',
+                data: dataToSend,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                        'content'
+                    ) // Menambahkan token CSRF untuk melindungi form Anda dari serangan CSRF
+                },
+                success: function(response) {
+                    // Menangani respons dari server
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    // Menangani kesalahan saat melakukan request
+                    console.error(error);
+                }
+            })
+        })
+    </script>
 
 @endsection

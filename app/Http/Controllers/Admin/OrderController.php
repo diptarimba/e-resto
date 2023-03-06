@@ -113,6 +113,17 @@ class OrderController extends Controller
         return redirect()->route('admin.order.edit', $order->id)->with('success', 'Success Change Status Order');
     }
 
+    public function change_payment(Order $order, Request $request)
+    {
+        $request->validate([
+            'payment_id' => 'required'
+        ]);
+
+        $order->update($request->all());
+
+        return response()->json(['message' => 'Success Update Payment'], 200);
+    }
+
     public function getActionColumn($data)
     {
         $viewBtn = route('admin.order.edit', $data->id);
