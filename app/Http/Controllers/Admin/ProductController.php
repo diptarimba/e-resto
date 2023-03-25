@@ -131,11 +131,13 @@ class ProductController extends Controller
     public function getActionColumn($data)
     {
         $editBtn = route('admin.product.edit', $data->id);
+        $sizeBtn = route('admin.product.size.index', ['product' => $data->id]);
         $deleteBtn = route('admin.product.destroy', $data->id);
         $ident = Str::random();
 
         return
         '<a href="'.$editBtn.'" class="btn mx-1 my-1 btn-sm btn-outline-success">Edit</a>'
+        . '<a href="'.$sizeBtn.'" class="btn mx-1 my-1 btn-sm btn-outline-secondary">Size</a>'
         . '<button type="button" onclick="delete_data(\'form'.$ident .'\')" class="mx-1 my-1 btn btn-sm btn-outline-danger">Delete</button>'
         .'<form id="form'.$ident .'" action="'.$deleteBtn.'" method="post">
         <input type="hidden" name="_token" value="'.csrf_token().'" />
