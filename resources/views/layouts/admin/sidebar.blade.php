@@ -42,11 +42,11 @@
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
-                <x-sidebar.sidebar-single text="Dashboard" icon="bi bi-grid-fill" href="{{route('admin.home.index')}}" />
-                <x-sidebar.sidebar-single text="Product" icon="bi bi-file-diff-fill" href="{{route('admin.product.index')}}" />
-                <x-sidebar.sidebar-single text="Customer" icon="bi bi-person-fill" href="{{route('admin.customer.index')}}" />
-                <x-sidebar.sidebar-single text="Order" icon="bi bi-currency-exchange" href="{{route('admin.order.index')}}" />
-                <x-sidebar.sidebar-single text="Payment Method" icon="bi bi-credit-card-fill" href="{{route('admin.payment.index')}}" />
+                <x-sidebar.sidebar-single text="Dashboard" icon="bi bi-grid-fill" href="{{route('admin.home.index')}}" :classes="request()->routeIs('admin.home.*') ? 'active' : ''"/>
+                <x-sidebar.sidebar-single text="Product" icon="bi bi-file-diff-fill" href="{{route('admin.product.index')}}" :classes="request()->routeIs('admin.product.*') ? 'active' : ''" />
+                <x-sidebar.sidebar-single text="Customer" icon="bi bi-person-fill" href="{{route('admin.customer.index')}}" :classes="request()->routeIs('admin.customer.*') ? 'active' : ''" />
+                <x-sidebar.sidebar-single text="Order" icon="bi bi-currency-exchange" href="{{route('admin.order.index')}}" :classes="request()->routeIs('admin.order.*') ? 'active' : ''" />
+                <x-sidebar.sidebar-single text="Payment Method" icon="bi bi-credit-card-fill" href="{{route('admin.payment.index')}}" :classes="request()->routeIs('admin.payment.*') ? 'active' : ''" />
                 {{-- <x-sidebar.sidebar-single text="Event" icon="bi bi-stack" href="{{route('event.index')}}"/>
                 <x-sidebar.sidebar-single text="Audience" icon="bi bi-stack" href="{{route('audience.index')}}"/>
                 <x-sidebar.sidebar-single text="Logout" icon="bi bi-arrow-bar-right" href="{{route('logout.index')}}"/> --}}
