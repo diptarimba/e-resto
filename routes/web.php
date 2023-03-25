@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\ProductOptionController;
 use App\Http\Controllers\Admin\ProductSizeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
@@ -42,6 +43,7 @@ Route::name('admin.')->prefix('a')->group(function(){
     Route::get('/', [AdminHomeController::class, 'index'])->name('home.index');
     Route::post('/order/change_status/{order}', [OrderController::class, 'change_status'])->name('order.change');
     Route::post('/order/change_payment/{order}', [OrderController::class, 'change_payment'])->name('order.payment');
+    Route::resource('product.size.option', ProductOptionController::class);
     Route::resource('product.size', ProductSizeController::class);
     Route::resource('product', AdminProductController::class);
     Route::resource('customer', CustomerController::class);

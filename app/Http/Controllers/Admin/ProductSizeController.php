@@ -127,10 +127,12 @@ class ProductSizeController extends Controller
     {
         $editBtn = route('admin.product.size.edit',['product' => $data->product_id, 'size' => $data->id]);
         $deleteBtn = route('admin.product.size.destroy', ['product' => $data->product_id, 'size' => $data->id]);
+        $optionBtn = route('admin.product.size.option.index', ['product' => $data->product_id, 'size' => $data->id]);
         $ident = Str::random();
 
         return
         '<a href="'.$editBtn.'" class="btn mx-1 my-1 btn-sm btn-outline-success">Edit</a>'
+        . '<a href="'.$optionBtn.'" class="btn mx-1 my-1 btn-sm btn-outline-secondary">Option</a>'
         . '<button type="button" onclick="delete_data(\'form'.$ident .'\')" class="mx-1 my-1 btn btn-sm btn-outline-danger">Delete</button>'
         .'<form id="form'.$ident .'" action="'.$deleteBtn.'" method="post">
         <input type="hidden" name="_token" value="'.csrf_token().'" />
