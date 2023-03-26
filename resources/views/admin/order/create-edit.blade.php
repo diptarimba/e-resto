@@ -36,6 +36,26 @@
                 @endforeach
             </x-slot>
         </x-card.card>
+        <x-card.card>
+            <x-slot name="header">
+                <h4>Order Detail</h4>
+            </x-slot>
+            <x-slot name="body">
+                <table class="table table-striped datatables-target-exec">
+                    <thead>
+                        <th>No</th>
+                        <th>Order Number</th>
+                        <th>Table</th>
+                        <th>Status</th>
+                        <th>Total Payment</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </x-slot>
+        </x-card.card>
     </x-layoutContent>
 @endsection
 
