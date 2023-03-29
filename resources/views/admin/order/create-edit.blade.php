@@ -41,7 +41,7 @@
                 <h4>Order Detail</h4>
             </x-slot>
             <x-slot name="body">
-                <table class="table table-striped datatables-target-exec">
+                <table class="table table-striped datatables-target-exec" style="width: 100%">
                     <thead>
                         <th>No</th>
                         <th>Product</th>

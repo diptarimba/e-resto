@@ -17,7 +17,7 @@
             <x-card.card-title-create url="{{route('admin.customer.create')}}" text="List"/>
         </x-slot>
         <x-slot name="body">
-            <table class="table table-striped datatables-target-exec">
+            <table class="table table-striped datatables-target-exec" style="width: 100%">
                 <thead>
                     <th>No</th>
                     <th>Token</th>
