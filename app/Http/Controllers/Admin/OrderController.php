@@ -75,6 +75,7 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         $payment = Payment::get()->pluck('name', 'id');
+        $order->pay_amount = number_format($order->pay_amount, 0, ",", ".");
         $button = Order::${'ORDER_NEXT_' . $order->status};
         return view('admin.order.create-edit', compact('order', 'payment', 'button'));
     }
