@@ -55,9 +55,9 @@
                         <th>Quantity</th>
                         <th>Sub Total</th>
                         <th>Note</th>
-                        <th>Action</th>
-                        <th></th>
-                        <th></th>
+                        @if(!in_array($order->status, ['CANCEL', 'COMPLETE']))
+                            <th>Action</th>
+                        @endif
                     </thead>
                     <tbody>
 
@@ -363,12 +363,14 @@
                         data: 'note',
                         name: 'note'
                     },
+                    @if(!in_array($order->status, ['CANCEL', 'COMPLETE']))
                     {
                         data: 'action',
                         name: 'action',
                         orderable: true,
                         searchable: true
                     }
+                    @endif
                 ],
                 columnDefs: [{
                     targets: 2,

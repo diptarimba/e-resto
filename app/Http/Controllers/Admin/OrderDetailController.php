@@ -20,7 +20,7 @@ class OrderDetailController extends Controller
     {
         if($request->ajax())
         {
-            $orderDetail = $order->order_detail()->with('product')->get();
+            $orderDetail = $order->order_detail()->with('product', 'order:id,status')->get();
             return datatables()->of($orderDetail)
             ->addIndexColumn()
             ->addColumn('action', function($query){
@@ -144,11 +144,13 @@ class OrderDetailController extends Controller
 
     public function getActionColumn($data)
     {
-        $deleteBtn = route('admin.order.detail.destroy', ['order' => $data->order_id, 'detail' => $data->id]);
-        $ident = Str::random(10);
+        if(!in_array($data->order->status, ['CANCEL', 'COMPLETE'])){
+            $deleteBtn = route('admin.order.detail.destroy', ['order' => $data->order_id, 'detail' => $data->id]);
+            $ident = Str::random(10);
 
-        return
-        '<button type="button" onclick="editModal('.$data->order_id.','.$data->id.')" class="btn mx-1 my-1 btn-sm btn-outline-success edit-row">Edit</button>'
-        . '<button type="button" onclick="deleteDetail('.$data->order_id.','.$data->id.')" class="mx-1 my-1 btn btn-sm btn-outline-danger delete-row">Delete</button>';
+            return
+            '<button type="button" onclick="editModal('.$data->order_id.','.$data->id.')" class="btn mx-1 my-1 btn-sm btn-outline-success edit-row">Edit</button>'
+            . '<button type="button" onclick="deleteDetail('.$data->order_id.','.$data->id.')" class="mx-1 my-1 btn btn-sm btn-outline-danger delete-row">Delete</button>';
+        }
     }
 }
