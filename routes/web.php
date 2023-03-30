@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\OrderController;
@@ -47,6 +48,7 @@ Route::name('admin.')->prefix('a')->group(function(){
     Route::post('/order/change_payment/{order}', [OrderController::class, 'change_payment'])->name('order.payment');
     Route::resource('product.size.option', ProductOptionController::class);
     Route::resource('product.size', ProductSizeController::class);
+    Route::resource('category', AdminCategoryController::class);
     Route::resource('product', AdminProductController::class);
     Route::resource('customer', CustomerController::class);
     Route::resource('payment', PaymentController::class);

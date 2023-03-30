@@ -43,7 +43,10 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <x-sidebar.sidebar-single text="Dashboard" icon="bi bi-grid-fill" href="{{route('admin.home.index')}}" :classes="request()->routeIs('admin.home.*') ? 'active' : ''"/>
-                <x-sidebar.sidebar-single text="Product" icon="bi bi-file-diff-fill" href="{{route('admin.product.index')}}" :classes="request()->routeIs('admin.product.*') ? 'active' : ''" />
+                <x-sidebar.sidebar-parent text="Product" icon="bi bi-file-diff-fill" :active="request()->routeIs(['admin.product.*', 'admin.category.*']) ? 'active' : ''" :open="request()->routeIs(['admin.product.*', 'admin.category.*']) ? 'submenu-open' : ''">
+                    <x-sidebar.sidebar-child text="List" :href="route('admin.product.index')"/>
+                    <x-sidebar.sidebar-child text="Category" :href="route('admin.category.index')"/>
+                </x-sidebar.sidebar-parent>
                 <x-sidebar.sidebar-single text="Customer" icon="bi bi-person-fill" href="{{route('admin.customer.index')}}" :classes="request()->routeIs('admin.customer.*') ? 'active' : ''" />
                 <x-sidebar.sidebar-single text="Order" icon="bi bi-currency-exchange" href="{{route('admin.order.index')}}" :classes="request()->routeIs('admin.order.*') ? 'active' : ''" />
                 <x-sidebar.sidebar-single text="Payment Method" icon="bi bi-credit-card-fill" href="{{route('admin.payment.index')}}" :classes="request()->routeIs('admin.payment.*') ? 'active' : ''" />
