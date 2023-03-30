@@ -46,6 +46,7 @@ Route::name('admin.')->prefix('a')->group(function(){
     Route::get('/', [AdminHomeController::class, 'index'])->name('home.index');
     Route::post('/order/change_status/{order}', [OrderController::class, 'change_status'])->name('order.change');
     Route::post('/order/change_payment/{order}', [OrderController::class, 'change_payment'])->name('order.payment');
+    Route::post('/order/change_table/{order}', [OrderController::class, 'change_table'])->name('order.table');
     Route::resource('product.size.option', ProductOptionController::class);
     Route::resource('product.size', ProductSizeController::class);
     Route::resource('category', AdminCategoryController::class);

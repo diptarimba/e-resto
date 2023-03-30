@@ -19,10 +19,16 @@
                     @csrf
                     <x-forms.put-method />
                     <x-forms.input required="" label="Customer" name="customer_name" :value="@$order->customer->name" />
-                    <x-forms.input required="" label="Table" name="table" :value="@$order->table->name" />
+                    <x-forms.select label="Table" name="table" :items="$table" :value="@$order->table_id" />
+                    <div class="mb-2" id="edit-table">
+                        <button type="button" class="btn btn-outline-success btn-sm edit-table">Edit Table</button>
+                    </div>
                     <x-forms.input required="" label="Quantity" name="quantity" :value="@$order->quantity" />
                     <x-forms.input required="" label="Order Number" name="order_number" :value="@$order->order_number" />
                     <x-forms.select label="Payment Method" name="payment_id" :items="$payment" :value="@$order->payment_id" />
+                        <div class="mb-2" id="edit-payment">
+                            <button type="button" class="btn btn-outline-success btn-sm edit-payment">Edit Payment</button>
+                        </div>
                     <x-forms.input required="" label="Total Payment" name="total_payment" :value="@$order->pay_amount" />
                 </form>
                 <x-action.cancel href="{{route('admin.order.index')}}"/>
@@ -114,7 +120,7 @@
 
 @section('footer')
     <script>
-        $('select').on('change', function() {
+        $('#payment_id').on('change', function() {
             var dataToSend = {
                 payment_id: $(this).val()
             }
@@ -129,6 +135,36 @@
                     ) // Menambahkan token CSRF untuk melindungi form Anda dari serangan CSRF
                 },
                 success: function(response) {
+                    $('#payment_id').prop('disabled', true)
+                    $('#edit-payment').fadeIn();
+                    // Menangani respons dari server
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    // Menangani kesalahan saat melakukan request
+                    console.error(error);
+                }
+            })
+        })
+    </script>
+    <script>
+        $('#table').on('change', function() {
+            var dataToSend = {
+                table_id: $(this).val()
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('admin.order.table', $order->id) }}',
+                data: dataToSend,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                        'content'
+                    ) // Menambahkan token CSRF untuk melindungi form Anda dari serangan CSRF
+                },
+                success: function(response) {
+                    $('#table').prop('disabled', true)
+                    $('#edit-table').fadeIn();
                     // Menangani respons dari server
                     console.log(response);
                 },
@@ -145,6 +181,22 @@
         $('#customer_name').prop('disabled', true)
         $('#total_payment').prop('disabled', true)
         $('#quantity').prop('disabled', true)
+
+        if(!$('#payment_id option:selected').val().includes('Choose')){
+            $('#payment_id').prop('disabled', true)
+        }
+        if(!$('#table option:selected').val().includes('Choose')){
+            $('#table').prop('disabled', true)
+        }
+
+        $('.edit-table').on('click', function(){
+            $('#table').prop('disabled', false)
+            $('#edit-table').fadeOut();
+        })
+        $('.edit-payment').on('click', function(){
+            $('#payment_id').prop('disabled', false)
+            $('#edit-payment').fadeOut();
+        })
 
         /* Agar variable table bisa diakses dari luar */
         var table;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Payment;
+use App\Models\Table;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -77,9 +78,10 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         $payment = Payment::get()->pluck('name', 'id');
+        $table = Table::get()->pluck('name', 'id');
         $order->pay_amount = number_format($order->pay_amount, 0, ",", ".");
         $button = Order::${'ORDER_NEXT_' . $order->status};
-        return view('admin.order.create-edit', compact('order', 'payment', 'button'));
+        return view('admin.order.create-edit', compact('order', 'payment', 'button', 'table'));
     }
 
     /**
@@ -125,6 +127,17 @@ class OrderController extends Controller
         $order->update($request->all());
 
         return response()->json(['message' => 'Success Update Payment'], 200);
+    }
+
+    public function change_table(Order $order, Request $request)
+    {
+        $request->validate([
+            'table_id' => 'required'
+        ]);
+
+        $order->update($request->all());
+
+        return response()->json(['message' => 'Success Update Table'], 200);
     }
 
     public function getActionColumn($data)
