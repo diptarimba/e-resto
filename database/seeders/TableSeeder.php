@@ -15,12 +15,13 @@ class TableSeeder extends Seeder
      */
     public function run()
     {
-        $data = [
-            ['name' => '1'],
-            ['name' => '2'],
-            ['name' => '3'],
-            ['name' => '4'],
-        ];
+
+        $data = [];
+
+        for($x = 1; $x < 11; $x++)
+        {
+            $data[] = ['name' => 'Meja ' . $x];
+        }
 
         $tableCreate = Table::insert($data);
     }

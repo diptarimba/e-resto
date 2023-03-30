@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProductOptionController;
 use App\Http\Controllers\Admin\ProductSizeController;
+use App\Http\Controllers\Admin\TableController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -51,4 +52,5 @@ Route::name('admin.')->prefix('a')->group(function(){
     Route::resource('payment', PaymentController::class);
     Route::resource('order.detail', OrderDetailController::class);
     Route::resource('order', OrderController::class);
+    Route::resource('table', TableController::class);
 });
