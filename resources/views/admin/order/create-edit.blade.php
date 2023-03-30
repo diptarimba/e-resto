@@ -18,7 +18,7 @@
                     method="post" enctype="multipart/form-data">
                     @csrf
                     <x-forms.put-method />
-                    <x-forms.input required="" label="Customer" name="customer_name" :value="@$order->customer->name" />
+                    <x-forms.input required="" label="Customer" name="customer_name" :value="@$order->customer->name ?? 'Pelanggan Belum Memasukan Nama'" />
                     <x-forms.select label="Table" name="table" :items="$table" :value="@$order->table_id" />
                     <div class="mb-2" id="edit-table">
                         <button type="button" class="btn btn-outline-success btn-sm edit-table">Edit Table</button>
