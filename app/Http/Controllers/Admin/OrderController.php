@@ -18,7 +18,9 @@ class OrderController extends Controller
     {
         if($request->ajax())
         {
-            $order = Order::with('table')->select();
+            $order = Order::with('table')->when(!is_null($request->status), function($query) use ($request){
+                $query->whereStatus($request->status);
+            })->select();
             return datatables()->of($order)
             ->addIndexColumn()
             ->addColumn('table', function($query){

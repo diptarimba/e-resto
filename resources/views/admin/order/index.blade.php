@@ -33,11 +33,21 @@
 
 @section('footer')
     <script>
+        // mengambil URL saat ini
+        let currentUrl = window.location.search;
+        // membuat objek URLSearchParams dari URL saat ini
+        var searchParams = new URLSearchParams(currentUrl);
+
         $(document).ready(() => {
             var table = $('.datatables-target-exec').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('admin.order.index') }}",
+                ajax: {
+                    url: "{{ route('admin.order.index') }}",
+                    data: function(d){
+                        d.status = searchParams.get('status') ?? null
+                    }
+                },
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',

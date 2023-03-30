@@ -43,12 +43,19 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <x-sidebar.sidebar-single text="Dashboard" icon="bi bi-grid-fill" href="{{route('admin.home.index')}}" :classes="request()->routeIs('admin.home.*') ? 'active' : ''"/>
+                <x-sidebar.sidebar-parent text="Order" icon="bi bi-currency-exchange" :active="request()->routeIs('admin.order.*') ? 'active' : ''" :open="request()->routeIs('admin.order.*') ? 'submenu-open' : ''">
+                    <x-sidebar.sidebar-child text="ACCEPT" :href="route('admin.order.index', ['status' => 'ACCEPT'])"/>
+                    <x-sidebar.sidebar-child text="PROCESS" :href="route('admin.order.index', ['status' => 'PROCESS'])"/>
+                    <x-sidebar.sidebar-child text="CANCEL" :href="route('admin.order.index', ['status' => 'CANCEL'])"/>
+                    <x-sidebar.sidebar-child text="COMPLETE" :href="route('admin.order.index', ['status' => 'COMPLETE'])"/>
+                    <x-sidebar.sidebar-child text="ALL" :href="route('admin.order.index')"/>
+                </x-sidebar.sidebar-parent>
+                <li class="sidebar-title">Master Data</li>
                 <x-sidebar.sidebar-parent text="Product" icon="bi bi-file-diff-fill" :active="request()->routeIs(['admin.product.*', 'admin.category.*']) ? 'active' : ''" :open="request()->routeIs(['admin.product.*', 'admin.category.*']) ? 'submenu-open' : ''">
                     <x-sidebar.sidebar-child text="List" :href="route('admin.product.index')"/>
                     <x-sidebar.sidebar-child text="Category" :href="route('admin.category.index')"/>
                 </x-sidebar.sidebar-parent>
                 <x-sidebar.sidebar-single text="Customer" icon="bi bi-person-fill" href="{{route('admin.customer.index')}}" :classes="request()->routeIs('admin.customer.*') ? 'active' : ''" />
-                <x-sidebar.sidebar-single text="Order" icon="bi bi-currency-exchange" href="{{route('admin.order.index')}}" :classes="request()->routeIs('admin.order.*') ? 'active' : ''" />
                 <x-sidebar.sidebar-single text="Payment Method" icon="bi bi-credit-card-fill" href="{{route('admin.payment.index')}}" :classes="request()->routeIs('admin.payment.*') ? 'active' : ''" />
                 <x-sidebar.sidebar-single text="Table" icon="bi bi-stack" href="{{route('admin.table.index')}}" :classes="request()->routeIs('admin.table.*') ? 'active' : ''" />
                 {{-- <x-sidebar.sidebar-single text="Event" icon="bi bi-stack" href="{{route('event.index')}}"/>
