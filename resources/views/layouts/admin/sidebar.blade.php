@@ -58,6 +58,9 @@
                 <x-sidebar.sidebar-single text="Customer" icon="bi bi-person-fill" href="{{route('admin.customer.index')}}" :classes="request()->routeIs('admin.customer.*') ? 'active' : ''" />
                 <x-sidebar.sidebar-single text="Payment Method" icon="bi bi-credit-card-fill" href="{{route('admin.payment.index')}}" :classes="request()->routeIs('admin.payment.*') ? 'active' : ''" />
                 <x-sidebar.sidebar-single text="Table" icon="bi bi-stack" href="{{route('admin.table.index')}}" :classes="request()->routeIs('admin.table.*') ? 'active' : ''" />
+                <x-sidebar.sidebar-single text="User" icon="bi bi-person-check-fill" href="{{route('admin.user.index')}}" :classes="request()->routeIs('admin.user.*') ? 'active' : ''" />
+                <li class="sidebar-title">Profile</li>
+                <x-sidebar.sidebar-single text="Me" icon="bi bi-person-dash-fill" href="{{route('admin.me')}}" :classes="request()->routeIs('admin.me') ? 'active' : ''" />
                 <x-sidebar.sidebar-single text="Logout" icon="bi bi-power" href="{{route('admin.logout')}}" :classes="''" />
                 {{-- <x-sidebar.sidebar-single text="Event" icon="bi bi-stack" href="{{route('event.index')}}"/>
                 <x-sidebar.sidebar-single text="Audience" icon="bi bi-stack" href="{{route('audience.index')}}"/>

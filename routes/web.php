@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProductOptionController;
 use App\Http\Controllers\Admin\ProductSizeController;
 use App\Http\Controllers\Admin\TableController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -47,6 +48,7 @@ Route::name('admin.')->prefix('a')->middleware(['auth:web'])->group(function(){
     Route::post('/order/change_status/{order}', [OrderController::class, 'change_status'])->name('order.change');
     Route::post('/order/change_payment/{order}', [OrderController::class, 'change_payment'])->name('order.payment');
     Route::post('/order/change_table/{order}', [OrderController::class, 'change_table'])->name('order.table');
+    Route::get('/me', [UserController::class, 'me'])->name('me');
     Route::resource('product.size.option', ProductOptionController::class);
     Route::resource('product.size', ProductSizeController::class);
     Route::resource('category', AdminCategoryController::class);
@@ -56,6 +58,7 @@ Route::name('admin.')->prefix('a')->middleware(['auth:web'])->group(function(){
     Route::resource('order.detail', OrderDetailController::class);
     Route::resource('order', OrderController::class);
     Route::resource('table', TableController::class);
+    Route::resource('user', UserController::class);
 
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });
