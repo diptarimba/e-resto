@@ -52,7 +52,7 @@
                                 <h4 class="shop-filter-block__title" style="margin-bottom: 3rem;">Price</h4>
                                 <div class="shop-filter-block__content">
                                     <div class="widget-price-range">
-                                        <Slider :format="{ prefix: 'Rp ', thousand: ',', decimals: 0 }" :default="sliderDefault" :max="sliderMax" class="slider-red" />
+                                        <Slider v-model="sliderDefault[0]" :format="{ prefix: 'Rp ', thousand: ',', decimals: 0 }" :default="sliderDefault" :max="sliderMax" class="slider-red" />
                                     </div>
                                 </div>
                             </div>
