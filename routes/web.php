@@ -42,7 +42,7 @@ Route::post('/order',[HomeController::class, 'place_order'])->name('post.order')
 Route::get('/auth/login', [LoginController::class, 'index'])->name('auth.index');
 Route::post('/auth/login', [LoginController::class, 'authenticate'])->name('auth.post');
 
-Route::name('admin.')->prefix('a')->group(function(){
+Route::name('admin.')->prefix('a')->middleware(['auth:web'])->group(function(){
     Route::get('/', [AdminHomeController::class, 'index'])->name('home.index');
     Route::post('/order/change_status/{order}', [OrderController::class, 'change_status'])->name('order.change');
     Route::post('/order/change_payment/{order}', [OrderController::class, 'change_payment'])->name('order.payment');
@@ -56,4 +56,6 @@ Route::name('admin.')->prefix('a')->group(function(){
     Route::resource('order.detail', OrderDetailController::class);
     Route::resource('order', OrderController::class);
     Route::resource('table', TableController::class);
+
+    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });
