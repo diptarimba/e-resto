@@ -36,9 +36,6 @@
 @endsection
 
 @section('footer')
-<script src="{{asset('dashboard-assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('dashboard-assets/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
-{{-- <script src="{{asset('dashboard-assets/js/bootstrap.bundle.min.js')}}"></script> --}}
 <script>
     $(document).ready(() => {
         var table = $('.datatables-target-exec').DataTable({
