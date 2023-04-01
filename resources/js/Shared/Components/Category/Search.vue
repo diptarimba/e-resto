@@ -52,7 +52,7 @@
                                 <h4 class="shop-filter-block__title" style="margin-bottom: 3rem;">Price</h4>
                                 <div class="shop-filter-block__content">
                                     <div class="widget-price-range">
-                                        <Slider v-model="sliderDefault[0]" :format="{ prefix: 'Rp ', thousand: ',', decimals: 0 }" :default="sliderDefault" :max="sliderMax" class="slider-red" />
+                                        <Slider v-model="currentSlide" :format="{ prefix: 'Rp ', thousand: ',', decimals: 0 }" :default="sliderDefault" :max="sliderMax" class="slider-red" />
                                     </div>
                                 </div>
                             </div>
@@ -105,6 +105,7 @@ import Slider from '@vueform/slider'
 import debounce from 'lodash/debounce'
 import '@vueform/slider/themes/default.css';
 const props = defineProps(['searchText', 'sliderMax', 'sliderDefault'])
+let currentSlide = [props.sliderDefault[0],props.sliderDefault[1]];
 const emit = defineEmits(['update:sliderDefault', 'update:searchText', 'update:sliderMax'])
 const isSlide = ref(false);
 const clickSlide = () => {

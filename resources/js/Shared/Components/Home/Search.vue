@@ -50,7 +50,7 @@
                                 <h4 class="shop-filter-block__title" style="margin-bottom: 3rem;">Price</h4>
                                 <div class="shop-filter-block__content">
                                     <div class="widget-price-range">
-                                        <Slider v-model="sliderDefault[0]" :format="{ prefix: 'Rp ', thousand: ',', decimals: 0 }" :max="sliderMax" :default="sliderDefault" class="slider-red" />
+                                        <Slider v-model="currentSlide" :format="{ prefix: 'Rp ', thousand: ',', decimals: 0 }" :max="sliderMax" :default="sliderDefault" class="slider-red" />
                                     </div>
                                 </div>
                             </div>
@@ -106,6 +106,7 @@ import '@vueform/slider/themes/default.css';
 const props = defineProps(['searchText', 'sliderMax', 'sliderDefault'])
 const emit = defineEmits(['update:sliderDefault', 'update:searchText', 'update:sliderMax'])
 const isSlide = ref(false);
+let currentSlide = [props.sliderDefault[0],props.sliderDefault[1]];
 const clickSlide = () => {
     isSlide.value = !isSlide.value
 }
