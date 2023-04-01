@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
         if($request->ajax())
         {
-            $product = Product::select();
+            $product = Product::with('category')->select();
             return datatables()->of($product)
             ->addIndexColumn()
             ->addColumn('action', function($data){

@@ -21,6 +21,7 @@
                 <thead>
                     <th>No</th>
                     <th>Name</th>
+                    <th>Category</th>
                     <th>Action</th>
                 </thead>
                 <tbody>
@@ -42,6 +43,7 @@
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, sortable: false, searchable: false},
             {data: 'name', name: 'name'},
+            {data: 'category.name', name: 'category.name'},
             {
                 data: 'action',
                 name: 'action',
