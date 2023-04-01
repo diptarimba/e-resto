@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 
-@section('title', 'Home')
+@section('title', 'Order')
 
 @section('header')
 
