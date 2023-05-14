@@ -3374,7 +3374,7 @@ span.ripple {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    gap: 25px;
+    gap: 18px;
     -webkit-box-pack: end;
     -webkit-justify-content: flex-end;
     -ms-flex-pack: end;
@@ -3543,25 +3543,6 @@ span.ripple {
     left: 0;
     display: none;
     background-color: rgba(0, 0, 0, 0.5);
-}
-
-.offcanvas-header {
-    margin-bottom: 30px;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
 }
 
 .offcanvas-close {
