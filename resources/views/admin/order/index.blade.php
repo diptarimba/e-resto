@@ -19,6 +19,7 @@
                         <th>Order Number</th>
                         <th>Table</th>
                         <th>Status</th>
+                        <th>Payment</th>
                         <th>Total Payment</th>
                         <th>Action</th>
                     </thead>
@@ -68,8 +69,20 @@
                         name: 'status'
                     },
                     {
+                        data: 'cash_flow_id',
+                        name: 'cash_flow_id',
+                        render: function (data, type, row){
+                            console.log(data)
+                            return data === null ? 'Unpaid' : 'Paid'
+                        },
+                        sortable: true,
+                    },
+                    {
                         data: 'pay_amount',
-                        name: 'pay_amount'
+                        name: 'pay_amount',
+                        render: function(data, type, row){
+                            return data.toLocaleString();
+                        }
                     },
                     {
                         data: 'action',

@@ -12,9 +12,8 @@ class Payment extends Model
     protected $fillable = [
         'name'
     ];
-
-    public function order()
+    public function cash_flow()
     {
-        return $this->hasMany(Order::class, 'order_id');
+        return $this->hasMany(CashFlow::class, 'payment_id');
     }
 }

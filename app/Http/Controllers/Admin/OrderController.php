@@ -79,7 +79,6 @@ class OrderController extends Controller
     {
         $payment = Payment::get()->pluck('name', 'id');
         $table = Table::get()->pluck('name', 'id');
-        $order->pay_amount = number_format($order->pay_amount, 0, ",", ".");
         $button = Order::${'ORDER_NEXT_' . $order->status};
         return view('admin.order.create-edit', compact('order', 'payment', 'button', 'table'));
     }
@@ -121,10 +120,11 @@ class OrderController extends Controller
     public function change_payment(Order $order, Request $request)
     {
         $request->validate([
+            'customer_pay' => 'required|min:1',
             'payment_id' => 'required'
         ]);
 
-        $order->update($request->all());
+        $order->createCashFlow(['value' => $request->customer_pay, 'payment_id' => $request->payment_id]);
 
         return response()->json(['message' => 'Success Update Payment'], 200);
     }
