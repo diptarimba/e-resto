@@ -310,51 +310,13 @@
                                         </li>
                                         <li class="list-item">
                                             <a
-                                                href="profile-settings.html"
+                                                href="/account"
                                                 class="profile-link"
                                                 ><span class="icon"
                                                     ><i
                                                         class="icon icon-carce-user"
                                                     ></i></span
                                                 >Account Setting</a
-                                            >
-                                        </li>
-                                        <li class="list-item">
-                                            <a
-                                                href="checkout.html"
-                                                class="profile-link"
-                                                ><span class="icon"
-                                                    ><i
-                                                        class="icon icon-carce-briefcase"
-                                                    ></i></span
-                                                >Billing & Payment</a
-                                            >
-                                        </li>
-                                        <li class="list-item">
-                                            <a
-                                                href="notification.html"
-                                                class="profile-link"
-                                                ><span class="icon"
-                                                    ><i
-                                                        class="icon icon-carce-bell"
-                                                    ></i></span
-                                                >Notification</a
-                                            >
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li class="profile-list-item">
-                                    <ul class="profile-single-list">
-                                        <li class="list-item">
-                                            <a
-                                                href="login.html"
-                                                class="profile-link"
-                                                ><span class="icon"
-                                                    ><i
-                                                        class="icon icon-carce-login"
-                                                    ></i></span
-                                                >Log Out</a
                                             >
                                         </li>
                                     </ul>

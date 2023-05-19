@@ -17,10 +17,7 @@
                     <p class="text-center text-secondary">
                         Anda belum memiliki daftar riwayat pesanan.
                     </p>
-                    <a href="/" class="btn_order mt-2"
-                        ><i class="icon icon-carce-cart"></i>
-                        <span class="ms-2">Order Sekarang</span>
-                    </a>
+                    <a href="/" class="btn_order">Order Sekarang </a>
                 </div>
             </div>
         </div>
@@ -48,6 +45,7 @@ const props = defineProps({
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    color: gray;
 }
 .btn_order {
     background-color: #ff375f;
@@ -56,6 +54,7 @@ const props = defineProps({
     border: none;
     border-radius: 8px;
     font-weight: 500;
+    margin-top: 0.5rem;
     font-size: 0.875rem;
 }
 </style>

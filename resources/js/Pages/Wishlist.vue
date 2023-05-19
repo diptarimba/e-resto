@@ -21,10 +21,7 @@
                     <p class="text-center text-secondary">
                         Anda belum menambahkan produk ke dalam wishlist.
                     </p>
-                    <a href="/" class="btn_order mt-2"
-                        ><i class="icon icon-carce-plus me-2"></i>Tambahkan
-                        Produk</a
-                    >
+                    <a href="/" class="btn_order">Tambahkan Produk</a>
                 </div>
             </div>
         </div>
@@ -78,6 +75,7 @@ const getCartLocal = () => {
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    color: gray;
 }
 .btn_order {
     background-color: #ff375f;
@@ -86,6 +84,7 @@ const getCartLocal = () => {
     border: none;
     border-radius: 8px;
     font-weight: 500;
+    margin-top: 0.5rem;
     font-size: 0.875rem;
 }
 .cart-items-wrapper i {
