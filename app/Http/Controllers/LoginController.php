@@ -9,6 +9,9 @@ class LoginController extends Controller
 {
     public function index()
     {
+        if(Auth::guard('web')->check()){
+            return redirect()->route('admin.home.index');
+        }
         return view('auth.login');
     }
 
