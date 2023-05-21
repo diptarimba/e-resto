@@ -175,7 +175,7 @@
             });
 
         $('.btn-pay-confirm').on('click', function() {
-            var customerPay = parseFloat($('input[name="customer_pay"]').val().replace(/\D/g, ''))
+            var customerPay = parseFloat($('input[name="customer_billed"]').val().replace(/\D/g, ''))
             var paymentId = $('#payment_id').val()
             var dataToSend = {
                 payment_id: paymentId,
