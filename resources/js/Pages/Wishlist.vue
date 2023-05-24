@@ -17,7 +17,7 @@
                         />
                     </ul>
                 </div>
-                <div v-else class="cart-items-wrapper">
+                <div v-else class="cart-items-wrapper empty_product">
                     <p class="text-center text-secondary">
                         Anda belum menambahkan produk ke dalam wishlist.
                     </p>
@@ -69,7 +69,7 @@ const getCartLocal = () => {
 </script>
 
 <style scoped>
-.cart-items-wrapper {
+.empty_product {
     height: 80vh !important;
     display: flex;
     align-items: center;

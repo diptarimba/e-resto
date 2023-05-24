@@ -13,7 +13,7 @@
                         />
                     </ul>
                 </div>
-                <div v-else class="cart-items-wrapper">
+                <div v-else class="cart-items-wrapper empty_product">
                     <p class="text-center text-secondary">
                         Anda belum memiliki daftar riwayat pesanan.
                     </p>
@@ -39,7 +39,7 @@ const props = defineProps({
 </script>
 
 <style scoped>
-.cart-items-wrapper {
+.empty_product {
     height: 80vh !important;
     display: flex;
     align-items: center;
