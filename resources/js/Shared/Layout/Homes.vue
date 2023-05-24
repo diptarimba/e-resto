@@ -131,35 +131,6 @@
 
             <!-- Start Offcanvas Mobile Menu Wrapper -->
             <div class="offcanvas-mobile-menu-wrapper">
-                <!-- Start Mobile Menu  -->
-                <div class="mobile-menu-bottom">
-                    <!-- Start Mobile Menu Nav -->
-                    <div class="offcanvas-menu">
-                        <ul>
-                            <li>
-                                <a href="/"><span>Home</span></a>
-                            </li>
-                            <li>
-                                <div class="offcanvas-menu-expand"></div>
-                                <a href="#"><span>Shop</span></a>
-                                <ul class="mobile-sub-menu">
-                                    <li><a href="shop.html">Shop</a></li>
-                                    <li>
-                                        <a href="/">Product</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-category.html"
-                                            >Product Category</a
-                                        >
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- End Mobile Menu Nav -->
-                </div>
-                <!-- End Mobile Menu -->
-
                 <!-- Start Mobile contact Info -->
                 <div class="mobile-contact-info">
                     <address class="address">
@@ -238,6 +209,10 @@
 @import url("../../../../public/assets/css/style.css");
 @import url("../../../../public/assets/css/vendor/icomoon.css");
 @import url("sweetalert2/dist/sweetalert2.min.css");
+
+.offcanvas-mobile-menu-wrapper {
+    margin-top: 3rem;
+}
 </style>
 
 <script setup>
