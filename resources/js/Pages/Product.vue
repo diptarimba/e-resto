@@ -209,41 +209,6 @@
 .disable-click {
     pointer-events: none;
 }
-
-.Vue-Toastification__toast-body {
-    font-size: 0.875rem !important;
-}
-
-.Vue-Toastification__toast {
-    /* padding: 0.5rem 1rem !important; */
-    align-items: center !important;
-    max-height: auto !important;
-    min-height: auto !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    text-align: center !important;
-    gap: 0.75rem !important;
-    padding: 0.75rem 2rem !important;
-}
-
-.Vue-Toastification__icon {
-    margin: 0 !important;
-    width: 2.5rem !important;
-}
-
-.Vue-Toastification__toast--success {
-    background-color: rgb(0, 0, 0, 0.7) !important;
-}
-
-.Vue-Toastification__container .Vue-Toastification__toast {
-    width: 300px !important;
-    margin: auto !important;
-    border-radius: 12px !important;
-}
-h1.title {
-    text-transform: capitalize;
-}
 </style>
 
 <script>
