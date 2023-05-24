@@ -95,6 +95,10 @@ h1.title {
 }
 /* end toast */
 
+.product-item--style-1 {
+    padding: 1rem !important;
+}
+
 @media screen and (max-width: 380px) {
     html,
     body {

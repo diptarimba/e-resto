@@ -67,9 +67,8 @@
     display: flex;
     justify-content: center;
 }
-.content--right {
-    position: absolute;
-    z-index: 99;
+p.title {
+    text-transform: capitalize;
 }
 </style>
 

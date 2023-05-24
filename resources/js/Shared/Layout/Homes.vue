@@ -78,24 +78,6 @@
                                             ><i class="icon icon-carce-cart"></i
                                         ></Link>
                                     </li>
-                                    <li class="list-item">
-                                        <span
-                                            class="notch-bg notch-bg--emerald"
-                                        ></span>
-                                        <button
-                                            @click="clickProfile"
-                                            area-label="User"
-                                            class="btn btn--size-33-33 btn--center btn--round offcanvas-toggle offside-menu"
-                                        >
-                                            <img
-                                                class="img-fluid"
-                                                height="33"
-                                                width="33"
-                                                src="/assets/images/header-top-user-img.jpg"
-                                                alt="user image"
-                                            />
-                                        </button>
-                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -155,7 +137,7 @@
                     <div class="offcanvas-menu">
                         <ul>
                             <li>
-                                <a href="index.html"><span>Home</span></a>
+                                <a href="/"><span>Home</span></a>
                             </li>
                             <li>
                                 <div class="offcanvas-menu-expand"></div>
@@ -163,30 +145,12 @@
                                 <ul class="mobile-sub-menu">
                                     <li><a href="shop.html">Shop</a></li>
                                     <li>
-                                        <a href="single-product.html"
-                                            >Product</a
-                                        >
+                                        <a href="/">Product</a>
                                     </li>
                                     <li>
                                         <a href="shop-category.html"
-                                            >Shop Category</a
+                                            >Product Category</a
                                         >
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <div class="offcanvas-menu-expand"></div>
-                                <a href="#"><span>Pages</span></a>
-                                <ul class="mobile-sub-menu">
-                                    <li><a href="chat.html">Chat</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li>
-                                        <a href="wishlist.html">Wishlist</a>
-                                    </li>
-                                    <li><a href="order.html">Order</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li>
-                                        <a href="register.html">Register</a>
                                     </li>
                                 </ul>
                             </li>
@@ -212,124 +176,6 @@
             <!-- End Offcanvas Mobile Menu Wrapper -->
         </div>
         <!-- ...:::: End Offcanvas Mobile Menu Section:::... -->
-
-        <!--  Start Offcanvas Profile Menu Section -->
-        <div
-            id="profile-menu-offcanvas"
-            class="offcanvas offcanvas-rightside"
-            :class="{ 'offcanvas-open': profileOpen }"
-        >
-            <!-- Start Offcanvas Header -->
-            <div class="offcanvas-header flex-start offcanvas-modify">
-                <button
-                    class="offcanvas-close"
-                    @click="clickProfile"
-                    aria-label="offcanvas svg icon"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="5.973"
-                        height="10.449"
-                        viewBox="0 0 5.973 10.449"
-                    >
-                        <path
-                            id="Icon_ionic-ios-arrow-back"
-                            data-name="Icon ionic-ios-arrow-back"
-                            d="M13.051,11.417,17,7.466a.747.747,0,0,0-1.058-1.054l-4.479,4.476a.745.745,0,0,0-.022,1.03l4.5,4.507A.747.747,0,1,0,17,15.37Z"
-                            transform="translate(-11.251 -6.194)"
-                        />
-                    </svg>
-                </button>
-                <span>Home</span>
-            </div>
-            <!-- End Offcanvas Header -->
-            <!-- Start Offcanvas Mobile Menu Wrapper -->
-            <div class="offcanvas-profile-menu-wrapper">
-                <!-- ...:::Start Profile Card Section:::... -->
-                <div class="profile-card-section section-gap-top-25">
-                    <div class="profile-card-wrapper">
-                        <div class="image">
-                            <img
-                                class="img-fluid"
-                                width="96"
-                                height="96"
-                                src="/assets/images/user/user-profile.png"
-                                alt="image"
-                            />
-                        </div>
-                        <div class="content">
-                            <h2 class="name">Kajavasta Moon</h2>
-                            <span class="email">moon@example.com</span>
-                            <span class="id-num">ID NO: EXMPL 4566</span>
-                        </div>
-                        <div class="profile-shape profile-shape-1">
-                            <img
-                                class="img-fluid"
-                                width="61"
-                                height="50"
-                                src="/assets/images/profile-shape-1.svg"
-                                alt="image"
-                            />
-                        </div>
-                        <div class="profile-shape profile-shape-2">
-                            <img
-                                class="img-fluid"
-                                width="48"
-                                height="59"
-                                src="/assets/images/profile-shape-2.svg"
-                                alt="image"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <!-- ...:::End Profile Card Section:::... -->
-
-                <!-- ...:::Start Profile Details Section:::... -->
-                <div class="profile-details-section section-gap-top-30">
-                    <div class="profile-details-wrapper">
-                        <div class="profile-details-top">
-                            <div class="left">
-                                <span class="text">Total Buy</span>
-                                <span class="price">$2000.00</span>
-                            </div>
-                            <div class="right">
-                                <button
-                                    aria-label="Wishlist"
-                                    class="btn btn--size-58-58 btn--font-size-22 btn--center btn--round btn--color-radical-red btn--bg-white btn--box-shadow"
-                                >
-                                    <i class="icon icon-carce-heart"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="profile-details-bottom">
-                            <ul class="profile-user-list">
-                                <li class="profile-list-item">
-                                    <ul class="profile-single-list">
-                                        <li class="list-item">
-                                            <span class="title">Setting</span>
-                                        </li>
-                                        <li class="list-item">
-                                            <a
-                                                href="/account"
-                                                class="profile-link"
-                                                ><span class="icon"
-                                                    ><i
-                                                        class="icon icon-carce-user"
-                                                    ></i></span
-                                                >Account Setting</a
-                                            >
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- ...:::End Profile Details Section:::... -->
-            </div>
-            <!-- End Offcanvas Mobile Menu Wrapper -->
-        </div>
-        <!-- ...:::: End Offcanvas Profile Menu Section:::... -->
 
         <div class="offcanvas-overlay"></div>
 
@@ -372,9 +218,9 @@
                         ></Link>
                         <a
                             area-label="chat icon"
-                            href="chat.html"
+                            href="/account"
                             class="event-btn-link"
-                            ><i class="icon icon-carce-bubbles2"></i
+                            ><i class="icon icon-carce-user"></i
                         ></a>
                     </div>
                 </div>
