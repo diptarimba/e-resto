@@ -27,7 +27,7 @@ class Order extends Model
         'customer_id',
         'order_number',
         'status',
-        'payment_id'
+        'cash_flow_id'
     ];
 
     protected static function boot() {
@@ -43,9 +43,22 @@ class Order extends Model
         return $this->belongsTo(Table::class, 'table_id');
     }
 
-    public function payment()
+    public function cash_flow()
     {
-        return $this->belongsTo(Payment::class, 'payment_id');
+        return $this->belongsTo(CashFlow::class, 'cash_flow_id');
+    }
+
+    public function createCashFlow($data)
+    {
+        $cashFlow = CashFlow::create($data);
+        $this->cash_flow()->associate($cashFlow);
+        $this->save();
+        return $cashFlow;
+    }
+
+    public function payment_method()
+    {
+        return $this->cash_flow->payment_method();
     }
 
     public function order_detail()
