@@ -79,12 +79,14 @@ import { reactive, ref } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
 import { Inertia } from "@inertiajs/inertia";
 import { useForm } from "@inertiajs/inertia-vue3";
+import { useToast } from "vue-toastification";
 
 onMounted(() => {
     getCartLocal();
 });
 
 const currenTotal = ref(0);
+const toast = useToast();
 
 let currentCart = ref([]); // Deklarasikan variable penampungan cart
 const orderCart = useForm({
@@ -127,6 +129,21 @@ const actionOrder = () => {
         onSuccess: () => {
             orderCart.reset();
             localStorage.setItem("cart", JSON.stringify([]));
+            toast.success("Produk berhasil dicheckout!", {
+                position: "top-center",
+                timeout: 2000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: true,
+                closeButton: false,
+                icon: true,
+                rtl: false,
+            });
+
             getCartLocal();
         },
     });
