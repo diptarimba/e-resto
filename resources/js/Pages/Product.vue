@@ -19,54 +19,12 @@
                             watch-slides-progress
                             :loop="true"
                         >
-                            <swiper-slide>
+                            <swiper-slide v-for="value in slider" :key="value">
                                 <div class="product-gallery-single-item">
                                     <div class="image">
                                         <img
-                                            class="img-fluid"
-                                            width="276"
-                                            height="172"
-                                            src="/assets/images/product/single/product-gallery-single-1.png"
-                                            alt=""
-                                        />
-
-                                        <div
-                                            class="image-shape image-shape-1"
-                                        ></div>
-                                        <div
-                                            class="image-shape image-shape-2"
-                                        ></div>
-                                    </div>
-                                </div>
-                            </swiper-slide>
-                            <swiper-slide>
-                                <div class="product-gallery-single-item">
-                                    <div class="image">
-                                        <img
-                                            class="img-fluid"
-                                            width="276"
-                                            height="172"
-                                            src="/assets/images/product/single/product-gallery-single-1.png"
-                                            alt=""
-                                        />
-
-                                        <div
-                                            class="image-shape image-shape-1"
-                                        ></div>
-                                        <div
-                                            class="image-shape image-shape-2"
-                                        ></div>
-                                    </div>
-                                </div>
-                            </swiper-slide>
-                            <swiper-slide>
-                                <div class="product-gallery-single-item">
-                                    <div class="image">
-                                        <img
-                                            class="img-fluid"
-                                            width="276"
-                                            height="172"
-                                            src="/assets/images/product/single/product-gallery-single-1.png"
+                                            class="img_slider"
+                                            :src="value"
                                             alt=""
                                         />
 
@@ -100,7 +58,7 @@
 
             <div class="container px-0">
                 <div class="product-gallery-details">
-                    <span class="rating">Rating 4.0 of 5</span>
+                    <!-- <span class="rating">Rating 4.0 of 5</span> -->
                     <h1 class="title">{{ product.name }}</h1>
                     <p class="text">{{ product.description }}</p>
 
@@ -209,6 +167,11 @@
 .disable-click {
     pointer-events: none;
 }
+.img_slider {
+    width: 276px;
+    height: 172px;
+    object-fit: cover;
+}
 </style>
 
 <script>
@@ -230,6 +193,11 @@ const toast = useToast();
 let countQuantity = ref(1);
 let option = [];
 const inWishlist = ref(false);
+const slider = ref([
+    "/assets/images/product/single/nasigoreng/1.png",
+    "/assets/images/product/single/nasigoreng/2.png",
+    "/assets/images/product/single/nasigoreng/3.png",
+]);
 
 // Menggunakan sweetalert dari fungsi global
 const swal = inject("$swal");
