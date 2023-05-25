@@ -21,6 +21,19 @@ class OrderController extends Controller
         {
             $order = Order::with('table')->when(!is_null($request->status), function($query) use ($request){
                 $query->whereStatus($request->status);
+            })->when(!is_null($request->period), function($query) use ($request){
+                $query->when($request->period == 'TODAY', function($queries){
+                    $queries->whereDate('created_at', '=', date("Y-m-d"));
+                })
+                ->when($request->period == '1WEEK', function($queries){
+                    $queries->where('created_at', '>=', date("Y-m-d", strtotime('-1 week')) . " 00:00:00");
+                })
+                ->when($request->period == '1MONTH', function($queries){
+                    $queries->where('created_at', '>=', date("Y-m-d", strtotime('-1 month')) . " 00:00:00");
+                });
+            })->when(!is_null($request->start_period) && !is_null($request->end_period), function($query) use ($request){
+                $query->where('created_at', '>=', date("Y-m-d", strtotime($request->start_period)). " 00:00:00")
+                ->where('created_at', '<=', date("Y-m-d", strtotime($request->end_period)). " 23:59:59");
             })->select();
             return datatables()->of($order)
             ->addIndexColumn()

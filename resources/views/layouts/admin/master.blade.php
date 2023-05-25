@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{asset('dashboard-assets/css/main/app.css')}}">
     <link rel="stylesheet" href="{{asset('dashboard-assets/css/main/app-dark.css')}}">
     <link rel="stylesheet" href="{{asset('dashboard-assets/extensions/sweetalert2/sweetalert2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('dashboard-assets/css/daterangepicker.css')}}">
     <link rel="shortcut icon" href="{{asset('dashboard-assets/images/logo/favicon.svg')}}" type="image/x-icon">
     <link rel="shortcut icon" href="{{asset('dashboard-assets/images/logo/favicon.png')}}" type="image/png">
     @yield('header')
@@ -47,6 +48,8 @@
     <script src="{{asset('dashboard-assets/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
     <script src="{{asset('dashboard-assets/extensions/sweetalert2/sweetalert2.min.js')}}"></script>
     <script src="{{asset('dashboard-assets/js/bootstrap.js')}}"></script>
+    <script src="{{asset('dashboard-assets/js/moment.min.js')}}"></script>
+    <script src="{{asset('dashboard-assets/js/daterangepicker.js')}}"></script>
     <script>
         $.ajaxSetup({
             headers: {
