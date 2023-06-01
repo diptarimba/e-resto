@@ -53,13 +53,18 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'price' => 'required',
-            'image' => 'required|max:1024|mimes:png,jpg',
+            'image' => 'required|array|min:1',
+            'image.*' => 'nullable|mimes:jpg,png|max:1024',
             'description' => 'required',
             'quantity' => 'required',
             'category_id' => 'required|exists:categories,id'
         ]);
 
-        $product = Product::create(array_merge($request->all(), ['image' => '/storage/' . $request->file('image')->storePublicly('product')]));
+        $product = Product::create($request->except(['image']));
+
+        foreach($request->file('image') as $each){
+           $product->product_image()->create(['image' => '/storage/' . $each->storePublicly('product')]);
+        }
 
         return redirect()->route('admin.product.index')->with('success', 'Success Add Product');
     }
@@ -99,15 +104,20 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'price' => 'required',
-            'image' => 'sometimes|max:1024|mimes:png,jpg',
+            'image' => 'nullable|array',
+            'image.*' => 'mimes:jpg,png|max:1024',
             'description' => 'required',
             'quantity' => 'required',
             'category_id' => 'required|exists:categories,id'
         ]);
 
-        $product->update(array_merge($request->all(), [
-            'image' => $request->hasFile('image') ? '/storage/' . $request->file('image')->storePublicly('product') : $product->image
-        ]));
+        $product->update($request->except(['image']));
+
+        $product->product_image()->delete();
+
+        foreach($request->image as $each){
+            $product->product_image()->create(['image' => '/storage/' . $each->storePublicly('product')]);
+         }
 
         return redirect()->route('admin.product.index')->with('success', 'Success update');
     }

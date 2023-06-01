@@ -19,7 +19,8 @@ class Product extends Model
     ];
 
     protected $appends = [
-        'category_name'
+        'category_name',
+        'image'
     ];
 
     public function category()
@@ -40,5 +41,15 @@ class Product extends Model
     public function getCategoryNameAttribute()
     {
         return $this->category()->first()->name ?? null;
+    }
+
+    public function getImageAttribute()
+    {
+        return $this->product_image->pluck('image') ?? null;
+    }
+
+    public function product_image()
+    {
+        return $this->hasMany(PictureProduct::class, 'product_id');
     }
 }

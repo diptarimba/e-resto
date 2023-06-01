@@ -7,8 +7,7 @@
 @endsection
 
 @section('body')
-    <x-layoutContent Heading="Product" mainTitle="Product"
-        subTitle="Index" half="1">
+    <x-layoutContent Heading="Product" mainTitle="Product" subTitle="Index" half="1">
         <x-card.card>
             <x-slot name="header">
                 <h4>{{ request()->routeIs('admin.product.create') ? 'Add Product' : 'Modify Product' }}</h4>
@@ -20,9 +19,17 @@
                     @csrf
                     <x-forms.put-method />
                     @isset($product->image)
-                        <x-forms.view-image label="Product Image" src="{{ asset($product->image) }}" />
+                        <div class="row row-cols-lg-2 row-cols-sm-2 row-cols-md-3 justify-content-center">
+                            @foreach ($product->image as $each)
+                                <div class="col card previewPictDB">
+                                    <div class="my-auto">
+                                        <img class="img-thumbnail imagePreview" src="{{ asset($each) }}" alt="">
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     @endisset
-                    <x-forms.file label="Pilih Foto Product" name="image" id="gallery-photo-add" />
+                    <x-forms.file multiple="true" label="Pilih Foto Product" name="image[]" id="gallery-photo-add" />
                     <div class="gallery row row-cols-2 justify-content-center" id="isi-gallery"></div>
                     <x-forms.input required="" label="Nama Produk" name="name" :value="@$product->name" />
                     <x-forms.input required="" label="Kuantitas" name="quantity" :value="@$product->quantity" />

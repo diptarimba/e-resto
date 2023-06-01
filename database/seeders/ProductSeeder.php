@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\PictureProduct;
 use App\Models\Product;
 use App\Models\ProductSize;
 use App\Models\ProductSizeOption;
@@ -22,6 +23,11 @@ class ProductSeeder extends Seeder
             Product::factory()->count(20)->state([
                 'category_id' => $query->id
             ])->create()->map(function($query){
+                PictureProduct::factory()->count(3)->state(
+                    [ 'image' => '/storage/placeholder/product/Sop/tmp1.png','product_id' => $query->id],
+                    [ 'image' => '/storage/placeholder/product/Sop/tmp2.png','product_id' => $query->id],
+                    [ 'image' => '/storage/placeholder/product/Sop/tmp3.png','product_id' => $query->id]
+                )->create();
                 ProductSize::factory()->count(2)->state([
                     'product_id' => $query->id
                 ])->create()->map(function($query){
