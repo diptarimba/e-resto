@@ -134,6 +134,7 @@
 .profile-card-wrapper .image img {
     width: 96px !important;
     height: 96px !important;
+    object-fit: cover;
 }
 .profile-card-wrapper {
     padding: 2rem !important;
@@ -148,7 +149,7 @@ export default {
 </script>
 <script setup>
 import { useToast } from "vue-toastification";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 const toast = useToast();
 
@@ -176,7 +177,6 @@ const actionUploadPhoto = () => {
     const formData = new FormData();
     formData.append("file", file.value.files[0]);
     formData.append("token", tokenLocal);
-    console.log(formData);
     Inertia.post("/account/upload", formData, {
         preserveScroll: true,
         onSuccess: () => {
@@ -194,6 +194,7 @@ const actionUploadPhoto = () => {
                 icon: true,
                 rtl: false,
             });
+            imageProfile.value = URL.createObjectURL(file.value.files[0]);
         },
     });
 };
@@ -224,8 +225,4 @@ const actionUpdateProfile = () => {
         },
     });
 };
-
-onMounted(() => {
-    console.log(props.customer);
-});
 </script>

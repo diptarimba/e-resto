@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class AccountController extends Controller
@@ -53,10 +54,14 @@ class AccountController extends Controller
         $request->validate([
             'file' => 'required|image'
         ]);
-
-        $customer = Customer::updateOrCreate(['token' => $request->token], ['image' => '/storage/' . $request->file('file')->storePublicly('product')]);
-
+    
+        $imagePath = $request->file('file')->store('public/product');
+        $imageUrl = Storage::url($imagePath);
+    
+        $customer = Customer::updateOrCreate(['token' => $request->token], ['image' => $imageUrl]);
+    
         return redirect()->route('home.profile', $request->token);
-
     }
+    
+
 }
