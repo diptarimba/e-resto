@@ -8,7 +8,7 @@
                         <div class="image">
                             <img
                                 class="img-fluid"
-                                :src="imageProfile"
+                                :src="imageProfile ?? '/assets/images/user/user-profile.png'"
                                 alt=""
                                 width="96"
                                 height="96"
@@ -126,7 +126,7 @@ let props = defineProps({
     customer: Object
 })
 
-let imageProfile = ref(props.customer.image);
+let imageProfile = ref(props.customer.image ?? '/assets/images/user/user-profile.png');
 const profileData = useForm({
     name: "",
     phone: "",
