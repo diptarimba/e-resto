@@ -4,7 +4,7 @@
         :class="'product-item--bg-' + bgColour"
     >
         <Link :href="route('product.detail', product.id, false)">
-            <img class="image" :src="product.image" alt="image" />
+            <img class="image" :src="product.image[0]" alt="image" />
         </Link>
         <div class="content">
             <Link :href="route('product.detail', product.id, false)">
