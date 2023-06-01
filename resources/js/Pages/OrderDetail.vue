@@ -25,7 +25,7 @@
                     <!-- Start Single Cart Item -->
                     <li class="single-cart-item" v-for="(each, key) in order.order_detail" :key="key">
                         <div class="image">
-                            <img class="img-cart" :src="each.product.image" alt="image">
+                            <img class="img-cart" :src="each.product.image[0]" alt="image">
                         </div>
                         <div class="content">
                             <Link :href="route('product.detail', each.product.id, false)" class="title">{{each.product.name}}</Link>

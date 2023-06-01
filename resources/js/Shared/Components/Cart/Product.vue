@@ -2,7 +2,7 @@
 <!-- Start Single Cart Item -->
 <li class="single-cart-item">
     <div class="image">
-        <img class="img-cart" :src="product.image" alt="image">
+        <img class="img-cart" :src="product.image[0]" alt="image">
     </div>
     <div class="content">
         <button class="delete-item" @click="unlistProduct">

@@ -2,7 +2,7 @@
     <!-- Start Single Cart Item -->
     <li class="single-cart-item">
         <Link :href="route('product.detail', product.id, false)" class="image"
-            ><img class="img-wishlist" :src="product.image" alt=""
+            ><img class="img-wishlist" :src="product.image[0]" alt=""
         /></Link>
 
         <div class="content">
