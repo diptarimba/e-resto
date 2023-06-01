@@ -36,14 +36,18 @@ Route::get('/product/{productId}', [ProductController::class, 'show'])->name('pr
 
 Route::get('/wishlist', [HomeController::class, 'wishlist'])->name('home.wishlist');
 Route::get('/cart', [HomeController::class, 'cart'])->name('home.cart');
-Route::get('/account', [AccountController::class, 'index']);
+Route::get('/account/{token}', [AccountController::class, 'index'])->name('home.profile');
+Route::post('/account/update', [AccountController::class, 'update_profile'])->name('post.profile');
+Route::post('/account/upload', [AccountController::class, 'upload_photo'])->name('upload.profile');
 
 Route::get('/order/{id}/detail', [HomeController::class, 'order_detail'])->name('order.detail');
 Route::get('/order/{token}', [HomeController::class, 'order'])->name('home.order');
 Route::post('/order',[HomeController::class, 'place_order'])->name('post.order');
 
+
 Route::get('/auth/login', [LoginController::class, 'index'])->name('auth.index');
 Route::post('/auth/login', [LoginController::class, 'authenticate'])->name('auth.post');
+
 
 Route::name('admin.')->prefix('a')->middleware(['auth:web'])->group(function(){
     Route::get('/', [AdminHomeController::class, 'index'])->name('home.index');

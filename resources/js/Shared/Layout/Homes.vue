@@ -189,7 +189,8 @@
                         ></Link>
                         <a
                             area-label="chat icon"
-                            href="/account"
+                            v-if="currentToken"
+                            :href="route('home.profile', currentToken, false)"
                             class="event-btn-link"
                             ><i class="icon icon-carce-user"></i
                         ></a>

@@ -8,7 +8,7 @@
                         <div class="image">
                             <img
                                 class="img-fluid"
-                                src="assets/images/user/user-profile.png"
+                                :src="imageProfile"
                                 alt=""
                                 width="96"
                                 height="96"
@@ -16,19 +16,19 @@
                             <label class="upload-image-label" for="file">
                                 <i class="icon icon-carce-camera"></i>
                             </label>
-                            <input class="upload-file" id="file" type="file" />
+                            <input class="upload-file" id="file" @change="actionUploadPhoto" ref="file" type="file" />
                         </div>
                         <div class="content">
-                            <h2 class="setting-name">Kajavasta Moon</h2>
+                            <h2 class="setting-name">{{props.customer.name || "Profile Name Not Set"}}</h2>
                             <span class="setting-email email"
-                                >moon@example.com</span
+                                >{{props.customer.email || "Profile Email Not Set"}}</span
                             >
-                            <span class="id-num">ID NO: EXMPL 4566</span>
+                            <span class="id-num">Phone: {{props.customer.phone || "Profile Phone Not Set"}}</span>
                         </div>
                         <div class="profile-shape profile-shape-1">
                             <img
                                 class="img-fluid"
-                                src="assets/images/profile-shape-1.svg"
+                                src="/assets/images/profile-shape-1.svg"
                                 alt=""
                                 width="61"
                                 height="50"
@@ -37,7 +37,7 @@
                         <div class="profile-shape profile-shape-2">
                             <img
                                 class="img-fluid"
-                                src="assets/images/profile-shape-2.svg"
+                                src="/assets/images/profile-shape-2.svg"
                                 alt=""
                                 width="48"
                                 height="59"
@@ -60,6 +60,7 @@
                                 <input
                                     type="text"
                                     id="name"
+                                    v-model="profileData.name"
                                     placeholder="Full Name"
                                 />
                                 <span class="icon"
@@ -73,6 +74,7 @@
                                 <input
                                     type="email"
                                     id="email"
+                                    v-model="profileData.email"
                                     placeholder="Email"
                                 />
                                 <span class="icon"
@@ -86,23 +88,11 @@
                                 <input
                                     type="text"
                                     id="number"
+                                    v-model="profileData.phone"
                                     placeholder="Phone"
                                 />
                                 <span class="icon"
                                     ><i class="icon icon-carce-phone"></i
-                                ></span>
-                            </li>
-                            <li class="single-form-item">
-                                <label for="gender" class="visually-hidden"
-                                    >Gender</label
-                                >
-                                <input
-                                    type="text"
-                                    id="gender"
-                                    placeholder="Gender"
-                                />
-                                <span class="icon"
-                                    ><i class="icon icon-carce-user"></i
                                 ></span>
                             </li>
                         </ul>
@@ -110,6 +100,7 @@
                     <a
                         href="#"
                         class="btn btn--block btn--radius btn--size-xlarge btn--color-white btn--bg-maya-blue text-center contact-btn"
+                        @click="actionUpdateProfile"
                         >Save</a
                     >
                 </div>
@@ -120,7 +111,85 @@
 
 <script>
 import Homes from "../Shared/Layout/Homes.vue";
+import { useForm } from "@inertiajs/inertia-vue3";
 export default {
     layout: Homes,
 };
+</script>
+<script setup>
+import { useToast } from "vue-toastification";
+import { ref } from 'vue';
+import { Inertia } from '@inertiajs/inertia';
+const toast = useToast();
+
+let props = defineProps({
+    customer: Object
+})
+
+let imageProfile = ref(props.customer.image);
+const profileData = useForm({
+    name: "",
+    phone: "",
+    email: "",
+    token: ""
+});
+
+const file = ref(null);
+
+
+const actionUploadPhoto = () => {
+
+    let tokenLocal = localStorage.getItem("token");
+    const formData = new FormData();
+    formData.append('file', file.value.files[0]);
+    formData.append('token', tokenLocal);
+    console.log(formData)
+    Inertia.post("/account/upload", formData, {
+        preserveScroll: true,
+        onSuccess: () => {
+            toast.success("Profile Pict berhasil di update!", {
+                position: "top-center",
+                timeout: 2000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: true,
+                closeButton: false,
+                icon: true,
+                rtl: false,
+            });
+        },
+    });
+}
+
+const actionUpdateProfile = () => {
+    // mengambil data token masing masing user
+    let tokenLocal = localStorage.getItem("token");
+    profileData.token = tokenLocal
+
+    profileData.post("/account/update", {
+        preserveScroll: true,
+        onSuccess: () => {
+            profileData.reset();
+            toast.success("Profile berhasil di update!", {
+                position: "top-center",
+                timeout: 2000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: true,
+                closeButton: false,
+                icon: true,
+                rtl: false,
+            });
+        },
+    });
+};
+
 </script>
