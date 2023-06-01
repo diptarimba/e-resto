@@ -193,11 +193,7 @@ const toast = useToast();
 let countQuantity = ref(1);
 let option = [];
 const inWishlist = ref(false);
-const slider = ref([
-    "/assets/images/product/single/nasigoreng/1.png",
-    "/assets/images/product/single/nasigoreng/2.png",
-    "/assets/images/product/single/nasigoreng/3.png",
-]);
+const slider = ref(props.product.image);
 
 // Menggunakan sweetalert dari fungsi global
 const swal = inject("$swal");
