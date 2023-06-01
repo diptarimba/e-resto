@@ -24,11 +24,25 @@ class AccountController extends Controller
             'phone' => 'sometimes',
             'token' => 'required|string',
         ]);
-
-        $customer = Customer::updateOrCreate(['token' => $request->token], $request->all());
-
+    
+        $customer = Customer::where('token', $request->token)->first();
+        if ($customer) {
+            if ($request->filled('name')) {
+                $customer->name = $request->name;
+            }
+            if ($request->filled('email')) {
+                $customer->email = $request->email;
+            }
+            if ($request->filled('phone')) {
+                $customer->phone = $request->phone;
+            }
+            $customer->save();
+        }
+    
         return redirect()->route('home.profile', $request->token);
     }
+    
+
 
     public function upload_photo(Request $request)
     {

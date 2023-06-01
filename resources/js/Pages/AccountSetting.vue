@@ -8,7 +8,7 @@
                         <div class="image">
                             <img
                                 class="img-fluid"
-                                :src="imageProfile ?? '/assets/images/user/user-profile.png'"
+                                :src="imageProfile"
                                 alt=""
                                 width="96"
                                 height="96"
@@ -16,14 +16,43 @@
                             <label class="upload-image-label" for="file">
                                 <i class="icon icon-carce-camera"></i>
                             </label>
-                            <input class="upload-file" id="file" @change="actionUploadPhoto" ref="file" type="file" />
+                            <input
+                                class="upload-file"
+                                id="file"
+                                @change="actionUploadPhoto"
+                                ref="file"
+                                type="file"
+                            />
                         </div>
                         <div class="content">
-                            <h2 class="setting-name">{{props.customer.name || "Profile Name Not Set"}}</h2>
-                            <span class="setting-email email"
-                                >{{props.customer.email || "Profile Email Not Set"}}</span
-                            >
-                            <span class="id-num">Phone: {{props.customer.phone || "Profile Phone Not Set"}}</span>
+                            <h2 class="setting-name">
+                                {{
+                                    (props.customer !== null ||
+                                        props.customer !== "") &&
+                                    props.customer.name !== null
+                                        ? props.customer.name
+                                        : "Profile Name Not Set"
+                                }}
+                            </h2>
+                            <span class="setting-email email">
+                                {{
+                                    (props.customer !== null ||
+                                        props.customer !== "") &&
+                                    props.customer.email !== null
+                                        ? props.customer.email
+                                        : "Profile Email Not Set"
+                                }}
+                            </span>
+                            <span class="id-num">
+                                Phone:
+                                {{
+                                    (props.customer !== null ||
+                                        props.customer !== "") &&
+                                    props.customer.phone !== null
+                                        ? props.customer.phone
+                                        : "Profile Phone Not Set"
+                                }}
+                            </span>
                         </div>
                         <div class="profile-shape profile-shape-1">
                             <img
@@ -118,63 +147,40 @@ export default {
 </script>
 <script setup>
 import { useToast } from "vue-toastification";
-import { ref } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
+import { onMounted, ref } from "vue";
+import { Inertia } from "@inertiajs/inertia";
 const toast = useToast();
 
 let props = defineProps({
-    customer: Object
-})
+    customer: Object,
+});
 
-let imageProfile = ref(props.customer.image ?? '/assets/images/user/user-profile.png');
+let imageProfile = ref(
+    (props.customer !== null || props.customer !== "") &&
+        props.customer.image !== null
+        ? props.customer.image
+        : "/assets/images/user/user-profile.png"
+);
+
 const profileData = useForm({
     name: "",
     phone: "",
     email: "",
-    token: ""
+    token: "",
 });
 
 const file = ref(null);
 
-
 const actionUploadPhoto = () => {
-
     let tokenLocal = localStorage.getItem("token");
     const formData = new FormData();
-    formData.append('file', file.value.files[0]);
-    formData.append('token', tokenLocal);
-    console.log(formData)
+    formData.append("file", file.value.files[0]);
+    formData.append("token", tokenLocal);
+    console.log(formData);
     Inertia.post("/account/upload", formData, {
         preserveScroll: true,
         onSuccess: () => {
-            toast.success("Profile Pict berhasil di update!", {
-                position: "top-center",
-                timeout: 2000,
-                closeOnClick: true,
-                pauseOnFocusLoss: true,
-                pauseOnHover: true,
-                draggable: true,
-                draggablePercent: 0.6,
-                showCloseButtonOnHover: false,
-                hideProgressBar: true,
-                closeButton: false,
-                icon: true,
-                rtl: false,
-            });
-        },
-    });
-}
-
-const actionUpdateProfile = () => {
-    // mengambil data token masing masing user
-    let tokenLocal = localStorage.getItem("token");
-    profileData.token = tokenLocal
-
-    profileData.post("/account/update", {
-        preserveScroll: true,
-        onSuccess: () => {
-            profileData.reset();
-            toast.success("Profile berhasil di update!", {
+            toast.success("Profile Pict berhasil diupdate!", {
                 position: "top-center",
                 timeout: 2000,
                 closeOnClick: true,
@@ -192,4 +198,30 @@ const actionUpdateProfile = () => {
     });
 };
 
+const actionUpdateProfile = () => {
+    // mengambil data token masing masing user
+    let tokenLocal = localStorage.getItem("token");
+    profileData.token = tokenLocal;
+
+    profileData.post("/account/update", {
+        preserveScroll: true,
+        onSuccess: () => {
+            profileData.reset();
+            toast.success("Profile berhasil diupdate!", {
+                position: "top-center",
+                timeout: 2000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: true,
+                closeButton: false,
+                icon: true,
+                rtl: false,
+            });
+        },
+    });
+};
 </script>
