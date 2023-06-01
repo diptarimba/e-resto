@@ -10,11 +10,15 @@ class AccountController extends Controller
 {
     public function index($token)
     {
-        $customer = Customer::whereToken($token)->first();
+        $customer = Customer::firstOrNew(['token' => $token]);
+        $customer->save();
+        
         return Inertia::render('AccountSetting', [
             'customer' => $customer
         ]);
     }
+    
+
 
     public function update_profile(Request $request)
     {

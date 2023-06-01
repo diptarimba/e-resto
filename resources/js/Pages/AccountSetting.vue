@@ -7,11 +7,9 @@
                     <div class="profile-card-wrapper">
                         <div class="image">
                             <img
-                                class="img-fluid"
+                                class="img_profile"
                                 :src="imageProfile"
                                 alt=""
-                                width="96"
-                                height="96"
                             />
                             <label class="upload-image-label" for="file">
                                 <i class="icon icon-carce-camera"></i>
@@ -27,8 +25,6 @@
                         <div class="content">
                             <h2 class="setting-name">
                                 {{
-                                    (props.customer !== null ||
-                                        props.customer !== "") &&
                                     props.customer.name !== null
                                         ? props.customer.name
                                         : "Profile Name Not Set"
@@ -36,8 +32,6 @@
                             </h2>
                             <span class="setting-email email">
                                 {{
-                                    (props.customer !== null ||
-                                        props.customer !== "") &&
                                     props.customer.email !== null
                                         ? props.customer.email
                                         : "Profile Email Not Set"
@@ -46,8 +40,6 @@
                             <span class="id-num">
                                 Phone:
                                 {{
-                                    (props.customer !== null ||
-                                        props.customer !== "") &&
                                     props.customer.phone !== null
                                         ? props.customer.phone
                                         : "Profile Phone Not Set"
@@ -138,6 +130,15 @@
     </div>
 </template>
 
+<style scoped>
+.profile-card-wrapper .image img {
+    width: 96px !important;
+    height: 96px !important;
+}
+.profile-card-wrapper {
+    padding: 2rem !important;
+}
+</style>
 <script>
 import Homes from "../Shared/Layout/Homes.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
@@ -156,10 +157,9 @@ let props = defineProps({
 });
 
 let imageProfile = ref(
-    (props.customer !== null || props.customer !== "") &&
-        props.customer.image !== null
+    props.customer.image !== null
         ? props.customer.image
-        : "/assets/images/user/user-profile.png"
+        : "/assets/images/user/user.png"
 );
 
 const profileData = useForm({
@@ -224,4 +224,8 @@ const actionUpdateProfile = () => {
         },
     });
 };
+
+onMounted(() => {
+    console.log(props.customer);
+});
 </script>
