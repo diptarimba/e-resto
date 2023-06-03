@@ -98,13 +98,9 @@
             <div class="offcanvas-header flex-end">
                 <div class="logo">
                     <a href="index.html"
-                        ><img
-                            class="img-fluid"
-                            width="147"
-                            height="26"
-                            src="/assets/images/logo.png"
-                            alt="image"
-                    /></a>
+                        >
+                    <component :is="asset_logo" class="img-fluid"  width="147"
+                            height="26" alt="image"/></a>
                 </div>
 
                 <button
@@ -217,7 +213,7 @@
 </style>
 
 <script setup>
-import { ref, onMounted, onUnmounted, inject } from "vue";
+import { ref, onMounted, onUnmounted, inject, defineAsyncComponent } from "vue";
 import { v4 as uuidv4 } from "uuid";
 
 const scrolled = ref(false);
@@ -227,6 +223,10 @@ const sidebarOpen = ref(false);
 // const handleScroll = (e) => {
 //     scrolled.value = window.top.scrollY > 0 ? true : false
 // }
+
+const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${import.meta.env.BASE_URL}${path}`));
+
+const asset_logo = createAsyncComponent("assets/images/logo.png");
 
 const clickProfile = () => {
     profileOpen.value = !profileOpen.value;

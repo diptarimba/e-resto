@@ -47,22 +47,24 @@
                             </span>
                         </div>
                         <div class="profile-shape profile-shape-1">
-                            <img
+                            <component :is="profilePict1" class="img-fluid" alt="" width="61" height="50" />
+                            <!-- <img
                                 class="img-fluid"
                                 src="/assets/images/profile-shape-1.svg"
                                 alt=""
                                 width="61"
                                 height="50"
-                            />
+                            /> -->
                         </div>
                         <div class="profile-shape profile-shape-2">
-                            <img
+                            <component :is="profilePict1" class="img-fluid" alt="" width="48" height="59" />
+                            <!-- <img
                                 class="img-fluid"
                                 src="/assets/images/profile-shape-2.svg"
                                 alt=""
                                 width="48"
                                 height="59"
-                            />
+                            /> -->
                         </div>
                     </div>
                 </div>
@@ -149,9 +151,15 @@ export default {
 </script>
 <script setup>
 import { useToast } from "vue-toastification";
-import { ref } from "vue";
+import { defineAsyncComponent, ref } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 const toast = useToast();
+
+const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${import.meta.env.BASE_URL}${path}`));
+
+const profilePict1 = createAsyncComponent("assets/images/profile-shape-1.svg");
+const profilePict2 = createAsyncComponent("assets/images/profile-shape-2.svg");
+const imageUser = createAsyncComponent("assets/images/user/user.png");
 
 let props = defineProps({
     customer: Object,
@@ -160,7 +168,7 @@ let props = defineProps({
 let imageProfile = ref(
     props.customer.image !== null
         ? props.customer.image
-        : "/assets/images/user/user.png"
+        : imageUser
 );
 
 const profileData = useForm({

@@ -18,7 +18,7 @@
                                 </div>
                                 <div class="product-img">
                                     <img width="149" height="127" class="img-fluid" :src="slider.product_pict" alt="image">
-                                    <div class="shape shape-1"><img width="83" height="83" class="img-fluid" src="/assets/images/hero/shape/shape-dotted.png" alt="image"></div>
+                                    <div class="shape shape-1"><component :is="asset_shape_dotted" class="img-fluid" alt="image" width="83" height="83" /></div>
                                 </div>
                             </div>
                         </div>
@@ -38,7 +38,11 @@
 import { Pagination } from 'swiper'
 import 'swiper/css/pagination';
 import 'swiper/css';
+import { defineAsyncComponent } from 'vue';
 defineProps({
     contentSlider: Object
 })
+
+const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${import.meta.env.BASE_URL}${path}`));
+const asset_shape_dotted = createAsyncComponent("assets/images/hero/shape/shape-dotted.png");
 </script>

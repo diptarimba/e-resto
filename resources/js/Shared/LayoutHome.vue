@@ -30,7 +30,8 @@
                                 <li class="list-item">
                                     <span class="notch-bg notch-bg--emerald"></span>
                                     <a href="#profile-menu-offcanvas" area-label="User" class="btn btn--size-33-33 btn--center btn--round offcanvas-toggle offside-menu">
-                                        <img class="img-fluid" height="33" width="33" src="/assets/images/header-top-user-img.jpg" alt="user image"></a>
+                                        <component :is="asset_header_top_user" class="img-fluid" alt="user image" width="33" height="33" />
+                                        </a>
                                 </li>
                             </ul>
                         </li>
@@ -48,7 +49,9 @@
         <div class="offcanvas-header flex-end">
 
             <div class="logo">
-                <a href="index.html"><img class="img-fluid" width="147" height="26" src="/assets/images/logo.png" alt="image"></a>
+                <a href="index.html">
+                <component :is="asset_logo" class="img-fluid" alt="image" width="147" height="26" />
+                </a>
             </div>
 
             <button class="offcanvas-close" aria-label="offcanvas svg icon">
@@ -125,15 +128,15 @@
             <div class="profile-card-section section-gap-top-25">
                 <div class="profile-card-wrapper">
                     <div class="image">
-                        <img class="img-fluid" width="96" height="96" src="/assets/images/user/user-profile.png" alt="image">
+                        <component :is="asset_user_profile" class="img-fluid" alt="image" width="96" height="96" />
                     </div>
                     <div class="content">
                         <h2 class="name">Kajavasta Moon</h2>
                         <span class="email">moon@example.com</span>
                         <span class="id-num">ID NO: EXMPL 4566</span>
                     </div>
-                    <div class="profile-shape profile-shape-1"><img class="img-fluid" width="61" height="50" src="/assets/images/profile-shape-1.svg" alt="image"></div>
-                    <div class="profile-shape profile-shape-2"><img class="img-fluid" width="48" height="59" src="/assets/images/profile-shape-2.svg" alt="image"></div>
+                    <div class="profile-shape profile-shape-1"><component :is="profilePict1" class="img-fluid" alt="" width="61" height="50" /></div>
+                    <div class="profile-shape profile-shape-2"><component :is="profilePict2" class="img-fluid" alt="" width="48" height="59" /></div>
                 </div>
             </div>
             <!-- ...:::End Profile Card Section:::... -->
@@ -200,7 +203,7 @@
                     <swiper-slide>
                         <div class="hero-singel-slide ">
                             <div class="hero-bg">
-                                <img width="388" height="160" class="img-full" src="/assets/images/hero/bg/hero-bg-1.jpg" alt="image">
+                                <component :is="asset_hero_bg_1" class="img-full" alt="image" width="388" height="160" />
                             </div>
                             <div class="inner-wrapper">
                                 <div class="content">
@@ -210,8 +213,9 @@
                                     <h3 class="sub-title">UP to <span>70% </span> off</h3>
                                 </div>
                                 <div class="product-img">
-                                    <img width="149" height="127" class="img-fluid" src="/assets/images/hero/product/product-1.png" alt="image">
-                                    <div class="shape shape-1"><img width="83" height="83" class="img-fluid" src="/assets/images/hero/shape/shape-dotted.png" alt="image"></div>
+                                    <component :is="asset_product_1" class="img-fluid" alt="image" width="149" height="127" />
+
+                                    <div class="shape shape-1"><component :is="asset_shape_dotted" class="img-fluid" alt="image" width="83" height="83" /></div>
                                 </div>
                             </div>
                         </div>
@@ -219,7 +223,7 @@
                     <swiper-slide>
                         <div class="hero-singel-slide">
                             <div class="hero-bg">
-                                <img width="388" height="160" class="img-full" src="/assets/images/hero/bg/hero-bg-1.jpg" alt="image">
+                                <component :is="asset_hero_bg_1" class="img-full" alt="image" width="388" height="160" />
                             </div>
                             <div class="inner-wrapper">
                                 <div class="content">
@@ -229,8 +233,8 @@
                                     <h3 class="sub-title">UP to <span>70% </span> off</h3>
                                 </div>
                                 <div class="product-img">
-                                    <img width="127" height="98" class="img-fluid" src="/assets/images/hero/product/product-2.png" alt="image">
-                                    <div class="shape shape-1"><img width="83" height="83" class="img-fluid" src="/assets/images/hero/shape/shape-dotted.png" alt="image"></div>
+                                    <component :is="asset_product_2" class="img-fluid" alt="image" width="127" height="98" />
+                                    <div class="shape shape-1"><component :is="asset_shape_dotted" class="img-fluid" alt="image" width="83" height="83" /></div>
                                 </div>
                             </div>
                         </div>
@@ -238,7 +242,7 @@
                     <swiper-slide>
                         <div class="hero-singel-slide">
                             <div class="hero-bg">
-                                <img width="388" height="160" class="img-full" src="/assets/images/hero/bg/hero-bg-1.jpg" alt="image">
+                                <component :is="asset_hero_bg_1" class="img-full" alt="image" width="388" height="160" />
                             </div>
                             <div class="inner-wrapper">
                                 <div class="content">
@@ -248,8 +252,8 @@
                                     <h3 class="sub-title">UP to <span>70% </span> off</h3>
                                 </div>
                                 <div class="product-img">
-                                    <img width="126" height="98" class="img-fluid" src="/assets/images/hero/product/product-3.png" alt="image">
-                                    <div class="shape shape-1"><img width="83" height="83" class="img-fluid" src="/assets/images/hero/shape/shape-dotted.png" alt="image"></div>
+                                    <component :is="asset_product_3" class="img-fluid" alt="image" width="126" height="98" />
+                                    <div class="shape shape-1"><component :is="asset_shape_dotted" class="img-fluid" alt="image" width="83" height="83" /></div>
                                 </div>
                             </div>
                         </div>
@@ -268,16 +272,16 @@
                 <div class="catagories-nav-1">
                     <swiper slides-per-view="auto" :space-between="12">
                         <swiper-slide>
-                            <Link href="shop.html" class="btn"><span class="icon"><img width="33" height="33" src="/assets/images/catagories/sneakers.png" alt="image"></span> Sneakers</Link>
+                            <Link href="shop.html" class="btn"><span class="icon"><component :is="asset_sneakers" alt="image" width="33" height="33" /></span> Sneakers</Link>
                         </swiper-slide>
                         <swiper-slide>
-                            <Link href="shop.html" class="btn"><span class="icon"><img width="33" height="33" src="/assets/images/catagories/watch.png" alt="image"></span>Watch</Link>
+                            <Link href="shop.html" class="btn"><span class="icon"><component :is="asset_watch" alt="image" width="33" height="33" /></span>Watch</Link>
                         </swiper-slide>
                         <swiper-slide>
-                            <Link href="shop.html" class="btn"><span class="icon"><img width="33" height="33" src="/assets/images/catagories/headphones.png" alt="image"></span>Gadget</Link>
+                            <Link href="shop.html" class="btn"><span class="icon"><component :is="asset_headphones" alt="image" width="33" height="33" /></span>Gadget</Link>
                         </swiper-slide>
                         <swiper-slide>
-                            <Link href="shop.html" class="btn"><span class="icon"><img width="33" height="33" src="/assets/images/catagories/bagpack.png" alt="image"></span>Bagpack</Link>
+                            <Link href="shop.html" class="btn"><span class="icon"><component :is="asset_bagpack" alt="image" width="33" height="33" /></span>Bagpack</Link>
                         </swiper-slide>
                     </swiper>
                     <!-- Slider main container -->
@@ -327,10 +331,27 @@
 </style>
 <script setup>
 import { Pagination } from 'swiper'
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
 
 import 'swiper/css/pagination';
 import 'swiper/css';
+
+const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${import.meta.env.BASE_URL}${path}`));
+
+const profilePict1 = createAsyncComponent("assets/images/profile-shape-1.svg");
+const profilePict2 = createAsyncComponent("assets/images/profile-shape-2.svg");
+const asset_logo = createAsyncComponent("assets/images/logo.png");
+const asset_user_profile = createAsyncComponent("assets/images/user/user-profile.png");
+const asset_product_1 = createAsyncComponent("assets/images/hero/product/product-1.png");
+const asset_product_2 = createAsyncComponent("assets/images/hero/product/product-2.png");
+const asset_product_3 = createAsyncComponent("assets/images/hero/product/product-3.png");
+const asset_shape_dotted = createAsyncComponent("assets/images/hero/shape/shape-dotted.png");
+const asset_sneakers = createAsyncComponent("assets/images/categories/sneakers.png");
+const asset_watch = createAsyncComponent("assets/images/categories/watch.png");
+const asset_headphones = createAsyncComponent("assets/images/categories/headphones.png");
+const asset_bagpack = createAsyncComponent("assets/images/categories/bagpack.png");
+const asset_hero_bg_1 = createAsyncComponent("assets/images/hero/bg/hero-bg-1.jpg");
+const asset_header_top_user = createAsyncComponent("assets/images/header-top-user-img.jpg");
 
 const scrolled = ref(false)
 

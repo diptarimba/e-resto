@@ -21,6 +21,7 @@
         "moment": "^2.29.4",
         "swiper": "^8.4.4",
         "uuid": "^9.0.0",
+        "vite-svg-loader": "^4.0.0",
         "vue": "^3.2.36",
         "vue-collapsed": "^1.0.2",
         "vue-loader": "^17.0.0",

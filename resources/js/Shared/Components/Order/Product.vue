@@ -2,7 +2,7 @@
 <!-- Start Single Cart Item -->
 <li class="single-cart-item">
     <div class="image">
-        <img class="img-order" src="/assets/images/product/small/product-1-small-2.png" alt="">
+        <component :is="asset_product_1_small_2" class="img-order" alt=""/>
     </div>
     <div class="content">
         <Link :href="route('order.detail', order.id, false)" class="title">{{order.order_number}}</Link>
@@ -34,7 +34,12 @@
 </style>
 
 <script setup>
+import { defineAsyncComponent } from "vue";
+
 const props = defineProps({
     order: Object,
 })
+
+const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${import.meta.env.BASE_URL}${path}`));
+const asset_product_1_small_2 = createAsyncComponent("assets/images/product/small/product-1-small-2.png");
 </script>
