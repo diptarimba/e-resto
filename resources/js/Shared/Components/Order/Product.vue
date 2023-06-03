@@ -40,6 +40,6 @@ const props = defineProps({
     order: Object,
 })
 
-const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${import.meta.env.VITE_BASE_URLL}${path}`));
+const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${import.meta.env.VITE_BASE_URL}${path}`));
 const asset_product_1_small_2 = createAsyncComponent("assets/images/product/small/product-1-small-2.png");
 </script>

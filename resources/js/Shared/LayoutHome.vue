@@ -336,7 +336,7 @@ import { ref, onMounted, onUnmounted, defineAsyncComponent } from 'vue'
 import 'swiper/css/pagination';
 import 'swiper/css';
 
-const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${import.meta.env.VITE_BASE_URLL}${path}`));
+const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${import.meta.env.VITE_BASE_URL}${path}`));
 
 const profilePict1 = createAsyncComponent("assets/images/profile-shape-1.svg");
 const profilePict2 = createAsyncComponent("assets/images/profile-shape-2.svg");

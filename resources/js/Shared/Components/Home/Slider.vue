@@ -43,6 +43,6 @@ defineProps({
     contentSlider: Object
 })
 
-const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${import.meta.env.VITE_BASE_URLL}${path}`));
+const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${import.meta.env.VITE_BASE_URL}${path}`));
 const asset_shape_dotted = createAsyncComponent("assets/images/hero/shape/shape-dotted.png");
 </script>
