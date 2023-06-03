@@ -29,6 +29,8 @@ class HomeController extends Controller
                 request()->whenFilled('max', function ($max) use ($query) {
                     $query->where('price', '<=', $max);
                 });
+                $query->whereNot('status', 'DISABLED');
+                $query->orderBy('status');
             }])
             ->when(Request()->input('search'), function ($query, $search) {
                 request()->whenFilled('search', function ($search) use ($query) {
@@ -97,6 +99,7 @@ class HomeController extends Controller
             ['token' => $request->token]
         )->id;
 
+        // Membuat data order, sesuai request user, tapi terdapat penyesuaian
         $order = Order::create([
             'name' => 'Pelanggan',
             'table_id' => 1,
@@ -108,14 +111,43 @@ class HomeController extends Controller
 
         foreach($request->items as $each)
         {
-            $each = (object) $each;
-            $order_detail = $order->order_detail()->create([
-                'product_id' => $each->product_id,
-                'quantity' => $each->quantity,
-                'note' => $each->note ?? ''
-            ]);
+            // Mencari Product Yang dibeli
+            $product = Product::find($each->product_id);
 
-            $order_detail->product_option()->attach($each->option);
+            // mengecek apakah product memiliki kuantitas tersedia
+            if($product->quantity >= $each->quantity){
+                $each = (object) $each;
+                $order_detail = $order->order_detail()->create([
+                    'product_id' => $each->product_id,
+                    'quantity' => $each->quantity,
+                    'note' => $each->note ?? ''
+                ]);
+
+                $order_detail->product_option()->attach($each->option);
+
+                // Mengurangi Kuantitas Product Tersedia
+                $product->decrement('quantity', $each->quantity);
+
+                if($product->quantity == 0){
+                    $product->setSuspend();
+                }
+            }else{
+                // Kuantitas yang ingin dibeli user
+                $quantityRequest = $each->quantity;
+                // Harga masing masing produk
+                $productPrice = $product->price;
+                // Total harga produk dikali kuantitas
+                $totalToDecrease = $quantityRequest * $productPrice;
+                // mengurangi total order
+                $order->decrement('quantity', $quantityRequest);
+                // Mengurangi total sebelumnya
+                $order->decrement('pay_amount', $totalToDecrease);
+            }
+        }
+
+        if ($order->quantity == 0 && $order->pay_amount == 0){
+            $order->delete();
+            return redirect()->route('home.index')->with(["message" => "Failed Create Order"]);
         }
 
         return redirect()->route('home.cart')->with(["message" => "Success Create", "order_number" => $order->order_number]);
@@ -123,7 +155,7 @@ class HomeController extends Controller
 
     public function order($token)
     {
-        
+
         $order = Order::with('customer')->whereHas('customer', function($query) use ($token){
             $query->whereToken($token);
         })->get();

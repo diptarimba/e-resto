@@ -21,6 +21,7 @@ return new class extends Migration
             $table->longText('description');
             $table->bigInteger('quantity');
             $table->unsignedBigInteger('category_id');
+            $table->string('status');
             $table->timestamps();
         });
     }

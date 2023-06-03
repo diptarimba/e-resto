@@ -35,6 +35,7 @@ class ProductSeeder extends Seeder
                         'product_size_id' => $query->id
                     ])->create();
                 });
+                $query->update(['status' => $query::$AVAIL]);
             });
         });
     }

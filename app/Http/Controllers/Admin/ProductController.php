@@ -25,6 +25,9 @@ class ProductController extends Controller
             ->addColumn('action', function($data){
                 return $this->getActionColumn($data);
             })
+            ->addColumn('note', function($data){
+                return Product::$message_product[$data->status];
+            })
             ->make(true);
         }
 
@@ -61,6 +64,10 @@ class ProductController extends Controller
         ]);
 
         $product = Product::create($request->except(['image']));
+
+        if($product->quantity == 0){
+            $product->setSuspend();
+        }
 
         foreach($request->file('image') as $each){
            $product->product_image()->create(['image' => '/storage/' . $each->storePublicly('product')]);
@@ -114,6 +121,10 @@ class ProductController extends Controller
         $product->update($request->except(['image']));
 
         $product->product_image()->delete();
+
+        if($product->quantity == 0){
+            $product->setSuspend();
+        }
 
         foreach($request->image as $each){
             $product->product_image()->create(['image' => '/storage/' . $each->storePublicly('product')]);

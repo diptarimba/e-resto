@@ -40,7 +40,7 @@
                         </swiper>
                     </div>
                     <div class="product-tag">
-                        <span class="tag-discountQuantity">Available</span>
+                        <span class="tag-discountQuantity">{{ product.status !== 'SUSPEND' ? 'Product Available' : 'Product Not Available' }}</span>
                         <button
                             @click="modifyWishlist"
                             aria-label="Wishlist"
@@ -144,7 +144,15 @@
                         }}</span>
                         <button
                             class="btn cart"
-                            :disabled="optionChoosen.value"
+                            v-if="!!optionChoosen"
+                        >
+                            <span class="icon"
+                                ><i class="icon icon-carce-cart"></i></span
+                            >Add to Cart
+                        </button>
+                        <button
+                            class="btn cart"
+                            v-else
                             @click="addToCart"
                         >
                             <span class="icon"
@@ -186,12 +194,13 @@ import { Pagination } from "swiper";
 import { useToast } from "vue-toastification";
 import "swiper/css/pagination";
 import "swiper/css";
+import { watch } from "vue"
 import { reactive, ref, toRaw } from "@vue/reactivity";
 import { computed, inject, onMounted } from "@vue/runtime-core";
 
 const toast = useToast();
 let countQuantity = ref(1);
-let option = [];
+const option = ref([]);
 const inWishlist = ref(false);
 const slider = ref(props.product.image);
 
@@ -207,9 +216,9 @@ const chooseOption = (size, options) => {
         valueName: options.name,
     };
 
-    let index = option.findIndex(({ key }) => key == objectAdd.key);
+    let index = option.value.findIndex(({ key }) => key == objectAdd.key);
 
-    index == -1 ? option.push(objectAdd) : (option[index] = objectAdd);
+    index == -1 ? option.value.push(objectAdd) : (option[index] = objectAdd);
 };
 // deklarasikan variable baru untuk penampungan cart dari localstorage
 let currentCart = [];
@@ -308,7 +317,7 @@ const modifyWishlist = () => {
 
 const addToCart = () => {
     let productAdd = unProxy(props.product);
-    productAdd.option = unProxy(option);
+    productAdd.option = option.value
     productAdd.choosenQuantity = unProxy(countQuantity.value);
 
     // Filter cart berdasarkan product yang akan ditambahkan, dengan
@@ -420,7 +429,11 @@ let props = defineProps({
     product: Object,
 });
 
-const optionChoosen = computed(() => {
-    return props.product.size.length > option.length;
+const optionChoosen = ref(true); // Initialize the reactive property
+
+
+watch([() => props.product.size.length, () => option.value.length], () => {
+  optionChoosen.value = props.product.size.length > option.value.length && props.product.status != 'SUSPEND';
 });
+
 </script>

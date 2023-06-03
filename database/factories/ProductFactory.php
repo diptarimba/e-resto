@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,6 +21,7 @@ class ProductFactory extends Factory
             'name' => fake()->words(2, true),
             'description' => fake()->words(10, true),
             'price' => fake()->numberBetween(2000,15000),
+            'status' => Product::$AVAIL,
             'quantity' => fake()->numberBetween(1,200)
         ];
     }

@@ -113,6 +113,9 @@ class ProductOptionController extends Controller
     {
         try {
             $option->delete();
+            if($size->size_option()->count()){
+                $product->setDisabled();
+            }
             return redirect()
             ->route('admin.product.size.option.index', ['product' => $product->id, 'size' => $size->id] )
             ->with('success', 'Successfully Delete Product Option');

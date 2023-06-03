@@ -9,13 +9,27 @@ class Product extends Model
 {
     use HasFactory;
 
+    //Tersedia
+    public static $AVAIL = 'AVAIL';
+    //Product Size Belum Diisi
+    public static $DISABLED = 'DISABLED';
+    //Quantity Habis
+    public static $SUSPEND = 'SUSPEND';
+
+    public static $message_product = [
+        'AVAIL' => 'Produk Ditampilkan',
+        'DISABLED' => 'Product Size Belum Diisi',
+        'SUSPEND' => 'Quantity Habis'
+    ];
+
     protected $fillable = [
         'name',
         'price',
         'image',
         'quantity',
         'description',
-        'category_id'
+        'category_id',
+        'status'
     ];
 
     protected $appends = [
@@ -52,4 +66,27 @@ class Product extends Model
     {
         return $this->hasMany(PictureProduct::class, 'product_id');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($product){
+            $product->status = $product::$DISABLED;
+        });
+    }
+
+    public function setAvailable(){
+        $this->update(['status' => $this::$AVAIL]);
+    }
+
+    public function setDisabled(){
+        $this->update(['status' => $this::$DISABLED]);
+    }
+
+    public function setSuspend(){
+        $this->update(['status' => $this::$SUSPEND]);
+    }
+
+
 }
