@@ -224,7 +224,7 @@ const sidebarOpen = ref(false);
 //     scrolled.value = window.top.scrollY > 0 ? true : false
 // }
 
-const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${import.meta.env.BASE_URL}${path}`));
+const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${import.meta.env.VITE_BASE_URLL}${path}`));
 
 const asset_logo = createAsyncComponent("assets/images/logo.png");
 
