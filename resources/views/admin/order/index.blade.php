@@ -41,6 +41,13 @@
                     <tbody>
 
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="5" style="text-align:right">Total:</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+
                 </table>
             </x-slot>
         </x-card.card>
@@ -116,11 +123,53 @@
                     targets: 4,
                     render: $.fn.dataTable.render.number(',', '.', 0, '')
                 }],
+                footerCallback: function(row, data, start, end, display) {
+                    var api = this.api();
+
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function(i) {
+                        return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i ===
+                            'number' ? i : 0;
+                    };
+
+                    // Total over this page
+                    pageTotal = api
+                        .column(5, {
+                            page: 'current'
+                        })
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // Update footer
+                    $.ajax({
+                        url: "{{ route('admin.order.index') }}",
+                        data: {
+                            sum_of_all: true,
+                            status: searchParams.get('status') ?? null,
+                            period: period,
+                            start_period: start_period,
+                            end_period: end_period
+                        },
+                        success: function(response) {
+                            var totalSum = parseFloat(response.total)
+                            $(api.column(4).footer()).html('Rp. ' + pageTotal
+                                .toLocaleString() + ' ( Rp. ' +
+                                totalSum.toLocaleString() + ' Total Semua)');
+                        },
+                        error: function() {
+                            console.error("Failed to retrieve total sum from the server")
+                        }
+                    }, )
+
+
+                },
             });
         })
     </script>
     <script>
-        $('.btn-period').on('click', function(){
+        $('.btn-period').on('click', function() {
             var Coloring = {
                 'btn-primary': 'btn-outline-primary',
                 'btn-success': 'btn-outline-success',
@@ -129,21 +178,21 @@
                 'btn-danger': 'btn-outline-danger',
             }
 
-            $('.btn-period').each(function(){
-                for(eachColor in Coloring){
-                    if($(this).hasClass(eachColor)){
+            $('.btn-period').each(function() {
+                for (eachColor in Coloring) {
+                    if ($(this).hasClass(eachColor)) {
                         $(this).removeClass(eachColor).addClass(Coloring[eachColor])
                     }
                 }
             })
 
-            for(eachColor in Coloring){
-                if($(this).hasClass(Coloring[eachColor])){
+            for (eachColor in Coloring) {
+                if ($(this).hasClass(Coloring[eachColor])) {
                     $(this).removeClass(Coloring[eachColor]).addClass(eachColor)
                 }
             }
 
-            if($(this).attr('id') !== undefined){
+            if ($(this).attr('id') !== undefined) {
                 period = $(this).attr('id')
                 start_period = null;
                 end_period = null;

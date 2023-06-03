@@ -34,7 +34,14 @@ class OrderController extends Controller
             })->when(!is_null($request->start_period) && !is_null($request->end_period), function($query) use ($request){
                 $query->where('created_at', '>=', date("Y-m-d", strtotime($request->start_period)). " 00:00:00")
                 ->where('created_at', '<=', date("Y-m-d", strtotime($request->end_period)). " 23:59:59");
-            })->select();
+            });
+
+            if($request->sum_of_all){
+                $res = $order->sum('pay_amount');
+                return response()->json(['total' => $res]);
+            }
+
+            $order->select();
             return datatables()->of($order)
             ->addIndexColumn()
             ->addColumn('table', function($query){
