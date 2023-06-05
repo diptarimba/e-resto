@@ -20,7 +20,14 @@
                             :loop="true"
                         >
                             <swiper-slide v-for="value in slider" :key="value">
-                                <div class="product-gallery-single-item">
+                                <div
+                                    :class="
+                                        product.status === 'SUSPEND'
+                                            ? 'product_not_available'
+                                            : ''
+                                    "
+                                    class="product-gallery-single-item"
+                                >
                                     <div class="image">
                                         <img
                                             class="img_slider"
@@ -40,7 +47,11 @@
                         </swiper>
                     </div>
                     <div class="product-tag">
-                        <span class="tag-discountQuantity">{{ product.status !== 'SUSPEND' ? 'Product Available' : 'Product Not Available' }}</span>
+                        <span class="tag-discountQuantity">{{
+                            product.status !== "SUSPEND"
+                                ? "Product Available"
+                                : "Product Not Available"
+                        }}</span>
                         <button
                             @click="modifyWishlist"
                             aria-label="Wishlist"
@@ -142,19 +153,12 @@
                         <span class="price">{{
                             $filters.toIDR(product.price)
                         }}</span>
-                        <button
-                            class="btn cart"
-                            v-if="!!optionChoosen"
-                        >
+                        <button class="btn cart" v-if="!!optionChoosen">
                             <span class="icon"
                                 ><i class="icon icon-carce-cart"></i></span
                             >Add to Cart
                         </button>
-                        <button
-                            class="btn cart"
-                            v-else
-                            @click="addToCart"
-                        >
+                        <button class="btn cart" v-else @click="addToCart">
                             <span class="icon"
                                 ><i class="icon icon-carce-cart"></i></span
                             >Add to Cart
@@ -180,6 +184,10 @@
     height: 172px;
     object-fit: cover;
 }
+.product_not_available {
+    opacity: 0.2;
+    position: relative;
+}
 </style>
 
 <script>
@@ -194,7 +202,7 @@ import { Pagination } from "swiper";
 import { useToast } from "vue-toastification";
 import "swiper/css/pagination";
 import "swiper/css";
-import { watch } from "vue"
+import { watch } from "vue";
 import { reactive, ref, toRaw } from "@vue/reactivity";
 import { computed, inject, onMounted } from "@vue/runtime-core";
 
@@ -317,7 +325,7 @@ const modifyWishlist = () => {
 
 const addToCart = () => {
     let productAdd = unProxy(props.product);
-    productAdd.option = option.value
+    productAdd.option = option.value;
     productAdd.choosenQuantity = unProxy(countQuantity.value);
 
     // Filter cart berdasarkan product yang akan ditambahkan, dengan
@@ -431,9 +439,9 @@ let props = defineProps({
 
 const optionChoosen = ref(true); // Initialize the reactive property
 
-
 watch([() => props.product.size.length, () => option.value.length], () => {
-  optionChoosen.value = props.product.size.length > option.value.length && props.product.status != 'SUSPEND';
+    optionChoosen.value =
+        props.product.size.length > option.value.length &&
+        props.product.status != "SUSPEND";
 });
-
 </script>
