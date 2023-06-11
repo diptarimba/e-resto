@@ -74,7 +74,7 @@ class HomeController extends Controller
 
     public function cart()
     {
-        $table = Table::pluck('name', 'id');
+        $table = Table::select('name', 'id')->get();
         return Inertia::render('Cart', [
             'table' => $table
         ]);
@@ -90,7 +90,7 @@ class HomeController extends Controller
 
         $this->validate($request, [
             'total' => 'numeric',
-            'table_id' => 'required|exists:tabels,id',
+            'table_id' => 'required|exists:tables,id',
             'items' => 'array',
             'token' => 'string',
             'total_items' => 'numeric',
@@ -116,6 +116,7 @@ class HomeController extends Controller
 
         foreach($request->items as $each)
         {
+            $each = (object) $each;
             // Mencari Product Yang dibeli
             $product = Product::find($each->product_id);
 
