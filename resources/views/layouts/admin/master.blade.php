@@ -57,6 +57,15 @@
             }
         })
     </script>
+    <script src="{{asset('dashboard-assets/js/OneSignalSDK.js')}}" defer></script>
+    <script>
+      window.OneSignal = window.OneSignal || [];
+      OneSignal.push(function() {
+        OneSignal.init({
+          appId: "3ff3f046-d943-409b-8080-d5cb0329123c",
+        });
+      });
+    </script>
     {{-- <script src="{{asset('dashboard-assets/js/bootstrap.bundle.min.js')}}"></script> --}}
     <script>
         function delete_data(identify){
