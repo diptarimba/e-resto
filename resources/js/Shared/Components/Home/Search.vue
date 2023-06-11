@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="shop-filter-block">
-                                <button class="apply-btn" @click="submitValue(sliderDefault)">APPLY</button>
+                                <button class="apply-btn" @click="submitValue(currentSlide)">APPLY</button>
                                 <button class="cancel-btn" @click="clickSlide">CANCEL</button>
                                 <button class="red-btn" @click="resetValue">RESET</button>
                             </div>

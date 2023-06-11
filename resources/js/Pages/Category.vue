@@ -96,7 +96,6 @@ const addProductOnScroll = () => {
     if (props.product.next_page_url === null) {
         return;
     }
-    console.log('sini')
     Inertia.get(props.product.next_page_url, {}, {
         preserveScroll: true,
         preserveState: true,
@@ -110,7 +109,6 @@ const addProductOnScroll = () => {
 
 // Melakukan query baru pencarian product ketika user menuliskan nama barang / memilih filter harga
 watch([searchText, defaultValue], debounce(function ([newSearch, newDefaultValue], [oldSearch, oldDefaultValue]) {
-    console.log('cek pencarian', newSearch)
     Inertia.get('/category/' + props.categoryId, {
         search: newSearch,
         min: newDefaultValue[0],
