@@ -22,7 +22,7 @@
                             <div class="hero-bg">
                                 <img
                                     class="img-slider"
-                                    :src="slider.background"
+                                    :src="slider.image"
                                     alt="image"
                                 />
                             </div>

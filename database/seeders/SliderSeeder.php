@@ -17,9 +17,9 @@ class SliderSeeder extends Seeder
     public function run()
     {
         Slider::factory()->count(3)->state(new Sequence(
-            ['background' => '/storage/placeholder/slider/bg/bg-place-1.png', 'product_pict' => '/storage/placeholder/slider/product/product-1.png'],
-            ['background' => '/storage/placeholder/slider/bg/bg-place-2.png', 'product_pict' => '/storage/placeholder/slider/product/product-2.png'],
-            ['background' => '/storage/placeholder/slider/bg/bg-place-3.png', 'product_pict' => '/storage/placeholder/slider/product/product-3.png']
+            ['image' => '/storage/placeholder/slider/bg/bg-place-1.jpg'],
+            ['image' => '/storage/placeholder/slider/bg/bg-place-2.jpg'],
+            ['image' => '/storage/placeholder/slider/bg/bg-place-3.jpg']
         ))->create();
     }
 }
