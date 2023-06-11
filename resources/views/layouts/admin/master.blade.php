@@ -60,11 +60,12 @@
     <script src="{{asset('dashboard-assets/js/OneSignalSDK.js')}}" defer></script>
     <script>
       window.OneSignal = window.OneSignal || [];
-      OneSignal.push(function() {
-        OneSignal.init({
-          appId: "3ff3f046-d943-409b-8080-d5cb0329123c",
-        });
-      });
+      var initConfig = {
+        appId: "3ff3f046-d943-409b-8080-d5cb0329123c",
+        notifyButton: {
+            enable: true
+        },
+    };
       OneSignal.push(function () {
         OneSignal.SERVICE_WORKER_PARAM = { scope: '/push/onesignal/' };
         OneSignal.SERVICE_WORKER_PATH = '{{asset('js/push/onesignal/OneSignalSDKWorker.js')}}'
