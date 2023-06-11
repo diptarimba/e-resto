@@ -120,15 +120,17 @@ class ProductController extends Controller
 
         $product->update($request->except(['image']));
 
-        $product->product_image()->delete();
-
         if($product->quantity == 0){
             $product->setSuspend();
         }
 
-        foreach($request->image as $each){
-            $product->product_image()->create(['image' => '/storage/' . $each->storePublicly('product')]);
-         }
+        if ( $request->image !== null ) {
+            $product->product_image()->delete();
+
+            foreach($request->image as $each){
+                $product->product_image()->create(['image' => '/storage/' . $each->storePublicly('product')]);
+            }
+        }
 
         return redirect()->route('admin.product.index')->with('success', 'Success update');
     }
