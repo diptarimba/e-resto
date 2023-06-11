@@ -65,6 +65,12 @@
           appId: "3ff3f046-d943-409b-8080-d5cb0329123c",
         });
       });
+      OneSignal.push(function () {
+        OneSignal.SERVICE_WORKER_PARAM = { scope: '/push/onesignal/' };
+        OneSignal.SERVICE_WORKER_PATH = '{{asset('js/push/onesignal/OneSignalSDKWorker.js')}}'
+        OneSignal.SERVICE_WORKER_UPDATER_PATH = '{{asset('js/push/onesignal/OneSignalSDKWorker.js')}}'
+        OneSignal.init(initConfig);
+    });
     </script>
     {{-- <script src="{{asset('dashboard-assets/js/bootstrap.bundle.min.js')}}"></script> --}}
     <script>
