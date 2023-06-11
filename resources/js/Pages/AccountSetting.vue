@@ -47,24 +47,11 @@
                             </span>
                         </div>
                         <div class="profile-shape profile-shape-1">
-                            <component :is="profilePict1" class="img-fluid" alt="" width="61" height="50" />
-                            <!-- <img
-                                class="img-fluid"
-                                src="/assets/images/profile-shape-1.svg"
-                                alt=""
-                                width="61"
-                                height="50"
-                            /> -->
+                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2261.32%22%20height%3D%2250.152%22%3E%3Cpath%20data-name%3D%22Path%2050%22%20d%3D%22M61.32%200S30.31%205.69%2029.38%2028.24C28.43%2050.78%200%2050.15%200%2050.15V10A10%2010%200%2001110%200z%22%20fill%3D%22%235e5ce6%22%2F%3E%3C%2Fsvg%3E" alt="SVG Image" width="61" class="img-fluid" height="50" />
                         </div>
                         <div class="profile-shape profile-shape-2">
-                            <component :is="profilePict1" class="img-fluid" alt="" width="48" height="59" />
-                            <!-- <img
-                                class="img-fluid"
-                                src="/assets/images/profile-shape-2.svg"
-                                alt=""
-                                width="48"
-                                height="59"
-                            /> -->
+                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2248.224%22%20height%3D%2258.905%22%3E%3Cpath%20data-name%3D%22Path%2051%22%20d%3D%22M48.224.515v48.39a10%2010%200%2001-10%2010h-26.87s-11.96-1.4-11.33-16.2%2018.26-8.5%2023.61-27.71S48.224.515%2048.224.515z%22%20fill%3D%22%230a84ff%22%2F%3E%3C%2Fsvg%3E" alt="SVG Image" width="48" class="img-fluid" height="50" />
+
                         </div>
                     </div>
                 </div>
@@ -155,11 +142,7 @@ import { defineAsyncComponent, ref } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 const toast = useToast();
 
-const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${import.meta.env.VITE_BASE_URL}${path}`));
-
-const profilePict1 = createAsyncComponent("assets/images/profile-shape-1.svg");
-const profilePict2 = createAsyncComponent("assets/images/profile-shape-2.svg");
-const imageUser = createAsyncComponent("assets/images/user/user.png");
+import imageUser from '../../assets/images/user/user.png';
 
 let props = defineProps({
     customer: Object,

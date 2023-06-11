@@ -18,7 +18,7 @@
                                 </div>
                                 <div class="product-img">
                                     <img width="149" height="127" class="img-fluid" :src="slider.product_pict" alt="image">
-                                    <div class="shape shape-1"><component :is="asset_shape_dotted" class="img-fluid" alt="image" width="83" height="83" /></div>
+                                    <div class="shape shape-1"><img :src="asset_shape_dotted" class="img-fluid" alt="image" width="83" height="83" /></div>
                                 </div>
                             </div>
                         </div>
@@ -43,6 +43,6 @@ defineProps({
     contentSlider: Object
 })
 
-const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${import.meta.env.VITE_BASE_URL}${path}`));
-const asset_shape_dotted = createAsyncComponent("assets/images/hero/shape/shape-dotted.png");
+
+import asset_shape_dotted from '../../../../assets/images/hero/shape/shape-dotted.png';
 </script>

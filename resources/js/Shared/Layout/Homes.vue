@@ -99,7 +99,7 @@
                 <div class="logo">
                     <a href="index.html"
                         >
-                    <component :is="asset_logo" class="img-fluid"  width="147"
+                    <img :src="asset_logo" class="img-fluid"  width="147"
                             height="26" alt="image"/></a>
                 </div>
 
@@ -224,9 +224,9 @@ const sidebarOpen = ref(false);
 //     scrolled.value = window.top.scrollY > 0 ? true : false
 // }
 
-const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${import.meta.env.VITE_BASE_URL}${path}`));
+const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${path}`));
 
-const asset_logo = createAsyncComponent("assets/images/logo.png");
+import asset_logo from '../../../assets/images/logo.png';
 
 const clickProfile = () => {
     profileOpen.value = !profileOpen.value;
