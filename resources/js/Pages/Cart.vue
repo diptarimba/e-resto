@@ -85,6 +85,12 @@ onMounted(() => {
     getCartLocal();
 });
 
+
+// Table Id & Table Name untuk menentukan lokasi meja pelanggan
+let props = defineProps({
+    table: Object,
+})
+
 const currenTotal = ref(0);
 const toast = useToast();
 
@@ -94,6 +100,7 @@ const orderCart = useForm({
     token: "",
     total_items: 0,
     items: [],
+    table_id: 0,
 });
 
 const getCartLocal = () => {

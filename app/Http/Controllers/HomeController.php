@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Slider;
+use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
@@ -73,7 +74,10 @@ class HomeController extends Controller
 
     public function cart()
     {
-        return Inertia::render('Cart');
+        $table = Table::pluck('name', 'id');
+        return Inertia::render('Cart', [
+            'table' => $table
+        ]);
     }
 
     public function wishlist()
@@ -86,6 +90,7 @@ class HomeController extends Controller
 
         $this->validate($request, [
             'total' => 'numeric',
+            'table_id' => 'required|exists:tabels,id',
             'items' => 'array',
             'token' => 'string',
             'total_items' => 'numeric',
@@ -102,7 +107,7 @@ class HomeController extends Controller
         // Membuat data order, sesuai request user, tapi terdapat penyesuaian
         $order = Order::create([
             'name' => 'Pelanggan',
-            'table_id' => 1,
+            'table_id' => $request->table_id,
             'customer_id' => $customerId,
             'quantity' => $request->total_items,
             'pay_amount' => $request->total,
