@@ -8,6 +8,9 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Slider;
 use App\Models\Table;
+use Berkayk\OneSignal\OneSignalClient;
+use Berkayk\OneSignal\OneSignalFacade;
+use Berkayk\OneSignal\OneSignalServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
@@ -17,6 +20,17 @@ use function Termwind\render;
 
 class HomeController extends Controller
 {
+    public $onesignal;
+
+    public function __construct()
+    {
+        $this->onesignal = new OneSignalClient(
+            config('onesignal.app_id'),
+            config('onesignal.rest_api_key'),
+            config('onesignal.user_auth_key')
+        );
+    }
+
     public function index()
     {
         $categoryWithProduct = Category::query()
@@ -155,6 +169,14 @@ class HomeController extends Controller
             $order->delete();
             return redirect()->route('home.index')->with(["message" => "Failed Create Order"]);
         }
+
+        $this->onesignal->sendNotificationToAll(
+            "Halo, kamu punya orderan baru!",
+            $url = "https://liyue.my.id/a/order/{$order->id}/edit",
+            $data = null,
+            $buttons = null,
+            $schedule = null
+        );
 
         return redirect()->route('home.cart')->with(["message" => "Success Create", "order_number" => $order->order_number]);
     }
