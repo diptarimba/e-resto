@@ -4,7 +4,14 @@
         :class="'product-item--bg-' + bgColour"
     >
         <Link :href="route('product.detail', product.id, false)">
-            <img class="image" :src="product.image[0]" alt="image" />
+            <img
+                class="image"
+                :class="
+                    product.status === 'SUSPEND' ? 'product_not_available' : ''
+                "
+                :src="product.image[0]"
+                alt="image"
+            />
         </Link>
         <div class="content">
             <Link :href="route('product.detail', product.id, false)">
@@ -69,6 +76,9 @@
 }
 p.title {
     text-transform: capitalize;
+}
+.product_not_available {
+    opacity: 0.2;
 }
 </style>
 
