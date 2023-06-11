@@ -224,8 +224,6 @@ const sidebarOpen = ref(false);
 //     scrolled.value = window.top.scrollY > 0 ? true : false
 // }
 
-const createAsyncComponent = (path) => defineAsyncComponent(() => import(`${path}`));
-
 import asset_logo from '../../../assets/images/logo.png';
 
 const clickProfile = () => {
