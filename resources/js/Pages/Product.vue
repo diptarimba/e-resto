@@ -141,7 +141,7 @@ export default {
     layout: Homes,
 };
 </script>
-<script>
+<script setup>
 import {
     Pagination
 } from "swiper";
