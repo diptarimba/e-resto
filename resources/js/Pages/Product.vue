@@ -324,113 +324,63 @@ const modifyWishlist = () => {
 };
 
 const addToCart = () => {
-    let productAdd = unProxy(props.product);
-    productAdd.option = option.value;
-    productAdd.choosenQuantity = unProxy(countQuantity.value);
+  let productAdd = unProxy(props.product);
+  productAdd.option = option.value;
+  productAdd.choosenQuantity = unProxy(countQuantity.value);
 
-    // Filter cart berdasarkan product yang akan ditambahkan, dengan
-    let indexProductInCart = currentCart.filter(
-        ({ id }) => id === productAdd.id
-    );
-    // Mengantisipasi jumlah order berlebihan dari stok yang tersedia
-    let sumQtyInCart = 0;
-    indexProductInCart.forEach((each) => {
-        sumQtyInCart += each.choosenQuantity;
-    });
-    if (countQuantity.value > props.product.quantity - sumQtyInCart) {
-        toast.warning(
-            "Stok tidak tersedia, silakan kurangi kuantitas order produk ini di cart.",
-            {
-                position: "top-center",
-                timeout: 2000,
-                closeOnClick: true,
-                pauseOnFocusLoss: true,
-                pauseOnHover: true,
-                draggable: true,
-                draggablePercent: 0.6,
-                showCloseButtonOnHover: false,
-                hideProgressBar: true,
-                closeButton: false,
-                icon: true,
-                rtl: false,
-            }
-        );
-        return;
+  // Filter cart berdasarkan product yang akan ditambahkan
+  let indexProductInCart = currentCart.findIndex(({ id }) => id === productAdd.id);
+
+  // Mengantisipasi jumlah order berlebihan dari stok yang tersedia
+  let sumQtyInCart = 0;
+  currentCart.forEach(({ id, choosenQuantity, option }) => {
+    if (id === productAdd.id && JSON.stringify(option) === JSON.stringify(productAdd.option)) {
+      sumQtyInCart += choosenQuantity;
     }
-    // Mendeklarasikan variable penampungan
-    let dataFind = [];
+  });
 
-    /*
-        Pencarian product yang didalam cart dari localstorage dengan aturan
-        - Tidak boleh ada barang yang sama dan memiliki option yang sama
-    */
-
-    // Melakukan perulangan setiap product yang sama dengan yang akan ditambahkan
-    // dan menampung kedalam variable
-    dataFind = indexProductInCart.map((eachCart, keyCart) => {
-        // Melakukan perulangan setiap option pada setiap product didalam cart dari localstorage,
-        // apakah memiliki kesamaan option dengan yang ditambahkkan atau tidak
-        let eachProductOption = productAdd.option.map((eachProduct) => {
-            // Melakukan perulangan setiap option dari product yang akan ditambahkan
-            // dengan option product dari cart localstorage
-            let optionCheck = eachCart.option.findIndex(({ key, value }) => {
-                // perbandingan 1 per 1 key & value
-                let coreCheck =
-                    key == eachProduct.key && value == eachProduct.value;
-                return coreCheck;
-            });
-
-            // Mengembalikan hasil perulangan pengecekan option
-            return optionCheck;
-        });
-
-        // Membuat object untuk dikirim ke variable penampungan dengan ditambahkan keyCart agar mudah untuk mengidentifikasi
-        let eachProductOptionCheck = {
-            key: keyCart,
-            data: eachProductOption,
-        };
-        return eachProductOptionCheck;
+  if (countQuantity.value > props.product.quantity - sumQtyInCart) {
+    toast.warning("Stok tidak tersedia, silakan kurangi kuantitas order produk ini di keranjang.", {
+      position: "top-center",
+      timeout: 2000,
+      closeOnClick: true,
+      pauseOnFocusLoss: true,
+      pauseOnHover: true,
+      draggable: true,
+      draggablePercent: 0.6,
+      showCloseButtonOnHover: false,
+      hideProgressBar: true,
+      closeButton: false,
+      icon: true,
+      rtl: false,
     });
+    return;
+  }
 
-    // mendefinisikan key untuk penambahan ke cart localstorage
-    let key = undefined;
+  if (indexProductInCart !== -1 && JSON.stringify(currentCart[indexProductInCart].option) === JSON.stringify(productAdd.option)) {
+    currentCart[indexProductInCart].choosenQuantity += productAdd.choosenQuantity;
+  } else {
+    currentCart.push(productAdd);
+  }
 
-    console.log(dataFind);
+  localStorage.setItem("cart", JSON.stringify(currentCart));
 
-    // melakukan perulangan dari hasil pengecekan
-    for (var x = 0; x < dataFind.length; x++) {
-        // apabila ada yang sama maka akan didefinisikan keynya
-        var checkIndex = dataFind[x].data.filter((cow) => cow == -1).length;
-        if (checkIndex === 0) {
-            key = dataFind[0].key;
-        }
-    }
-
-    // Memasukan data ke cart dengan 2 kondisi
-    // 1 apabila key undefined alias tidak terdapat kesamaan opsi, maka akan ditambahkan sebagai element baru
-    // 2 apabila ada kesamaan opsi maka akan direplace dengan yang baru
-    key === undefined
-        ? currentCart.push(unProxy(productAdd))
-        : (currentCart[key] = productAdd);
-
-    // Melakukan save ke local storage
-    localStorage.setItem("cart", JSON.stringify(currentCart));
-
-    toast.success("Produk berhasil ditambahkan ke keranjang!", {
-        position: "top-center",
-        timeout: 2000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: false,
-        icon: true,
-        rtl: false,
-    });
+  toast.success("Produk berhasil ditambahkan ke keranjang!", {
+    position: "top-center",
+    timeout: 2000,
+    closeOnClick: true,
+    pauseOnFocusLoss: true,
+    pauseOnHover: true,
+    draggable: true,
+    draggablePercent: 0.6,
+    showCloseButtonOnHover: false,
+    hideProgressBar: true,
+    closeButton: false,
+    icon: true,
+    rtl: false,
+  });
 };
+
 
 // Menerima data dari controller
 let props = defineProps({
