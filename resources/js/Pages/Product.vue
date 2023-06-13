@@ -99,10 +99,10 @@
                     <span class="price">{{
                             $filters.toIDR(product.price)
                         }}</span>
-                    <button class="btn cart" v-if="!!optionChoosen">
+                    <button class="btn cart" v-if="!!optionChoosen" @click="addToCart">
                         <span class="icon"><i class="icon icon-carce-cart"></i></span>Add to Cart
                     </button>
-                    <button class="btn cart" v-else @click="addToCart">
+                    <button class="btn cart" v-else >
                         <span class="icon"><i class="icon icon-carce-cart"></i></span>Add to Cart
                     </button>
                 </div>
@@ -366,11 +366,11 @@ let props = defineProps({
     product: Object,
 });
 
-const optionChoosen = ref(true); // Initialize the reactive property
+const optionChoosen = ref(false); // Initialize the reactive property
 
 watch([() => props.product.size.length, () => option.value.length], () => {
     optionChoosen.value =
-        props.product.size.length > option.value.length &&
-        props.product.status != "SUSPEND";
+        (props.product.size.length === option.value.length) &&
+        props.product.status == 'AVAIL' ;
 });
 </script>

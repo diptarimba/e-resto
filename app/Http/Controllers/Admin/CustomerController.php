@@ -15,25 +15,20 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $customer = Customer::select();
-            return datatables()->of($customer)
-            ->addIndexColumn()
-            ->addColumn('action', function($query){
-                return $this->getActionColumn($query);
-            })
-            ->addColumn('phone', function($query){
-                return $query->phone ?? 'Belum Diisi';
-            })
-            ->addColumn('name', function($query){
-                return $query->name ?? 'Belum Diisi';
-            })
-            ->addColumn('order_count', function($query){
-                return $query->order_count;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+
+            return datatables()
+                ->of($customer)
+                ->addIndexColumn()
+                ->addColumn('action', function ($query) {
+                    return $this->getActionColumn($query);
+                })
+                ->addColumn('order_count', function ($query) {
+                    return $query->order_count;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
 
         return view('admin.customer.index');
@@ -46,7 +41,9 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return redirect()->route('admin.customer.index')->with('error', 'Cannot Create Customer');
+        return redirect()
+            ->route('admin.customer.index')
+            ->with('error', 'Cannot Create Customer');
     }
 
     /**
@@ -102,14 +99,12 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-
     }
 
     public function getActionColumn($data)
     {
         $viewBtn = route('admin.customer.edit', $data->id);
 
-        return
-        '<a href="'.$viewBtn.'" class="btn mx-1 my-1 btn-sm btn-outline-success">View Customer</a>';
+        return '<a href="' . $viewBtn . '" class="btn mx-1 my-1 btn-sm btn-outline-success">View Customer</a>';
     }
 }

@@ -65,9 +65,7 @@ class ProductController extends Controller
 
         $product = Product::create($request->except(['image']));
 
-        if($product->quantity == 0){
-            $product->setSuspend();
-        }
+        $product->quantity == 0 ? $product->setSuspend() : $product->setAvailable();
 
         foreach($request->file('image') as $each){
            $product->product_image()->create(['image' => '/storage/' . $each->storePublicly('product')]);
@@ -120,9 +118,7 @@ class ProductController extends Controller
 
         $product->update($request->except(['image']));
 
-        if($product->quantity == 0){
-            $product->setSuspend();
-        }
+        $product->quantity == 0 ? $product->setSuspend() : $product->setAvailable();
 
         if ( $request->image !== null ) {
             $product->product_image()->delete();
