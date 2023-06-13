@@ -152,7 +152,7 @@ const getCartLocal = () => {
             product_id: each.id,
             quantity: each.choosenQuantity,
             option: each.option.map((x) => x.value),
-            note: "",
+            note: each.note,
         });
     });
     orderCart.token = tokenLocal;

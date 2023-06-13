@@ -120,6 +120,7 @@ const emit = defineEmits(["updateCart"]);
 const swal = inject("$swal");
 
 const countQuantity = ref(props.product.choosenQuantity);
+const note = ref(props.product.note);
 
 // Menghapus fitur proxy dari ES6 javascript
 const unProxy = (value) => {
@@ -146,6 +147,17 @@ const modifyChoosenQuantity = () => {
     emit("updateCart");
 };
 
+const modifyNote = () => {
+    console.log(note.value)
+    let getIndex = props.currentCart.findIndex(
+        ({ id }) => id === props.product.id
+    );
+    let currentCart = unProxy(props.currentCart);
+    currentCart[getIndex].note = unProxy(note.value);
+    localStorage.setItem("cart", JSON.stringify(currentCart));
+    emit("updateCart");
+};
+
 const unlistProduct = () => {
     swal({
         title: "Apakah kamu yakin?",
@@ -168,7 +180,6 @@ const unlistProduct = () => {
 };
 
 // notes
-const note = ref("");
 const maxLength = 150;
 const remainingCharacters = ref(150);
 
@@ -180,11 +191,16 @@ const limitCharacters = () => {
 };
 
 watch(
-    countQuantity,
-    debounce((newQuantity, oldQuantity) => {
-        modifyChoosenQuantity();
-    }, 500),
-    note,
-    limitCharacters
+  countQuantity,
+  debounce((newQuantity, oldQuantity) => {
+    modifyChoosenQuantity();
+  }, 500)
 );
+
+watch(note, debounce(() => {
+  modifyNote();
+}, 500));
+
+watch(note, limitCharacters);
+
 </script>

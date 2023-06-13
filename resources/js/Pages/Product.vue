@@ -292,6 +292,7 @@ const modifyWishlist = () => {
 const addToCart = () => {
     let productAdd = unProxy(props.product);
     productAdd.option = option.value;
+    productAdd.note = ""
     productAdd.choosenQuantity = unProxy(countQuantity.value);
 
     let existingProductIndex = currentCart.findIndex((item) => {
