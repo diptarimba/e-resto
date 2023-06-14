@@ -8,7 +8,7 @@
                     <div class="header-top-area header-top-area--style-1">
                         <ul class="event-list">
                             <li class="list-item">
-                                <button
+                                <!-- <button
                                     @click="clickSideBar"
                                     area-label="mobile menu offcanvas svg icon"
                                     class="btn btn--size-33-33 btn--center btn--round btn--color-radical-red btn--bg-white btn--box-shadow main-menu offcanvas-toggle offside-menu"
@@ -54,7 +54,7 @@
                                             />
                                         </g>
                                     </svg>
-                                </button>
+                                </button> -->
                             </li>
                             <li class="list-item">
                                 <h2 class="title text-center">Home</h2>
