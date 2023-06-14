@@ -167,9 +167,9 @@
             function() {
                 $('input[name="customer_pay"], input[name="customer_billed"], input[name="customer_change"]').each(
                     function() {
-                        var value = $(this).val().replace(/[^0-9.-]/g, ''); // Menghapus karakter non-digit
+                        var value = $(this).val().replace(/\D/g, ''); // Menghapus karakter non-digit
                         value = parseFloat(value) || 0; // Mengubah nilai menjadi angka atau 0 jika tidak valid
-                        $(this).val(value.toLocaleString()); // Mengubah nilai input menjadi format ribuan
+                        $(this).val(value.toLocaleString()); // Mengubah nilai input menjadi format ribuan saat menampilkan
                     })
             });
 
