@@ -167,12 +167,12 @@
             function() {
                 $('input[name="customer_pay"], input[name="customer_billed"], input[name="customer_change"]').each(
                     function() {
-                        var value = parseFloat($(this).val().replace(/[^0-9.-]+/g,
-                            '')); // Menghapus karakter non-digit dan mengonversi ke angka
-                        value = +value || 0;
+                        var value = $(this).val().replace(/[^0-9.-]/g, ''); // Menghapus karakter non-digit
+                        value = parseFloat(value) || 0; // Mengubah nilai menjadi angka atau 0 jika tidak valid
                         $(this).val(value.toLocaleString()); // Mengubah nilai input menjadi format ribuan
                     })
             });
+
 
         $('.btn-pay-confirm').on('click', function() {
             var customerPay = parseFloat($('input[name="customer_billed"]').val().replace(/\D/g, ''))
