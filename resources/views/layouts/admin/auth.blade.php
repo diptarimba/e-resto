@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="{{asset('dashboard-assets/css/main/app.css')}}">
     <link rel="stylesheet" href="{{asset('dashboard-assets/css/pages/auth.css')}}">
-    <link rel="shortcut icon" href="{{asset('dashboard-assets/images/logo/logo.svg')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('dashboard-assets/images/logo/liyue.jpg')}}" type="image/x-icon">
     <link rel="shortcut icon" href="{{asset('dashboard-assets/images/logo/favicon.png')}}" type="image/png">
     @yield('header')
 </head>

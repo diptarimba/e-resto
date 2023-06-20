@@ -32,10 +32,10 @@ body {
     font-size: 1.125rem !important;
 }
 #auth #auth-left .auth-logo {
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 #auth #auth-left .auth-logo img {
-    height: 2rem;
+    height: 5rem;
 }
 #auth a:hover {
     text-decoration: underline;
@@ -50,7 +50,7 @@ body {
         padding: 5rem 2.5rem;
     }
     #auth #auth-left .auth-logo {
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
     }
     #auth #auth-left .auth-title {
         font-size: 2rem;
