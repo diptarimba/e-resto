@@ -116,7 +116,7 @@ class ProductSizeController extends Controller
     {
         try {
             $size->delete();
-            if($product->size()->count() < 1){
+            if($product->size()->count() == 0){
                 $product->setDisabled();
             }
             return redirect()->route('admin.product.size.index', ['product' => $product->id,])->with('success', 'Success Delete Product Size');

@@ -56,6 +56,8 @@ class ProductOptionController extends Controller
 
         $size->size_option()->create($request->all());
 
+        $product->setAvailable();
+
         return redirect()
         ->route('admin.product.size.option.index', ['product' => $product->id, 'size' => $size->id])
         ->with('success', 'Success Create Product Option');
@@ -113,7 +115,7 @@ class ProductOptionController extends Controller
     {
         try {
             $option->delete();
-            if($size->size_option()->count()){
+            if($size->size_option()->count() == 0){
                 $product->setDisabled();
             }
             return redirect()
