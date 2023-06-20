@@ -2,10 +2,10 @@
     Template Name: Template Name
     Version: 1.0
 -----------------------------------------------------------------------------------
-    
+
     CSS INDEX
     ===================
-	
+
     01. Template default CSS
     02. Header
     03. Slider
@@ -2186,13 +2186,13 @@ span.ripple {
 }
 
 .product-variable-lists .left {
-    width: 13%;
+    width: 30%;
     font-size: 18px;
 }
 
 @media screen and (max-width: 480px) {
     .product-variable-lists .left {
-        width: 20%;
+        width: 30%;
     }
 }
 
@@ -2208,9 +2208,19 @@ span.ripple {
     gap: 15px;
 }
 
+.product-variable-lists .inner-child-item li {
+    margin-top: 5px;
+    margin-right: 20px;  /* menambahkan margin ke kanan untuk setiap li */
+}
+
 @media screen and (max-width: 480px) {
     .product-variable-lists .inner-child-item {
-        gap: 10px;
+    gap: 10px;
+    display: flex;
+    }
+
+    .product-variable-lists .inner-child-item li {
+        margin-right: 20px;  /* menambahkan margin ke kanan untuk setiap li */
     }
 }
 
@@ -2220,6 +2230,7 @@ span.ripple {
     height: 36px;
     display: block;
 }
+
 
 .product-variable-lists .inner-child-item input[type="radio"] {
     -webkit-appearance: none;
@@ -2245,16 +2256,16 @@ span.ripple {
     font-size: 16px;
     border: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 4px;
-    width: 100%;
-    height: 100%;
+    padding: 2px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
-    display: flex;
+    min-height: 60px;
+    min-width: 60px;
     -webkit-box-align: center;
     -webkit-align-items: center;
     -ms-flex-align: center;
-    align-items: center;
+    align-items:center;
     -webkit-box-pack: center;
     -webkit-justify-content: center;
     -ms-flex-pack: center;

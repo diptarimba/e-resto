@@ -132,6 +132,11 @@
     opacity: 0.2;
     position: relative;
 }
+.product-quantity {
+    -webkit-transform: translate(-13%, 0);
+    -ms-transform: translate(-13%, 0);
+    transform: translate(-13%, 0);
+}
 </style>
 
 <script>
