@@ -13,12 +13,12 @@
                 <x-card.card-title text="Period" />
             </x-slot>
             <x-slot name="body">
-                <div class="d-flex justify-content-center">
-                    <button id="ALL" class="btn btn-period btn-success">ALL</button>
-                    <button id="TODAY" class="btn btn-period btn-outline-primary mx-1">Today</button>
-                    <button id="1WEEK" class="btn btn-period btn-outline-secondary mx-1">1 Week</button>
-                    <button id="1MONTH" class="btn btn-period btn-outline-info mx-1">1 Month</button>
-                    <input type="button" class="btn btn-period btn-outline-danger mx-1" name="daterange" value="" />
+                <div class="d-flex flex-wrap justify-content-center">
+                    <button id="ALL" class="btn m-1 btn-period btn-success">ALL</button>
+                    <button id="TODAY" class="btn m-1 btn-period btn-outline-primary mx-1">Today</button>
+                    <button id="1WEEK" class="btn m-1 btn-period btn-outline-secondary mx-1">1 Week</button>
+                    <button id="1MONTH" class="btn m-1 btn-period btn-outline-info mx-1">1 Month</button>
+                    <input type="button" class="btn m-1 btn-period btn-outline-danger mx-1" name="daterange" value="" />
                 </div>
             </x-slot>
         </x-card.card>
