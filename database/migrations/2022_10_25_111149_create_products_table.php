@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('image');
             $table->longText('description');
             $table->bigInteger('quantity');
+            $table->decimal('star', 5, 1);
             $table->unsignedBigInteger('category_id');
             $table->string('status');
             $table->timestamps();

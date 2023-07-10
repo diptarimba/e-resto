@@ -32,6 +32,13 @@
                     <x-forms.file multiple="true" label="Pilih Foto Product" name="image[]" id="gallery-photo-add" />
                     <div class="gallery row row-cols-2 justify-content-center" id="isi-gallery"></div>
                     <x-forms.input required="" label="Nama Produk" name="name" :value="@$product->name" />
+                    <div class="form-group mb-2">
+                        <div class="d-flex justify-content-between">
+                            <label for="product_star" class="form-label">Bintang Produk:</label><output for="product_star" id="star_value">{{ @$product->star }}</output>
+                        </div>
+                        <input type="range" name="star" class="form-range" min="0" max="5" step="0.5"
+                            id="product_star" value="{{ @$product->star }}">
+                    </div>
                     <x-forms.input required="" label="Kuantitas" name="quantity" :value="@$product->quantity" />
                     <x-forms.input required="" label="Harga" name="price" :value="@$product->price" />
                     <x-forms.select label="Kategori" name="category_id" :items="$category" :value="@$product->category_id" />
@@ -45,5 +52,11 @@
 @endsection
 
 @section('footer')
-
+    <script>
+        $(document).ready(function() {
+            $('#product_star').on('input', function() {
+                $('#star_value').text($(this).val());
+            });
+        });
+    </script>
 @endsection

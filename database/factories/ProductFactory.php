@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
@@ -17,12 +18,13 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'name' => fake()->words(2, true),
-            'description' => fake()->words(10, true),
-            'price' => fake()->numberBetween(2000,15000),
-            'status' => Product::$AVAIL,
-            'quantity' => fake()->numberBetween(1,200)
-        ];
+            return [
+                'name' => fake()->words(2, true),
+                'description' => fake()->words(10, true),
+                'star' => fake()->randomElement([1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]),
+                'price' => fake()->numberBetween(2000,15000),
+                'status' => Product::$AVAIL,
+                'quantity' => fake()->numberBetween(1,200)
+            ];
     }
 }

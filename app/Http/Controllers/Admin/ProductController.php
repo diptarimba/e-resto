@@ -58,6 +58,7 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'price' => 'required',
+            'star' => 'required',
             'image' => 'required|array|min:1',
             'image.*' => 'nullable|mimes:jpg,png|max:1024',
             'description' => 'required',
@@ -113,6 +114,7 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'price' => 'required',
+            'star' => 'required',
             'image' => 'nullable|array',
             'image.*' => 'mimes:jpg,png|max:1024',
             'description' => 'required',
