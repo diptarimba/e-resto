@@ -1,13 +1,13 @@
 @extends('layouts.admin.master')
 
-@section('title', 'Order')
+@section('title', 'Runner Up Product')
 
 @section('header')
 
 @endsection
 
 @section('body')
-    <x-layoutContent Heading="Order" mainTitle="Order" subTitle="Home">
+    <x-layoutContent Heading="Runner Up Product" mainTitle="Runner Up Product" subTitle="Home">
         <x-card.card>
             <x-slot name="header">
                 <x-card.card-title text="Period" />
@@ -28,29 +28,18 @@
                 <x-card.card-title text="List" />
             </x-slot>
             <x-slot name="body">
-                <div class="table-responsive">
-                    <table class="table table-striped datatables-target-exec" style="width: 100%">
-                        <thead>
-                            <th>No</th>
-                            <th>Order Number</th>
-                            <th>Table</th>
-                            <th>Status</th>
-                            <th>Payment</th>
-                            <th>Total Payment</th>
-                            <th>Action</th>
-                        </thead>
-                        <tbody>
+                <table class="table table-striped datatables-target-exec" style="width: 100%">
+                    <thead>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Total Order</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
 
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th colspan="5" style="text-align:right">Total:</th>
-                                <th></th>
-                            </tr>
-                        </tfoot>
+                    </tbody>
 
-                    </table>
-                </div>
+                </table>
             </x-slot>
         </x-card.card>
     </x-layoutContent>
@@ -72,12 +61,12 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('admin.order.index') }}",
+                    url: "{{ route('admin.product.runeup') }}",
                     data: function(d) {
                         d.status = searchParams.get('status') ?? null,
-                            d.period = period
                         d.start_period = start_period
                         d.end_period = end_period
+                        d.period = period
                     }
                 },
                 columns: [{
@@ -88,31 +77,12 @@
                         searchable: false
                     },
                     {
-                        data: 'order_number',
-                        name: 'order_number'
+                        data: 'product_name',
+                        name: 'product_name'
                     },
                     {
-                        data: 'table',
-                        name: 'table'
-                    },
-                    {
-                        data: 'status',
-                        name: 'status'
-                    },
-                    {
-                        data: 'cash_flow_id',
-                        name: 'cash_flow_id',
-                        render: function(data, type, row) {
-                            return data === null ? 'Unpaid' : 'Paid'
-                        },
-                        sortable: true,
-                    },
-                    {
-                        data: 'pay_amount',
-                        name: 'pay_amount',
-                        render: function(data, type, row) {
-                            return data.toLocaleString();
-                        }
+                        data: 'quantity',
+                        name: 'quantity'
                     },
                     {
                         data: 'action',
@@ -122,51 +92,9 @@
                     },
                 ],
                 columnDefs: [{
-                    targets: 4,
+                    targets: 2,
                     render: $.fn.dataTable.render.number(',', '.', 0, '')
                 }],
-                footerCallback: function(row, data, start, end, display) {
-                    var api = this.api();
-
-                    // Remove the formatting to get integer data for summation
-                    var intVal = function(i) {
-                        return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i ===
-                            'number' ? i : 0;
-                    };
-
-                    // Total over this page
-                    pageTotal = api
-                        .column(5, {
-                            page: 'current'
-                        })
-                        .data()
-                        .reduce(function(a, b) {
-                            return intVal(a) + intVal(b);
-                        }, 0);
-
-                    // Update footer
-                    $.ajax({
-                        url: "{{ route('admin.order.index') }}",
-                        data: {
-                            sum_of_all: true,
-                            status: searchParams.get('status') ?? null,
-                            period: period,
-                            start_period: start_period,
-                            end_period: end_period
-                        },
-                        success: function(response) {
-                            var totalSum = parseFloat(response.total)
-                            $(api.column(4).footer()).html('Rp. ' + pageTotal
-                                .toLocaleString() + ' ( Rp. ' +
-                                totalSum.toLocaleString() + ' Total Semua)');
-                        },
-                        error: function() {
-                            console.error("Failed to retrieve total sum from the server")
-                        }
-                    }, )
-
-
-                },
             });
         })
     </script>

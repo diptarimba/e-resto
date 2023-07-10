@@ -13,19 +13,21 @@
                 <x-card.card-title-create url="{{ route('admin.customer.create') }}" text="List" />
             </x-slot>
             <x-slot name="body">
-                <table class="table table-striped datatables-target-exec" style="width: 100%">
-                    <thead>
-                        <th>No</th>
-                        <th>Token</th>
-                        <th>Nama</th>
-                        <th>Phone</th>
-                        <th>Jumlah Order</th>
-                        <th>Action</th>
-                    </thead>
-                    <tbody>
+                <div class="table-responsive">
+                    <table class="table table-striped datatables-target-exec" style="width: 100%">
+                        <thead>
+                            <th>No</th>
+                            <th>Token</th>
+                            <th>Nama</th>
+                            <th>Phone</th>
+                            <th>Jumlah Order</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </x-slot>
         </x-card.card>
     </x-layoutContent>

@@ -54,6 +54,7 @@
                 <x-sidebar.sidebar-parent text="Product" icon="bi bi-file-diff-fill" :active="request()->routeIs(['admin.product.*', 'admin.category.*']) ? 'active' : ''" :open="request()->routeIs(['admin.product.*', 'admin.category.*']) ? 'submenu-open' : ''">
                     <x-sidebar.sidebar-child text="List" :href="route('admin.product.index')"/>
                     <x-sidebar.sidebar-child text="Category" :href="route('admin.category.index')"/>
+                    <x-sidebar.sidebar-child text="Rune Up" :href="route('admin.product.runeup')"/>
                 </x-sidebar.sidebar-parent>
                 <x-sidebar.sidebar-single text="Customer" icon="bi bi-person-fill" href="{{route('admin.customer.index')}}" :classes="request()->routeIs('admin.customer.*') ? 'active' : ''" />
                 <x-sidebar.sidebar-single text="Payment Method" icon="bi bi-credit-card-fill" href="{{route('admin.payment.index')}}" :classes="request()->routeIs('admin.payment.*') ? 'active' : ''" />

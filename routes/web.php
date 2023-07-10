@@ -56,6 +56,7 @@ Route::name('admin.')->prefix('a')->middleware(['auth:web'])->group(function(){
     Route::post('/order/change_payment/{order}', [OrderController::class, 'change_payment'])->name('order.payment');
     Route::post('/order/change_table/{order}', [OrderController::class, 'change_table'])->name('order.table');
     Route::get('/me', [UserController::class, 'me'])->name('me');
+    Route::get('/runeup', [AdminProductController::class, 'runeUp'])->name('product.runeup');
     Route::resource('product.size.option', ProductOptionController::class);
     Route::resource('product.size', ProductSizeController::class);
     Route::resource('category', AdminCategoryController::class);

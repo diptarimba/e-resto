@@ -77,22 +77,24 @@
                 <h4>Order Detail</h4>
             </x-slot>
             <x-slot name="body">
-                <table class="table table-striped datatables-target-exec" style="width: 100%">
-                    <thead>
-                        <th>No</th>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Sub Total</th>
-                        <th>Note</th>
-                        @if (!in_array($order->status, ['CANCEL', 'COMPLETE']))
-                            <th>Action</th>
-                        @endif
-                    </thead>
-                    <tbody>
+                <div class="table-responsive">
+                    <table class="table table-striped datatables-target-exec" style="width: 100%">
+                        <thead>
+                            <th>No</th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Sub Total</th>
+                            <th>Note</th>
+                            @if (!in_array($order->status, ['CANCEL', 'COMPLETE']))
+                                <th>Action</th>
+                            @endif
+                        </thead>
+                        <tbody>
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </x-slot>
         </x-card.card>
     </x-layoutContent>
@@ -169,7 +171,8 @@
                     function() {
                         var value = $(this).val().replace(/\D/g, ''); // Menghapus karakter non-digit
                         value = parseFloat(value) || 0; // Mengubah nilai menjadi angka atau 0 jika tidak valid
-                        $(this).val(value.toLocaleString()); // Mengubah nilai input menjadi format ribuan saat menampilkan
+                        $(this).val(value
+                    .toLocaleString()); // Mengubah nilai input menjadi format ribuan saat menampilkan
                     })
             });
 
