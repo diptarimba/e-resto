@@ -19,9 +19,15 @@ class OrderController extends Controller
     {
         if($request->ajax())
         {
-            $order = Order::with('table')->when(!is_null($request->status), function($query) use ($request){
+            $order = Order::with('table', 'cash_flow.payment_method')->when(!is_null($request->status), function($query) use ($request){
                 $query->whereStatus($request->status);
-            })->when(!is_null($request->period), function($query) use ($request){
+            })
+            ->when($request->payment_id, function($query) use ($request){
+                $query->whereHas('cash_flow.payment_method', function($subQuery) use ($request){
+                    $subQuery->whereId($request->payment_id);
+                });
+            })
+            ->when(!is_null($request->period), function($query) use ($request){
                 $query->when($request->period == 'TODAY', function($queries){
                     $queries->whereDate('created_at', '=', date("Y-m-d"));
                 })
@@ -54,7 +60,9 @@ class OrderController extends Controller
             ->make(true);
         }
 
-        return view('admin.order.index');
+        $payment = Payment::get()->pluck('name', 'id');
+
+        return view('admin.order.index', compact('payment'));
     }
 
     /**

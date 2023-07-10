@@ -154,6 +154,10 @@
 @section('footer')
 
     <script>
+        $(document).ready(function() {
+            $('input[name="customer_change"]').prop('disabled', true);
+        });
+
         $('input[name="customer_pay"], #payment_id').on('change keyup', function() {
             var customerPay = parseFloat($('input[name="customer_pay"]').val().replace(/\D/g, ''))
             var amountBilled = parseFloat($('input[name="customer_billed"]').val().replace(/\D/g, ''))
@@ -169,7 +173,8 @@
             function() {
                 $('input[name="customer_pay"], input[name="customer_billed"], input[name="customer_change"]').each(
                     function() {
-                        var value = $(this).val().replace(/\D/g, ''); // Menghapus karakter non-digit
+                        var value = $(this).val().replace(/[^\d.-]/g, ''); // Menghapus karakter non-digit
+                        // var value = $(this).val().replace(/\D/g, ''); // Menghapus karakter non-digit
                         value = parseFloat(value) || 0; // Mengubah nilai menjadi angka atau 0 jika tidak valid
                         $(this).val(value
                     .toLocaleString()); // Mengubah nilai input menjadi format ribuan saat menampilkan

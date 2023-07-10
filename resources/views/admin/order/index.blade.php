@@ -18,14 +18,23 @@
                     <button id="TODAY" class="btn m-1 btn-period btn-outline-primary mx-1">Today</button>
                     <button id="1WEEK" class="btn m-1 btn-period btn-outline-secondary mx-1">1 Week</button>
                     <button id="1MONTH" class="btn m-1 btn-period btn-outline-info mx-1">1 Month</button>
-                    <input type="button" class="btn m-1 btn-period btn-outline-danger mx-1" name="daterange" value="" />
+                    <input type="button" class="btn m-1 btn-period btn-outline-danger mx-1" name="daterange"
+                        value="" />
                 </div>
             </x-slot>
         </x-card.card>
         <div class="mb-1"></div>
         <x-card.card>
             <x-slot name="header">
-                <x-card.card-title text="List" />
+                <div class="d-flex flex-wrap justify-content-between">
+                    <x-card.card-title text="List" />
+                    <select id="payment_select">
+                        <option value="0">Payment</option>
+                        @foreach ($payment as $id => $name)
+                            <option value="{{ $id }}">{{ $name }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </x-slot>
             <x-slot name="body">
                 <div class="table-responsive">
@@ -59,6 +68,7 @@
 @section('footer')
     <script>
         var period = 'ALL';
+        var payment_id = null;
         var start_period = null;
         var end_period = null;
         // mengambil URL saat ini
@@ -76,6 +86,7 @@
                     data: function(d) {
                         d.status = searchParams.get('status') ?? null,
                             d.period = period
+                        d.payment_id = payment_id
                         d.start_period = start_period
                         d.end_period = end_period
                     }
@@ -100,10 +111,11 @@
                         name: 'status'
                     },
                     {
-                        data: 'cash_flow_id',
-                        name: 'cash_flow_id',
+                        data: 'cash_flow',
+                        name: 'cash_flow',
                         render: function(data, type, row) {
-                            return data === null ? 'Unpaid' : 'Paid'
+                            return data?.payment_method?.name === undefined ? 'Unpaid' :
+                                `Paid (${data?.payment_method?.name})`
                         },
                         sortable: true,
                     },
@@ -151,6 +163,7 @@
                             sum_of_all: true,
                             status: searchParams.get('status') ?? null,
                             period: period,
+                            payment_id: payment_id,
                             start_period: start_period,
                             end_period: end_period
                         },
@@ -202,6 +215,21 @@
             }
 
         })
+
+        $(document).ready(function() {
+            $('#payment_select').on('change', function() {
+                var currentValue = $(this).val();
+                if(currentValue !== 0) {
+                    payment_id = currentValue;
+                    table.draw()
+                } else {
+                    payment_id = null;
+                    table.draw()
+                }
+            });
+        });
+
+
         $(function() {
             $('input[name="daterange"]').daterangepicker({
                 opens: 'left'
