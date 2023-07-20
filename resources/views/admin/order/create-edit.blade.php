@@ -165,7 +165,7 @@
             $('input[name="customer_change"]').val(valueChange)
 
             var paymentChoosen = $('#payment_id')[0]
-            var payConfirm = (valueChange > 0) && paymentChoosen.selectedIndex !== 0 ? false : true;
+            var payConfirm = (valueChange >= 0) && paymentChoosen.selectedIndex !== 0 ? false : true;
             $('.btn-pay-confirm').prop('disabled', payConfirm)
         })
         $('input[name="customer_pay"], input[name="customer_billed"], input[name="customer_change"], #payment_id').on(
@@ -173,8 +173,7 @@
             function() {
                 $('input[name="customer_pay"], input[name="customer_billed"], input[name="customer_change"]').each(
                     function() {
-                        var value = $(this).val().replace(/[^\d.-]/g, ''); // Menghapus karakter non-digit
-                        // var value = $(this).val().replace(/\D/g, ''); // Menghapus karakter non-digit
+                        var value = $(this).val().replace(/\D/g, ''); // Menghapus karakter non-digit
                         value = parseFloat(value) || 0; // Mengubah nilai menjadi angka atau 0 jika tidak valid
                         $(this).val(value
                     .toLocaleString()); // Mengubah nilai input menjadi format ribuan saat menampilkan
@@ -183,11 +182,11 @@
 
 
         $('.btn-pay-confirm').on('click', function() {
-            var customerPay = parseFloat($('input[name="customer_billed"]').val().replace(/\D/g, ''))
+            var amountBilled = parseFloat($('input[name="customer_billed"]').val().replace(/\D/g, ''))
             var paymentId = $('#payment_id').val()
             var dataToSend = {
                 payment_id: paymentId,
-                customer_pay: customerPay
+                customer_pay: amountBilled
             }
 
             $.ajax({
