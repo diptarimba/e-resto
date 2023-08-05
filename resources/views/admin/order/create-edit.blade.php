@@ -40,6 +40,12 @@
                 @foreach ($button as $each)
                     <x-action.btn-change-status status="{{ $each['key'] }}" colour="{{ $each['val'] }}" />
                 @endforeach
+                <button type="button" onclick="delete_data('form_delete_order')"
+                    class="mx-1 my-1 btn btn-outline-danger">Delete Order</button>
+                <form id="form_delete_order" action="{{ route('admin.order.destroy', $order->id) }}" method="post">
+                    @csrf
+                    <input type="hidden" name="_method" value="DELETE">
+                </form>
                 {{-- Menampilkan form change status dalam mode hidden --}}
                 @foreach ($button as $each)
                     <x-action.form-change-status order="{{ $order->id }}" status="{{ $each['key'] }}" />
@@ -176,7 +182,7 @@
                         var value = $(this).val().replace(/\D/g, ''); // Menghapus karakter non-digit
                         value = parseFloat(value) || 0; // Mengubah nilai menjadi angka atau 0 jika tidak valid
                         $(this).val(value
-                    .toLocaleString()); // Mengubah nilai input menjadi format ribuan saat menampilkan
+                            .toLocaleString()); // Mengubah nilai input menjadi format ribuan saat menampilkan
                     })
             });
 

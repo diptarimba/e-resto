@@ -131,7 +131,14 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        try {
+            $order->order_detail()->delete();
+            $order->cash_flow()->delete();
+            $order->delete();
+            return redirect()->route('admin.order.index')->with('success', 'Successfully Deleted Order');
+        } catch (\Throwable $th) {
+            return redirect()->route('admin.order.index')->with('error', 'Failed to Deleted Order');
+        }
     }
 
     public function change_status(Order $order, Request $request)
