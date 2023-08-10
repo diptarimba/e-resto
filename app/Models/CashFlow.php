@@ -19,6 +19,6 @@ class CashFlow extends Model
     }
 
     public function order(){
-        return $this->hasOne(Order::class);
+        return $this->hasOne(Order::class, 'cash_flow_id');
     }
 }
