@@ -29,7 +29,7 @@
                     <div class="mb-2" id="edit-payment">
                         <button type="button" class="btn btn-outline-success btn-sm edit-payment">Edit Payment</button>
                     </div> --}}
-                    <x-forms.input required="" label="Total Payment" name="total_payment" :value="@$order->pay_amount" />
+                    <x-forms.input required="" label="Total Payment" name="total_payment" :value="@number_format($order->pay_amount, 0, ',', '.')" />
                 </form>
                 <x-action.cancel href="{{ route('admin.order.index') }}" />
 
