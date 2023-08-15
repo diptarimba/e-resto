@@ -23,7 +23,7 @@ createInertiaApp({
 
         app.config.globalProperties.$filters = {
             toIDR(value) {
-                return "Rp. " + new Intl.NumberFormat("en-US").format(value);
+                return "Rp. " + new Intl.NumberFormat('de-DE').format(value);
             },
         };
 

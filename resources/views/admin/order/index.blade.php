@@ -123,7 +123,7 @@
                         data: 'pay_amount',
                         name: 'pay_amount',
                         render: function(data, type, row) {
-                            return data.toLocaleString();
+                            return data.toLocaleString('de-DE');
                         }
                     },
                     {
@@ -135,7 +135,7 @@
                 ],
                 columnDefs: [{
                     targets: 4,
-                    render: $.fn.dataTable.render.number(',', '.', 0, '')
+                    render: $.fn.dataTable.render.number('.', ',', 0, '')
                 }],
                 footerCallback: function(row, data, start, end, display) {
                     var api = this.api();
@@ -170,8 +170,8 @@
                         success: function(response) {
                             var totalSum = parseFloat(response.total)
                             $(api.column(4).footer()).html('Rp. ' + pageTotal
-                                .toLocaleString() + ' ( Rp. ' +
-                                totalSum.toLocaleString() + ' Total Semua)');
+                                .toLocaleString('de-DE') + ' ( Rp. ' +
+                                totalSum.toLocaleString('de-DE') + ' Total Semua)');
                         },
                         error: function() {
                             console.error("Failed to retrieve total sum from the server")

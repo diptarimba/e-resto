@@ -182,7 +182,7 @@
                         var value = $(this).val().replace(/\D/g, ''); // Menghapus karakter non-digit
                         value = parseFloat(value) || 0; // Mengubah nilai menjadi angka atau 0 jika tidak valid
                         $(this).val(value
-                            .toLocaleString()); // Mengubah nilai input menjadi format ribuan saat menampilkan
+                            .toLocaleString('de-DE')); // Mengubah nilai input menjadi format ribuan saat menampilkan
                     })
             });
 
@@ -327,8 +327,8 @@
                         quantity: updateQuantity
                     },
                     success: function(data) {
-                        $('#total_payment').val(data.data.order.pay_amount.toLocaleString())
-                        $('#quantity').val(data.data.order.quantity.toLocaleString())
+                        $('#total_payment').val(data.data.order.pay_amount.toLocaleString('de-DE'))
+                        $('#quantity').val(data.data.order.quantity.toLocaleString('de-DE'))
                         table.draw();
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
@@ -381,8 +381,8 @@
                 url: deletePath,
                 method: 'DELETE',
                 success: function(data) {
-                    $('#total_payment').val(data.data.order.pay_amount.toLocaleString())
-                    $('#quantity').val(data.data.order.quantity.toLocaleString())
+                    $('#total_payment').val(data.data.order.pay_amount.toLocaleString('de-DE'))
+                    $('#quantity').val(data.data.order.quantity.toLocaleString('de-DE'))
                     table.draw();
                     errorHandler(null)
                 },
@@ -425,7 +425,7 @@
                             var price = parseFloat(row.product.price);
                             var quantity = parseFloat(row.quantity);
                             var subtotal = price * quantity;
-                            return subtotal.toLocaleString();
+                            return subtotal.toLocaleString('de-DE');
                         }
                     },
                     {
@@ -443,7 +443,7 @@
                 ],
                 columnDefs: [{
                     targets: 2,
-                    render: $.fn.dataTable.render.number(',', '.', 0, '')
+                    render: $.fn.dataTable.render.number('.', ',', 0, '')
                 }],
             });
         })
